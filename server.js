@@ -19,13 +19,29 @@ app.get('/', function(req, res){
 ////////////////////
 ////Routes
 ////////////////////
+var reviewSample = {
+  stars: 4,
+  reviewContent: 'superduper gud',
+  recommend: false,
+  upvotes: 417
+}
 
-app.get('api/reviews', function(req, res){
-  db.Review.find({}, function(err, review){
+
+app.get('/api/reviews', function(req, res){
+  db.Review.find(function(err, review){
     if(err){
       console.log('Error in server.js', err);
     }
     console.log('review is ', review);
     res.send(review);
   });
-})
+});
+
+
+
+
+
+////Listen
+app.listen(process.env.port || 3000, function(){
+  console.log('express server online on port', 3000)
+});

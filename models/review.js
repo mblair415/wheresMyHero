@@ -3,10 +3,10 @@ var mongoose = require('mongoose'),
 
 var ReviewSchema = new Schema ({
   stars: Number,
-  text: String,
+  reviewContent: String,
   upvotes: Number,
   recommend: Boolean
-})
+});
 
 
 var Review = mongoose.model('Review', ReviewSchema);
