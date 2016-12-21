@@ -9,5 +9,5 @@ var ReviewSchema = new Schema ({
 })
 
 
-var Review = mongoose.model('Review', ReviewSchema)
-module.exports = Review
+var Review = mongoose.model('Review', ReviewSchema);
+module.exports = Review;
