@@ -26,7 +26,7 @@ var reviewSample = {
   upvotes: 417
 }
 
-
+////Get all reviews
 app.get('/api/reviews', function(req, res){
   db.Review.find(function(err, review){
     if(err){
@@ -37,7 +37,11 @@ app.get('/api/reviews', function(req, res){
   });
 });
 
+////Get one review
 
+
+
+////Create one review
 
 
 
