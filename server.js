@@ -57,7 +57,7 @@ app.get('api/reviews/:id', function(req, res) {
 })
 
 
-////Create one review
+////Create one review  i think this is a train wreck
 app.post('/api/reviews', function (req, res) {
   // create new book with form data (`req.body`)
   var newReview = new db.Review({
@@ -72,9 +72,17 @@ app.post('/api/reviews', function (req, res) {
         return console.log("save review error: " + err);
       }
       console.log("saved ", review.reviewContent);
-      // send back the review!
       res.json(review);
     });
+});
+
+// delete review  this may work
+app.delete('/api/review/:id', function (req, res) {
+  console.log('review delete', req.params);
+  var reviewId = req.params.id;
+  db.Review.findOneAndRemove({ _id: reviewId }, function (err, deletedReview) {
+    res.json(deletedReview);
+  });
 });
 
 
