@@ -46,8 +46,9 @@ app.get('/api/reviews', function(req, res){
 });
 
 //Get one review  this may work for seeded data
-app.get('api/reviews/:id', function(req, res) {
-  db.Review.findOne(function(err, review){
+app.get('/api/reviews/:id', function(req, res) {
+  var reviewId = req.params.id;
+  db.Review.findOne({ _id: reviewId }, function(err, review){
     if(err){
       console.log('FindOne error in server.js', err);
     }
@@ -77,7 +78,7 @@ app.post('/api/reviews', function (req, res) {
 });
 
 // delete review  this may work
-app.delete('/api/review/:id', function (req, res) {
+app.delete('/api/reviews/:id', function (req, res) {
   console.log('review delete', req.params);
   var reviewId = req.params.id;
   db.Review.findOneAndRemove({ _id: reviewId }, function (err, deletedReview) {
@@ -85,6 +86,26 @@ app.delete('/api/review/:id', function (req, res) {
   });
 });
 
+app.put('/api/reviews/:id', function (req, res){
+  var reviewId = req.params.id;
+  db.Review.findOne({ _id: reviewId }, function(err, foundReview){
+    if(err){
+      console.log('FindOne error in server.js', err);
+    }
+    console.log('your single review is ', foundReview);
+    foundReview.stars = req.body.stars || foundReviws.stars;
+    foundReview.reviewContent = req.body.reviewContent || foundReviws.reviewContent;
+    foundReview.recommend = req.body.recommend || foundReviws.recommend;
+    foundReview.upvotes = req.body.upvote || foundReview.upvotes;
+    foundReview.save(function(err, review){
+      if (err) {
+        return console.log("save review error: " + err);
+      }
+      console.log("saved ", review.reviewContent);
+      res.json(review);
+    });
+  });
+});
 
 ////Listen
 app.listen(process.env.port || 3000, function(){
