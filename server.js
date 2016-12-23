@@ -86,6 +86,7 @@ app.delete('/api/reviews/:id', function (req, res) {
   });
 });
 
+// edit one review
 app.put('/api/reviews/:id', function (req, res){
   var reviewId = req.params.id;
   db.Review.findOne({ _id: reviewId }, function(err, foundReview){
@@ -93,9 +94,9 @@ app.put('/api/reviews/:id', function (req, res){
       console.log('FindOne error in server.js', err);
     }
     console.log('your single review is ', foundReview);
-    foundReview.stars = req.body.stars || foundReviws.stars;
-    foundReview.reviewContent = req.body.reviewContent || foundReviws.reviewContent;
-    foundReview.recommend = req.body.recommend || foundReviws.recommend;
+    foundReview.stars = req.body.stars || foundReview.stars;
+    foundReview.reviewContent = req.body.reviewContent || foundReview.reviewContent;
+    foundReview.recommend = req.body.recommend || foundReview.recommend;
     foundReview.upvotes = req.body.upvote || foundReview.upvotes;
     foundReview.save(function(err, review){
       if (err) {
