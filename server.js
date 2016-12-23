@@ -16,22 +16,23 @@ app.get('/', function(req, res){
   });
 });
 
+// server.js pretend seed data. 
+// var reviewSample = [{
+//   stars: 4,
+//   reviewContent: 'superduper gud',
+//   recommend: false,
+//   upvotes: 417
+//   },
+//   {
+//     stars: 1,
+//     reviewContent: 'the stuff of nightmares, but on a plate',
+//     recommend: true,
+//     upvotes: 7
+//   }
+// ]
 ////////////////////
 ////Routes
 ////////////////////
-var reviewSample = [{
-  stars: 4,
-  reviewContent: 'superduper gud',
-  recommend: false,
-  upvotes: 417
-  },
-  {
-    stars: 1,
-    reviewContent: 'the stuff of nightmares, but on a plate',
-    recommend: true,
-    upvotes: 7
-  }
-]
 
 ////Get all reviews -- line 43 should work for seeded data.
 app.get('/api/reviews', function(req, res){
