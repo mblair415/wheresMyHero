@@ -63,6 +63,7 @@ reviewSamples.push({
 db.Review.remove({}, function(err, reviews){
   db.Review.create(reviewSamples, function(err, reviews){
     if (err) { return console.log('ERROR', err); }
+    console.log('all reviews deleted before reseeding');
     console.log("all reviews:", reviews);
     console.log("created", reviews.length, "reviews");
     process.exit();
