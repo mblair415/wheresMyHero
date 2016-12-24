@@ -6,8 +6,14 @@ var UserSchema = new Schema ({
   lastName: String,
   username: String,
   password: String,
-  sandwiches: [],
-  reviews: []
+  sandwiches: [{
+    type: Schema.Types.ObjectId,  //REFERENCING :D
+    ref: 'Sandwich'
+  }],
+  reviews: [{
+    type: Schema.Types.ObjectId,  //REFERENCING :D
+    ref: 'Review'
+  }]
 });
 
 

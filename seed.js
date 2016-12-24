@@ -74,7 +74,7 @@ var sandwichSamples = []
 sandwichSamples.push({
   name: 'Famous Turkey Sandwich',
   type: 'Turkey',
-  hot: false, //subcategory for different hot sandwiches
+  hot: false,
   price: 8.00,
   restaurant: '782 Arguello Blvd, San Francisco, CA 94118', //May eventually be a relationship to restaurant model
   Speed: 7,
@@ -84,7 +84,7 @@ sandwichSamples.push({
 sandwichSamples.push({
   name: 'Short Rib with Carmalized Onions',
   type: 'BBQ',
-  hot: true, //subcategory for different hot sandwiches
+  hot: true,
   price: 6.00,
   restaurant: '8 trinity plaza, San Francisco, CA 94104', //May eventually be a relationship to restaurant model
   Speed: 10,
@@ -94,7 +94,7 @@ sandwichSamples.push({
 sandwichSamples.push({
   name: 'Hot Cappicola',
   type: 'Salami',
-  hot: true, //subcategory for different hot sandwiches
+  hot: true,
   price: 7.00,
   restaurant: '3108 16th St San Francisco CA 94103', //May eventually be a relationship to restaurant model
   Speed: 4,

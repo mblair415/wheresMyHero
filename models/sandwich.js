@@ -8,7 +8,10 @@ var SandwichSchema = new Schema ({
   price: Number,
   restaurant: String, //May eventually be a relationship to restaurant model
   Speed: Number,
-  Reviews: []
+  Reviews: [{
+    type: Schema.Types.ObjectId,  //REFERENCING :D
+    ref: 'Review'
+  }]
 });
 
 
