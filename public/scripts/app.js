@@ -11,7 +11,7 @@ use ajax to pass info to server.js
 server.js tells server and db to handle the call.
 */
 
-  $('.form-horizontal').on('submit', function(event) {
+  $('.new-review').on('submit', function(event) {
     console.log('submit clicked');
     event.preventDefault();
 
