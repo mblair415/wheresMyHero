@@ -56,7 +56,7 @@ function newGifSearchSuccess(gif){
   console.log('ajax call for gif successful.  Gif: ', gif);
   gif.data.forEach(function(gif){
     $('.searched-gifs').append('<img src=' +
-    gif.images.fixed_height_downsampled.url + '>')
+    gif.images.fixed_height_small.url + '>')
   })
   // $('.searched-gifs').append(gif.data.forEach)
 }
