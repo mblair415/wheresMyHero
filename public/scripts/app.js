@@ -39,6 +39,20 @@ server.js tells server and db to handle the call.
     })
   })
 
+  $('#gifSearchButton').on('submit', function(event){
+    console.log('seond gif submission button clicked');
+    event.preventDefault();
+
+    $.ajax({
+      method: 'GET',
+      url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
+      data: $(this).serializeArray(),
+      sucess: newGifSearchSuccess,
+      error: newGifSearchError
+    })
+
+
+  })
 
 
 
@@ -55,7 +69,7 @@ function newReviewError(error){
 function newGifSearchSuccess(gif){
   console.log('ajax call for gif successful.  Gif: ', gif);
   gif.data.forEach(function(gif){
-    $('.searched-gifs').append('<img src=' +
+    $('.deleteThisClass').append('<img src=' +
     gif.images.fixed_height_small.url + '>')
   })
   // $('.searched-gifs').append(gif.data.forEach)
