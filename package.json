@@ -1,7 +1,7 @@
 {
   "name": "wheres-my-hero",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Who is our user? Our user is a tech savvy sandwich aficionado.  Someone who won’t be fooled by any questionable piece of meat sitting lacklusterly between a pair of tired old buns.  No!  Our user expects the greatest culinary experience offered.  But, the question remains, where to get it?  Where’s their club, their open face, their BLAT ...  where’s their hero?",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
