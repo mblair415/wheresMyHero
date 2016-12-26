@@ -68,6 +68,7 @@ function newReviewError(error){
 
 function newGifSearchSuccess(gif){
   console.log('ajax call for gif successful.  Gif: ', gif);
+  $('.deleteThisClass').empty();
   gif.data.forEach(function(gif){
     $('.deleteThisClass').append('<img src=' +
     gif.images.fixed_height_small.url + '>')
