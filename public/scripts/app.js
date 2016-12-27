@@ -1,6 +1,6 @@
 console.log('sanity check, app.js is connected')
 
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+// var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
@@ -8,26 +8,7 @@ $(document).ready(function(){
   var source = $('#selectableGif-template2').html();
 
   var template = Handlebars.compile(source);
-/*
-event listener listening for submitition
-prevent default
-collect info in ajax. serialize.
-use ajax to pass info to server.js
-server.js tells server and db to handle the call.
-*/
 
-  // $('.form-horizontal').on('submit', function(event) {
-  //   console.log('submit clicked');
-  //   event.preventDefault();
-  //
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/reviews',
-  //     data: $(this).serializeArray(),
-  //     success: newReviewSuccess,
-  //     error: newReviewError
-  //   })
-  // })
 
   $('.form-gif').on('submit', function(event){
     console.log('gif submit clicked');
@@ -43,7 +24,7 @@ server.js tells server and db to handle the call.
   })
 
   $('#gifSearchButton').on('submit', function(event){
-    console.log('seond gif submission button clicked');
+    console.log('second gif submission button clicked');
     event.preventDefault();
 
     $.ajax({
@@ -62,14 +43,12 @@ server.js tells server and db to handle the call.
      $.ajax({
        method: 'GET',
        url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
-       data: $('form').serialize()+'&offset=25',
+       data: $('form').serializeArray()+'&offset=25',
        success: giphySearchMoreSuccess,
        error: newGifSearchError
      })
     }
   });
-
-
 
   function newGifSearchSuccess(json){
     console.log('ajax call for gif successful.  Gif: ', json);
@@ -78,13 +57,16 @@ server.js tells server and db to handle the call.
       var giphyHtml = template({ insertGifHere: gif.images.fixed_width_small.url})
       $(".gifSelectionField2").append(giphyHtml);
     });
-
-    // json.data.forEach(function(gif){
-    //   $('.deleteThisClass').append('<img src=' +
-    //   gif.images.fixed_height_small.url + '>')
-    // })
-    // $('.searched-gifs').append(gif.data.forEach)
   }
+
+  function giphySearchMoreSuccess(json){
+    console.log('ajax call for MOAR gifs worked.  Gif: ', json);
+    json.data.forEach(function(gif){
+      var giphyHtml = template({ insertGifHere: gif.images.fixed_width_small.url})
+      $(".gifSelectionField2").append(giphyHtml);
+    })
+  }
+
 })
 
 // function newReviewSuccess(review){
@@ -99,13 +81,6 @@ server.js tells server and db to handle the call.
 // });
 
 
-function giphySearchMoreSuccess(json){
-  console.log('ajax call for MOAR gifs worked.  Gif: ', json);
-  json.data.forEach(function(gif){
-    var giphyHtml = template({ insertGifHere: gif.images.fixed_width_small.url})
-    $(".gifSelectionField2").append(giphyHtml);
-  })
-}
 
 function newGifSearchError(error){
   console.log('ajax call on gif search went bad, boss.  Error: ', error);
