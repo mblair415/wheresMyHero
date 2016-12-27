@@ -3,6 +3,14 @@ var express = require('express'),
   db = require('./models'),
   bodyParser = require('body-parser');
 
+var clientId = 'eOjaSriPI77z1AOBq0X33w'
+var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
+
+'use strict';
+
+const yelp = require('yelp-fusion');
+
+
 app.use(bodyParser.urlencoded({
   extended : true
 }));
@@ -16,7 +24,7 @@ app.get('/', function(req, res){
   });
 });
 
-// server.js pretend seed data. 
+// server.js pretend seed data.
 // var reviewSample = [{
 //   stars: 4,
 //   reviewContent: 'superduper gud',
@@ -108,6 +116,30 @@ app.put('/api/reviews/:id', function (req, res){
     });
   });
 });
+
+app.get('/api/locations/:location', function(req, res){
+  yelp.accessToken(clientId, clientSecret).then(response => {
+    const client = yelp.client(response.jsonBody.access_token);
+
+    client.search({
+      term:'sandwich',
+      location: req.params.location
+    }).then(response => {
+      console.log(response.jsonBody.businesses[0].name);
+      res.json(response.jsonBody.businesses)
+    });
+  }).catch(e => {
+    console.log(e);
+  });
+})
+
+
+
+// App ID
+// eOjaSriPI77z1AOBq0X33w
+// App Secret
+// UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985
+
 
 ////Listen
 app.listen(process.env.port || 3000, function(){
