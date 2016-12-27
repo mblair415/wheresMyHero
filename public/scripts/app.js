@@ -55,19 +55,19 @@ server.js tells server and db to handle the call.
     })
   })
 
-  // $(window).scroll(function() {
-  //   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-  //   console.log('dude, you scrolled to the bottom');
-  //
-  //    $.ajax({
-  //      method: 'GET',
-  //      url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
-  //      data: $('form').serialize()+'&offset=25',
-  //      success: giphySearchMoreSuccess,
-  //      error: newGifSearchError
-  //    })
-  //   }
-  // });
+  $(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+    console.log('dude, you scrolled to the bottom');
+
+     $.ajax({
+       method: 'GET',
+       url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
+       data: $('form').serialize()+'&offset=25',
+       success: giphySearchMoreSuccess,
+       error: newGifSearchError
+     })
+    }
+  });
 
 
 
@@ -99,17 +99,13 @@ server.js tells server and db to handle the call.
 // });
 
 
-function putGifInBox(gif){
-
+function giphySearchMoreSuccess(json){
+  console.log('ajax call for MOAR gifs worked.  Gif: ', json);
+  json.data.forEach(function(gif){
+    var giphyHtml = template({ insertGifHere: gif.images.fixed_width_small.url})
+    $(".gifSelectionField2").append(giphyHtml);
+  })
 }
-
-// function giphySearchMoreSuccess(json){
-//   console.log('ajax call for MOAR gifs worked.  Gif: ', json);
-//   json.data.forEach(function(gif){
-//     $('.deleteThisClass').append('<img src=' +
-//     gif.images.fixed_height_small.url + '>')
-//   })
-// }
 
 function newGifSearchError(error){
   console.log('ajax call on gif search went bad, boss.  Error: ', error);
