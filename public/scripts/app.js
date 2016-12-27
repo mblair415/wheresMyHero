@@ -1,20 +1,50 @@
 console.log('sanity check, app.js is connected')
 
-var yelpSearch = {
-'term': 'sandwich',
-'latitude': '37.786882',
-'longitude': '-122.399972'
-}
+// var yelpSearch = {
+// 'term': 'sandwich',
+// 'latitude': '37.786882',
+// 'longitude': '-122.399972'
+// }
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
 
-  client.search({
-    term:'sandwich',
-    location: 'san francisco, ca'
-  }).then(response => {
-    console.log(response.jsonBody.businesses[0].name);
+  $.ajax({
+    method: 'POST',
+    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+    success: searchYelp,
+    error: noLocation
   });
+
+  function searchYelp(data){
+    console.log('location found: ', data)
+    $.ajax({
+      method: 'POST',
+      url: '/api/locations',
+      data: data,
+      success: showRestaurants,
+      error: noRestaurants
+    })
+  }
+
+  function noLocation(data){
+    console.log('could not find location ', data)
+  }
+
+  function showRestaurants(data){
+    console.log('you found restaurants! ', data)
+  }
+
+  function noRestaurants(data){
+    console.log('you found no restaurants :( ', data)
+  }
+
+  // client.search({
+  //   term:'sandwich',
+  //   location: 'san francisco, ca'
+  // }).then(response => {
+  //   console.log(response.jsonBody.businesses[0].name);
+  // });
 
   //ajax call to bring in data from yelp...couldn't get this working
   // $.ajax({

@@ -6,10 +6,9 @@ var express = require('express'),
 var clientId = 'eOjaSriPI77z1AOBq0X33w'
 var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
 
-'use strict';
+// 'use strict';
 
 const yelp = require('yelp-fusion');
-
 
 app.use(bodyParser.urlencoded({
   extended : true
@@ -117,13 +116,16 @@ app.put('/api/reviews/:id', function (req, res){
   });
 });
 
-app.get('/api/locations/:location', function(req, res){
+////Get closest sandwich locations from yelp api
+app.post('/api/locations/', function(req, res){
   yelp.accessToken(clientId, clientSecret).then(response => {
     const client = yelp.client(response.jsonBody.access_token);
-
     client.search({
       term:'sandwich',
-      location: req.params.location
+      // location: req.params.location,
+      latitude: req.body.location.lat,
+      longitude: req.body.location.lng,
+      radius: 800
     }).then(response => {
       console.log(response.jsonBody.businesses[0].name);
       res.json(response.jsonBody.businesses)
