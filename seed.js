@@ -60,12 +60,71 @@ reviewSamples.push({
               recommend: false
             });
 
+var userSamples = [{
+  firstName: 'Ryan',
+  lastName: 'Thomas',
+  username: 'SammichKing',
+  password: 'BradySucks',
+  sandwiches: [],
+  reviews: []
+}]
+
+var sandwichSamples = []
+
+sandwichSamples.push({
+  name: 'Famous Turkey Sandwich',
+  type: 'Turkey',
+  hot: false,
+  price: 8.00,
+  restaurant: '782 Arguello Blvd, San Francisco, CA 94118', //May eventually be a relationship to restaurant model
+  Speed: 7,
+  Reviews: []
+})
+
+sandwichSamples.push({
+  name: 'Short Rib with Carmalized Onions',
+  type: 'BBQ',
+  hot: true,
+  price: 6.00,
+  restaurant: '8 trinity plaza, San Francisco, CA 94104', //May eventually be a relationship to restaurant model
+  Speed: 10,
+  Reviews: []
+})
+
+sandwichSamples.push({
+  name: 'Hot Cappicola',
+  type: 'Salami',
+  hot: true,
+  price: 7.00,
+  restaurant: '3108 16th St San Francisco CA 94103', //May eventually be a relationship to restaurant model
+  Speed: 4,
+  Reviews: []
+})
+
 db.Review.remove({}, function(err, reviews){
   db.Review.create(reviewSamples, function(err, reviews){
     if (err) { return console.log('ERROR', err); }
     console.log('all reviews deleted before reseeding');
     console.log("all reviews:", reviews);
     console.log("created", reviews.length, "reviews");
+  });
+});
+
+db.User.remove({}, function(err, users){
+  db.User.create(userSamples, function(err, users){
+    if (err) { return console.log('ERROR', err); }
+    console.log('all users deleted before reseeding');
+    console.log("all users:", reviews);
+    console.log("created", users.length, "users");
+  });
+});
+
+db.Sandwich.remove({}, function(err, sandwiches){
+  db.Sandwich.create(sandwichSamples, function(err, sandwiches){
+    if (err) { return console.log('ERROR', err); }
+    console.log('all sandwiches deleted before reseeding');
+    console.log("all sandwiches:", sandwiches);
+    console.log("created", sandwiches.length, "sandwiches");
     process.exit();
   });
 });
