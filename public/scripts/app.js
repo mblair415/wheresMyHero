@@ -90,6 +90,7 @@ function appendReviews(allReviews) {
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);
+  appendReviews([review])
 }
 
 function newReviewError(error){
