@@ -52,47 +52,6 @@
 
             <!-- Form Name -->
             <legend>Add New Review</legend>
-            <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#gifModal">
-              Find a gif
-              </button>
-
-              <!-- Modal -->
-              <div class="modal fade" id="gifModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Find a gif to represent your experience!</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="fluid-container">
-                      <!-- search field -->
-                        <div class="row">
-                          <section class="col-xs-12">
-                            <form class="form-inline" id="gifSearchButton">
-                              <!-- <label>Search Gifs</label> -->
-                              <input type="text" class="form-control gif-input" name="q" placeholder="search gifs">
-                              <input type="hidden" name="api_key" value="dc6zaTOxFJmzC">
-                              <!-- replace submit with an onclick action -->
-                              <input type="submit" value="Go!" class="btn btn-primary">
-                            </form>
-                          </section>
-                        </div>
-                        <!-- this is where gif images will go -->
-                        <section class="row gifSelectionField">
-                          <script id="selectableGif-template" type="text/x-handlebars-template">
-                            <article class="col-xs-6 col-md-4 gifBox">
-                              <img src="{{insertGifHere}}"></a>
-                            </article>
-                          </script>
-                        </section>
-                      </div>
-                    </div>
-                    <!-- modal footer removed -->
-                  </div>
-                </div>
-              </div>
 
 
             <!-- Text input-->
@@ -140,13 +99,32 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1 deleteThisClass">
           <h2>Reviews</h2>
-          <script id="selectableGif-template2" type="text/x-handlebars-template">
-            <article class="col-xs-6 col-md-4 gifBox">
-              <img src="{{insertGifHere}}"></a>
-            </article>
+            <script id="selectableGif-template2" type="text/x-handlebars-template">
+              <article class="col-xs-6 col-md-3" id="tester {{url}}">
+                <img class="gifBox" src="{{insertGifHere}}"></a>
+              </article>
+            </script>
+        </div>
+      </div>
+    </section>
+    <!-- <section class="container gifSelectionField3">
+      <div class="row">
+        <div class="col-md-3 gif-area">
+          <script id="selectableGif-template101" type="text/x-handlebars-template">
+
+          </script>
+        </div>
+        <div class="col-md-3 gif-area">
+          <script id="selectableGif-template102" type="text/x-handlebars-template">
+
+          </script>
+        </div>
+        <div class="col-md-3 gif-area">
+          <script id="selectableGif-template103" type="text/x-handlebars-template">
+
           </script>
         </div>
       </div>
-
+    </section> -->
   </body>
 </html>
