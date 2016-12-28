@@ -2,6 +2,12 @@
   border: dashed 1px black;
 }
 
+
+.gifBox {
+  min-height: 150px;
+  text-align: center;
+}
+
 .rating {
       overflow: hidden;
       display: inline-block;
