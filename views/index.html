@@ -27,6 +27,8 @@
     </div>
     <!-- Begin Form Sample -->
     <section id='review-form' class="container">
+
+      <script id='review-template' type='text/x-handlebars-template'>
       <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
@@ -72,8 +74,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="recommend">Recommend?</label>
               <div class="col-md-4">
-                <input type="radio" name="recommend" value="true"> True<br>
-                <input type="radio" name="recommend" value="false"> False<br>
+                <input type="radio" name="recommend" value="true"> Yes<br>
+                <input type="radio" name="recommend" value="false"> No<br>
               </div>
             </div>
 
@@ -89,6 +91,7 @@
       </div>
       </div>
     </section>
+  </script>
 
 
 
@@ -115,7 +118,7 @@
             <fieldset class='form-horizontal'>
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="songName">Song Name</label>
+                <label class="col-md-4 control-label" for="reviewName">Review Name</label>
                 <div class="col-md-4">
                   <!-- <span class="rating">
                       <input type="radio" class="rating-input"
@@ -134,15 +137,15 @@
                           id="rating-input-1-1" name="rating-input-1">
                       <label for="rating-input-1-1" class="rating-star"></label>
                   </span> -->
-                  <input id="songName" name="songName" type="text" placeholder="" class="form-control input-md" required="">
+                  <input id="reviewName" name="reviewName" type="text" placeholder="" class="form-control input-md" required="">
                 </div>
               </div>
 
               <!-- Number input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="trackNumber">Track Number</label>
+                <label class="col-md-4 control-label" for="trackNumber">Review Number</label>
                 <div class="col-md-4">
-                  <input id="trackNumber" name="trackNumber" type="number" placeholder="" class="form-control input-md">
+                  <input id="reviewNumber" name="reveiwNumber" type="number" placeholder="" class="form-control input-md">
                 </div>
               </div>
             </fieldset>
