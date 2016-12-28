@@ -7,6 +7,7 @@ var allReviews = [];
 $(document).ready(function(){
   console.log('The DOM body is ready')
 
+
 /*
 event listener listening for submitition
 prevent default
@@ -16,7 +17,7 @@ server.js tells server and db to handle the call.
 */
 
   $reviewsList = ('#review-form');
-  var source = ("#review-template");
+  var source = $("#review-template").html();
   template = Handlebars.compile(source);
 
   $('.new-review').on('submit', function(event) {
@@ -32,18 +33,24 @@ server.js tells server and db to handle the call.
     })
   })
 
-function render() {
-// empty existing posts from view
-  $reviewsList.empty();
+  $.ajax({
+    method: 'GET',
+    url: '/api/reviews',
+    success: appendReviews,
+    error: noAppend
+  })
 
+function appendReviews(allReviews) {
   var reviewHtml;
 
-  // for each book:
+  // for each review:
   allReviews.forEach(function(reviewData){
-    // create HTML for individual book
-    reviewHtml = template({review: reviewData});
-    // add book to page
-    $reviewsList.append(reviewHtml);
+    // create HTML for individual review
+    reviewHtml = template({reviewContent: reviewData.reviewContent});
+    console.log("review appended")
+    // console.log(template({reviewContent: reviewData.reviewContent}))
+    // add review to page
+    $('.appendReviews').append(reviewHtml);
   });
 };
 
@@ -56,3 +63,7 @@ function newReviewError(error){
 }
 
 })
+
+function noAppend (err){
+  console.log('the reviews did not append', err)
+}
