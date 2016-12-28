@@ -9,9 +9,22 @@ $(document).ready(function(){
 
   var template = Handlebars.compile(source);
 
+  $('.new-review').on('submit', function(event) {
+    console.log('submit clicked');
+    event.preventDefault();
 
+    $.ajax({
+      method: 'POST',
+      url: '/api/reviews',
+      data: $(this).serializeArray(),
+      success: newReviewSuccess,
+      error: newReviewError
+    })
+  })
+  
   $('.form-gif').on('submit', function(event){
     console.log('gif submit clicked');
+
     event.preventDefault();
 
     $.ajax({
@@ -74,16 +87,16 @@ $(document).ready(function(){
 
 })
 
-// function newReviewSuccess(review){
-//   console.log('ajax call on review successful.  Review: ', review);
-// }
-//
-// function newReviewError(error){
-//   console.log('ajax call on review dun messed up.  Error: ', error);
-// }
+function newReviewSuccess(review){
+  console.log('ajax call on review successful.  Review: ', review);
+}
+
+function newReviewError(error){
+  console.log('ajax call on review dun messed up.  Error: ', error);
+}
 
 
-// });
+});
 
 
 
