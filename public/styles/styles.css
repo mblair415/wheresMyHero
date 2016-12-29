@@ -41,7 +41,7 @@
 /*The following is styling related to the map section*/
 
 #mapPlacement {
-  height: 400px;
+  height: 400px; /*map size has to be created manually. Feel free to edit for beautification*/
   width: 100%;
   margin-top: 20px;
 }
