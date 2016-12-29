@@ -1,6 +1,6 @@
-* {
+/** {
   border: dashed 1px black;
-}
+}*/
 
 .rating {
       overflow: hidden;
@@ -37,3 +37,11 @@
       height: 16px;
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
   }
+
+/*The following is styling related to the map section*/
+
+#mapPlacement {
+  height: 400px;
+  width: 100%;
+  margin-top: 20px;
+}

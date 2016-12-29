@@ -1,5 +1,9 @@
 console.log('sanity check, app.js is connected')
 
+////Declare global variables here
+var map;
+
+
 // var yelpSearch = {
 // 'term': 'sandwich',
 // 'latitude': '37.786882',
@@ -17,7 +21,11 @@ $(document).ready(function(){
   });
 
   function searchYelp(data){
-    console.log('location found: ', data)
+    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+    map = new google.maps.Map(document.getElementById('mapPlacement'), {
+    center: {lat: data.location.lat, lng: data.location.lng},
+    zoom: 15
+    })
     $.ajax({
       method: 'POST',
       url: '/api/locations',
@@ -33,7 +41,39 @@ $(document).ready(function(){
 
   function showRestaurants(data){
     console.log('you found restaurants! ', data)
+    data.forEach(function(restaurant){
+      var location = {
+        lat: restaurant.coordinates.latitude,
+        lng: restaurant.coordinates.longitude
+      }
+      var content = '<h6>' + restaurant.name + '</h6>' + '<p>' + restaurant.location.address1 + '</p>'
+      addMarker(location, content)
+      // marker = new google.maps.Marker({
+      //   position: location,
+      //   map: map,
+      //   // icon: image,  ////Use this for custom marker image
+      //   title: restaurant.name
+      // })
+      // marker.addListener('click', function() {
+      //   infowindow.open(map, marker);
+      // });
+    })
   }
+
+  function addMarker(position, content){
+              var myLatlng, marker, infowindow,contentString;
+              marker = new google.maps.Marker({
+                  position: position,
+                  map: map
+              });
+              contentString = content;
+              infowindow = new google.maps.InfoWindow({
+                  content: contentString
+              });
+              marker.addListener('click', function() {
+                 infowindow.open(map, marker);
+              });
+         }
 
   function noRestaurants(data){
     console.log('you found no restaurants :( ', data)
@@ -58,15 +98,6 @@ $(document).ready(function(){
   //   success: yelpSuccess,
   //   error: yelpError
   // });
-
-
-/*
-event listener listening for submitition
-prevent default
-collect info in ajax. serialize.
-use ajax to pass info to server.js
-server.js tells server and db to handle the call.
-*/
 
   $('.new-review').on('submit', function(event) {
     console.log('submit clicked');

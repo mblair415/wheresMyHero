@@ -127,7 +127,7 @@ app.post('/api/locations/', function(req, res){
       longitude: req.body.location.lng,
       radius: 800
     }).then(response => {
-      console.log(response.jsonBody.businesses[0].name);
+      // console.log(response.jsonBody.businesses[0].name);
       res.json(response.jsonBody.businesses)
     });
   }).catch(e => {
