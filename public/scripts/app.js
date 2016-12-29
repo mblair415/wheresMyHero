@@ -17,15 +17,15 @@ $(document).ready(function(){
 //to get giphy handlebars to work
 
   //Gif Handlebars template
-  // var sourceOne = $('#selectableGif-template2').html();
-  // var templateGif = Handlebars.compile(sourceOne);
+  var sourceOne = $('#selectableGif-template2').html();
+  var templateGif = Handlebars.compile(sourceOne);
 
 //*****************
 //*****************
 
   //Review Handlebars template
   $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html();
+  var sourceTwo = $("#review-template").html(),
   templateReview = Handlebars.compile(sourceTwo);
 
   $('.new-review').on('submit', function(event) {
@@ -43,7 +43,6 @@ $(document).ready(function(){
 
   $('.form-gif').on('submit', function(event){
     console.log('gif submit clicked');
-
     event.preventDefault();
 
     $.ajax({
@@ -55,13 +54,15 @@ $(document).ready(function(){
     })
   })
 
+  // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     console.log('an image was clicked!', this.src);
   })
 
+  // this is what populates the area with gifs
   function newGifSearchSuccess(json){
     console.log('ajax call for gif successful.  Gif: ', json);
-    $('.deleteThisClass').empty();
+    $('.gifSelectionField2').empty();
     json.data.forEach(function(gif){
       var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url})
       $(".gifSelectionField2").append(giphyHtml);
