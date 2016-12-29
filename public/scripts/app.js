@@ -16,9 +16,11 @@ $(document).ready(function(){
 //Must uncommment this section
 //to get giphy handlebars to work
 
-  //Gif Handlebars template
-  var sourceOne = $('#selectableGif-template2').html();
-  var templateGif = Handlebars.compile(sourceOne);
+  //Gif Handlebars templates
+  var sourceOne = $('#selectableGif-template2').html(),
+    templateGif = Handlebars.compile(sourceOne);
+    sourceThree = $('#gif-choice').html(),
+    templateGifChoice = Handlebars.compile(sourceThree);
 
 //*****************
 //*****************
@@ -59,6 +61,8 @@ $(document).ready(function(){
     console.log('an image was clicked!', this.src);
     $('.gifSelectionField2').empty();
     console.log('i still know what you clicked on! ', this.src);
+    var pickedGifHtml = templateGifChoice({userChosenGif: this.src})
+    $("#gif-choice").append(pickedGifHtml);
   })
 
   // this is what populates the area with gifs

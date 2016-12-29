@@ -2,7 +2,6 @@
   border: dashed 1px black;
 }
 
-
 .gifBox {
   min-height: 150px;
   text-align: center;
@@ -12,6 +11,7 @@
       overflow: hidden;
       display: inline-block;
   }
+
   .rating-input {
       float: right;
       width: 16px;
@@ -20,6 +20,7 @@
       margin: 0 0 0 -16px;
       opacity: 0;
 }
+
   .rating-star {
       position: relative;
       float: right;
@@ -42,4 +43,20 @@
       width: 16px;
       height: 16px;
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
+  }
+
+  .jumbotron {
+    background-color: #0B543E;
+    color: #F4B260;
+  }
+
+  .site-logo {
+    max-width:100px;
+    height:auto;
+    margin-left: 40%;
+  }
+
+  h1 {
+    text-align: center;
+    text-shadow: 7px 5px 5px #E5563C;
   }

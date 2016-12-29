@@ -21,8 +21,11 @@
 
   <body>
     <div class="jumbotron">
-      <div class="container">
-        <h1>Find my Hero</h1>
+      <div class="container site-title">
+        <h1>Where's My Hero!?</h1>
+      </div>
+      <div class="site-logo center">
+        <img src="http://i.giphy.com/DpB9NBt1ySFDHH9yiCA.gif" alt="our hero!" height="250" style="max-width: 320px">
       </div>
     </div>
     <!-- Begin Form Sample -->
@@ -34,8 +37,7 @@
         <!-- ***** gif selection ***** -->
         <section id='review-form' class="container">
           <div class="row">
-            <div class="col-md-10 col-md-offset-1"> -->
-
+            <div class="col-md-10 col-md-offset-1">
               <form class="form-horizontal form-gif" action="indexGiphy.html" method="get">
                 <div class="form-group">
                   <div class="col-xs-12" id="giphy">
@@ -46,37 +48,17 @@
                   </div>
                   <button id="singlebutton" name="gifSubmit" class="btn btn-primary center-block">Search Gifs</button>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 searched-gifs">
-                    <!-- gifs go here -->
-                  </div>
-                </div>
               </form>
-
-              <!-- not sure what this form does right now -->
-              <!-- <form class="form-horizontal">
-              <fieldset>
-              Button
-              <div class="form-group">
-              <label class="col-md-4 control-label" for="singlebutton">Save Review</label>
-              <div class="col-md-4">
-              <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
             </div>
           </div>
-        </fieldset>
-      </form> -->
-
-              </div>
-            </div>
-          </section>
+        </section>
 
 <!-- gif handlebars section -->
           <section class="container gifSelectionField2">
             <div class="row">
-              <div class="col-md-10 col-md-offset-1 deleteThisClass">
-                <h2>Reviews</h2>
+              <div class="col-md-10 col-md-offset-1">
                 <script id="selectableGif-template2" type="text/x-handlebars-template">
-                  <article class="col-xs-6 col-md-4" id="tester {{url}}">
+                  <article class="col-xs-6 col-md-4">
                     <img class="gifBox" src="{{insertGifHere}}"></a>
                   </article>
                 </script>
@@ -91,6 +73,12 @@
             <legend>Add New Review</legend>
 
 
+            <section>
+              <script id="gif-choice" type="text/x-handlebars-template">
+                <article class="center col-xs-4">
+                  <img class="selected-gif" src="{{userChosenGif}}"></a>
+              </script>
+            </section>
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="stars">Stars</label>
