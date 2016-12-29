@@ -1,6 +1,6 @@
-* {
+/** {
   border: dashed 1px black;
-}
+}*/
 
 
 .gifBox {
@@ -43,3 +43,11 @@
       height: 16px;
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
   }
+
+/*The following is styling related to the map section*/
+
+#mapPlacement {
+  height: 400px; /*map size has to be created manually. Feel free to edit for beautification*/
+  width: 100%;
+  margin-top: 20px;
+}
