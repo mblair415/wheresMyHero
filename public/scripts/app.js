@@ -58,11 +58,10 @@ $(document).ready(function(){
 
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
-    console.log('an image was clicked!', this.src);
     $('.gifSelectionField2').empty();
-    console.log('i still know what you clicked on! ', this.src);
-    var pickedGifHtml = templateGifChoice({userChosenGif: this.src})
-    $("#gif-choice").append(pickedGifHtml);
+    // console.log('i still know what you clicked on! ', this.src);
+    var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
+    $(".selected-gif").append(pickedGifHtml);
   })
 
   // this is what populates the area with gifs
@@ -70,7 +69,7 @@ $(document).ready(function(){
     console.log('ajax call for gif successful.  Gif: ', json);
     $('.gifSelectionField2').empty();
     json.data.forEach(function(gif){
-      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url})
+      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url});
       $(".gifSelectionField2").append(giphyHtml);
     });
   }
