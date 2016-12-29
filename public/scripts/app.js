@@ -57,6 +57,8 @@ $(document).ready(function(){
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     console.log('an image was clicked!', this.src);
+    $('.gifSelectionField2').empty();
+    console.log('i still know what you clicked on! ', this.src);
   })
 
   // this is what populates the area with gifs
