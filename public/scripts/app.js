@@ -87,8 +87,14 @@ $(document).ready(function(){
     // for each review:
     allReviews.forEach(function(reviewData){
       // create HTML for individual review
-      reviewHtml = templateReview({reviewContent: reviewData.reviewContent});
-      console.log("review appended")
+      reviewHtml = templateReview({
+        reviewContent: reviewData.reviewContent,
+        reviewStars: reviewData.stars,
+        // turnary cheking to see if reviewData is true or false
+        reviewRecommend: reviewData.recommend ? "Yes" : "No"
+        // reviewGif:
+        });
+      console.log("review appended", reviewData)
       // console.log(templateReview({reviewContent: reviewData.reviewContent}))
       // add review to page
       $('.appendReviews').append(reviewHtml);

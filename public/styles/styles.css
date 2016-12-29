@@ -60,3 +60,7 @@
     text-align: center;
     text-shadow: 7px 5px 5px #E5563C;
   }
+
+  .reviewIndividual {
+    border: solid 1px black;
+  }
