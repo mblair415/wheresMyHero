@@ -9,6 +9,7 @@ var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
+  console.log('Body parser parsing the body');
 
 //*****************
 //*****************
@@ -74,28 +75,28 @@ $(document).ready(function(){
     error: noAppend
   })
 
-function appendReviews(allReviews) {
-  var reviewHtml;
+  function appendReviews(allReviews) {
+    var reviewHtml;
 
-  // for each review:
-  allReviews.forEach(function(reviewData){
-    // create HTML for individual review
-    reviewHtml = templateReview({reviewContent: reviewData.reviewContent});
-    console.log("review appended")
-    // console.log(templateReview({reviewContent: reviewData.reviewContent}))
-    // add review to page
-    $('.appendReviews').append(reviewHtml);
-  });
-};
+    // for each review:
+    allReviews.forEach(function(reviewData){
+      // create HTML for individual review
+      reviewHtml = templateReview({reviewContent: reviewData.reviewContent});
+      console.log("review appended")
+      // console.log(templateReview({reviewContent: reviewData.reviewContent}))
+      // add review to page
+      $('.appendReviews').append(reviewHtml);
+    });
+  };
 
-function newReviewSuccess(review){
-  console.log('ajax call on review successful.  Review: ', review);
-  appendReviews([review])
-}
+  function newReviewSuccess(review){
+    console.log('ajax call on review successful.  Review: ', review);
+    appendReviews([review])
+  }
 
-function newReviewError(error){
-  console.log('ajax call on review dun messed up.  Error: ', error);
-}
+  function newReviewError(error){
+    console.log('ajax call on review dun messed up.  Error: ', error);
+  }
 
 })
 
