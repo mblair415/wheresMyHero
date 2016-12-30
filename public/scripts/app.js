@@ -56,15 +56,6 @@ $(document).ready(function(){
       }
       var content = '<h6>' + restaurant.name + '</h6>' + '<p>' + restaurant.location.address1 + '</p>'
       addMarker(location, content)
-      // marker = new google.maps.Marker({
-      //   position: location,
-      //   map: map,
-      //   // icon: image,  ////Use this for custom marker image
-      //   title: restaurant.name
-      // })
-      // marker.addListener('click', function() {
-      //   infowindow.open(map, marker);
-      // });
     })
   }
 
