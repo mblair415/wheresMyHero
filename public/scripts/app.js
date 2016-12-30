@@ -43,6 +43,7 @@ $(document).ready(function(){
     })
   })
 
+  // this is what searches giphy for images
   $('.form-gif').on('submit', function(event){
     console.log('gif submit clicked');
     event.preventDefault();
@@ -56,20 +57,16 @@ $(document).ready(function(){
     })
   })
 
-//it don't work ... it don't work at all!
-  $('.btn-warning').click(function(){
-    console.log('the edit button was pressed!', this);
-  })
-
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     $('.gifSelectionField2').empty();
     // console.log('i still know what you clicked on! ', this.src);
     var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
-    $(".selected-gif").append(pickedGifHtml);
+    $('.selected-gif').empty();
+    $('.selected-gif').append(pickedGifHtml);
   })
 
-  // this is what populates the area with gifs
+  // this is what populates selectable gifs
   function newGifSearchSuccess(json){
     console.log('ajax call for gif successful.  Gif: ', json);
     $('.gifSelectionField2').empty();
@@ -101,10 +98,16 @@ $(document).ready(function(){
         });
       // console.log("review appended", reviewData)
       // console.log(templateReview({reviewContent: reviewData.reviewContent}))
-      // add review to page
+      // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
     });
   };
+
+  //it don't work ... it don't work at all!
+  $('reviewIndividual').on('click', '#edit-button', function(){
+    console.log('the edit button was pressed!', this);
+  })
+
 
   function newReviewSuccess(review){
     console.log('ajax call on review successful.  Review: ', review);
