@@ -94,19 +94,23 @@ $(document).ready(function(){
         reviewStars: reviewData.stars,
         // turnary cheking to see if reviewData is true or false
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
-        reviewGif: reviewData.gif
+        reviewGif: reviewData.gif,
+        reviewId: reviewData._id
         });
       // console.log("review appended", reviewData)
       // console.log(templateReview({reviewContent: reviewData.reviewContent}))
       // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
     });
+    //it don't work ... it don't work at all!
+    $('.reviewIndividual').on('click', '#edit-button', function(){
+      console.log('the edit button was pressed!', this);
+    })
+    $('.reviewIndividual').on('click', '#delete-button', function(){
+      console.log('the edit button was pressed!', this);
+    })
   };
 
-  //it don't work ... it don't work at all!
-  $('reviewIndividual').on('click', '#edit-button', function(){
-    console.log('the edit button was pressed!', this);
-  })
 
 
   function newReviewSuccess(review){
