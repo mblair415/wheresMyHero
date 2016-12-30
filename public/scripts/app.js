@@ -56,10 +56,15 @@ $(document).ready(function(){
     })
   })
 
+//it don't work ... it don't work at all!
+  $('.btn-warning').click(function(){
+    console.log('the edit button was pressed!', this);
+  })
+
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     $('.gifSelectionField2').empty();
-    console.log('i still know what you clicked on! ', this.src);
+    // console.log('i still know what you clicked on! ', this.src);
     var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
     $(".selected-gif").append(pickedGifHtml);
   })
@@ -94,10 +99,10 @@ $(document).ready(function(){
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif
         });
-      console.log("review appended", reviewData)
+      // console.log("review appended", reviewData)
       // console.log(templateReview({reviewContent: reviewData.reviewContent}))
       // add review to page
-      $('.appendReviews').append(reviewHtml);
+      $('.appendReviews').prepend(reviewHtml);
     });
   };
 
