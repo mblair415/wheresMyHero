@@ -9,7 +9,7 @@ var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
-  console.log('Body parser parsing the body');
+  console.log('Body parser parsing that body!');
 
 //*****************
 //*****************
@@ -59,7 +59,7 @@ $(document).ready(function(){
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     $('.gifSelectionField2').empty();
-    // console.log('i still know what you clicked on! ', this.src);
+    console.log('i still know what you clicked on! ', this.src);
     var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
     $(".selected-gif").append(pickedGifHtml);
   })
@@ -91,8 +91,8 @@ $(document).ready(function(){
         reviewContent: reviewData.reviewContent,
         reviewStars: reviewData.stars,
         // turnary cheking to see if reviewData is true or false
-        reviewRecommend: reviewData.recommend ? "Yes" : "No"
-        // reviewGif:
+        reviewRecommend: reviewData.recommend ? "Yes" : "No",
+        reviewGif: reviewData.gif
         });
       console.log("review appended", reviewData)
       // console.log(templateReview({reviewContent: reviewData.reviewContent}))

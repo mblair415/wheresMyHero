@@ -8,56 +8,64 @@ reviewSamples.push({
               stars: 4,
               reviewContent: 'Such a delicious sandwich',
               upvotes: 37,
-              recommend: true
+              recommend: true,
+              gif: 'http://media3.giphy.com/media/XHAQPPV2lMpCo/100w.gif'
             });
 
 reviewSamples.push({
               stars: 2,
               reviewContent: 'Juicy and messy, but not very good.  Still, very unique and worth trying.',
               upvotes: 5,
-              recommend: true
+              recommend: true,
+              gif: 'http://media2.giphy.com/media/14qGOyLfATB5ok/100w.gif'
             });
 
 reviewSamples.push({
               stars: 5,
               reviewContent: 'I really liked how the meat and veggies were between the bread.',
               upvotes: 111,
-              recommend: true
+              recommend: true,
+              gif: 'https://media1.giphy.com/media/o9gX2fZzZ1mLu/100w.gif'
             });
 
 reviewSamples.push({
               stars: 3,
-              reviewContent: 'This was the best sandwich I never ate. I bought it and dropped it on the ground by accident.   I cry evrtiem!!one!',
+              reviewContent: 'This was the best sandwich I never ate. I bought it and dropped it on the ground by accident.   I cri evrtiem!!one!',
               upvotes: 42,
-              recommend: true
+              recommend: true,
+              gif: 'http://media3.giphy.com/media/3owypf6HrM3J7UTvAA/100w.gif'
             });
 
 reviewSamples.push({
               stars: 1,
               reviewContent: 'There was a hair in my sandwich.  I specifically told them I wanted a vegetarian sandwich',
               upvotes: 58,
-              recommend: false
+              recommend: false,
+              gif: 'http://media4.giphy.com/media/CEXDSZBbrLVmM/100w.gif'
             });
 
 reviewSamples.push({
               stars: 2,
               reviewContent: 'It was awful.  I liked nothing about it, and the service was poor.',
               upvotes: 13,
-              recommend: false
+              recommend: false,
+              gif: 'https://media3.giphy.com/media/2pU8T0OTNkmre/100w.gif'
             });
 
 reviewSamples.push({
               stars: 4,
               reviewContent: 'Really good, but not special and I did not have a good dining experience, so I can not recommend it.',
               upvotes: 31,
-              recommend: false
+              recommend: false,
+              gif: 'http://media2.giphy.com/media/oVIJX9HoKYI8w/100w.gif'
             });
 
 reviewSamples.push({
               stars: 3,
               reviewContent: 'Meh....had better',
               upvotes: 77,
-              recommend: false
+              recommend: false,
+              gif: 'http://media1.giphy.com/media/IScTu2L6wFJYc/100w.gif'
             });
 
 var userSamples = [{
