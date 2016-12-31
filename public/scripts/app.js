@@ -30,7 +30,8 @@ $(document).ready(function(){
   });
 
   function searchYelp(data){
-    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+    console.log('I know where you live!');
     map = new google.maps.Map(document.getElementById('mapPlacement'), {
     center: {lat: data.location.lat, lng: data.location.lng},
     zoom: 15
@@ -194,8 +195,15 @@ $(document).ready(function(){
     $('.reviewIndividual').on('click', '#edit-button', function(){
       console.log('the edit button was pressed!', this);
     })
+
     $('.reviewIndividual').on('click', '#delete-button', function(){
-      console.log('the edit button was pressed!', this);
+      console.log('the delete button was pressed!', this);
+      $.ajax({
+        method: 'GET',
+        url: '/api/reviews/:id',
+        success: deleteReview,
+        error: deleteFailure
+      })
     })
   };
 
@@ -210,18 +218,19 @@ $(document).ready(function(){
     console.log('ajax call on review dun messed up.  Error: ', error);
   }
 
-function yelpSuccess(restaurant){
-  console.log(restaurant)
-}
+  function yelpSuccess(restaurant){
+    console.log(restaurant)
+  }
 
-function yelpError (error){
-  console.log('ajax call on yelp dun messed up.  Error: ', error);
-}
+  function yelpError (error){
+    console.log('ajax call on yelp dun messed up.  Error: ', error);
+  }
 
-function yelpCallback (data){
-  console.log('this is the yelp callback', data)
-}
+  function yelpCallback (data){
+    console.log('this is the yelp callback', data)
+  }
 
+// This is the end of on ready
 })
 
 function noAppend (err){
@@ -230,4 +239,12 @@ function noAppend (err){
 
 function newGifSearchError(error){
   console.log('ajax call on gif search went bad, boss.  Error: ', error);
+}
+
+function deleteReview(data){
+  console.log('delete review triggered!');
+}
+
+function deleteFailure(error){
+  console.log('The delete went bad.  Did you delete the right thing?  Did you delete everything?', error);
 }
