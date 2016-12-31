@@ -103,7 +103,8 @@ $(document).ready(function(){
   var sourceOne = $('#selectableGif-template2').html(),
     templateGif = Handlebars.compile(sourceOne),
     sourceThree = $('#gif-choice').html(),
-    templateGifChoice = Handlebars.compile(sourceThree);
+    templateGifChoice = Handlebars.compile(sourceThree),
+
 
 //*****************
 //*****************
@@ -182,7 +183,7 @@ $(document).ready(function(){
         // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
-        reviewId: reviewData._id
+        reviewId: reviewData._id,
         });
       // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
@@ -190,10 +191,10 @@ $(document).ready(function(){
 
     // click event for pressing the edit review
     /*
-    create a duplicate area within the review to be edited that has all the fields.
-    I think this means inserting a div with a handlebars script ready to fill in if needed.
-    div should have all the origial info from the review filled in, which the edit route already takes care of.
-    there needs to be a clear way to change the gif, too.
+    create small handlebars area within the review handle bars.
+    this space will expand and display as needed as per handlebars.
+    display the reviewContent field and allow that one field to be changed.
+    save changes.
     */
     $('.reviewIndividual').on('click', '#edit-button', function(){
       var classes = $(this).attr("class").split(' ')[0];
@@ -201,9 +202,11 @@ $(document).ready(function(){
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + classes,
+        data: $(this).serializeArray(),
         success: editReview,
         error: editFailure
       })
+      // location.reload();
     })
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
@@ -223,7 +226,16 @@ $(document).ready(function(){
   // this is the end of append reviews function
   };
 
-// This is the end of on ready
+  function editReview(data){
+    console.log('Trying to edit the review below', data);
+    templateReview({
+      reviewContent: data.reviewContent2
+    })
+    console.log('The review was edited', data);
+    return templateReview;
+  }
+
+// This is the end of on ready function
 })
 
 function newReviewSuccess(review){
@@ -249,7 +261,7 @@ function yelpCallback (data){
 
 function noAppend (err){
   console.log('the reviews did not append', err)
-};
+}
 
 function newGifSearchError(error){
   console.log('ajax call on gif search went bad, boss.  Error: ', error);
@@ -263,9 +275,26 @@ function deleteFailure(error){
   console.log('The delete went bad.  Did you delete the right thing?  Did you delete everything?', error);
 }
 
-function editReview(data){
-  console.log('The review was edited', data);
-}
+
+// TRASH THIS ********
+// function appendReviews(allReviews) {
+//   var reviewHtml;
+//
+//   // for each review:
+//   allReviews.forEach(function(reviewData){
+//     // create HTML for individual review
+//     reviewHtml = templateReview({
+//       reviewContent: reviewData.reviewContent,
+//       reviewStars: reviewData.stars,
+//       // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
+//       reviewRecommend: reviewData.recommend ? "Yes" : "No",
+//       reviewGif: reviewData.gif,
+//       reviewId: reviewData._id
+//       });
+//     // add review to top of review area
+//     $('.appendReviews').prepend(reviewHtml);
+//   });
+// *************
 
 function editFailure(error){
   console.log('Oh, no!  We have failed to edit!  Things remained the same, and you hated that stuff! Error: ', error);
