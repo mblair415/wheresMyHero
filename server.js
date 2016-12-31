@@ -3,6 +3,13 @@ var express = require('express'),
   db = require('./models'),
   bodyParser = require('body-parser');
 
+var clientId = 'eOjaSriPI77z1AOBq0X33w'
+var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
+
+// 'use strict';
+
+const yelp = require('yelp-fusion');
+
 app.use(bodyParser.urlencoded({
   extended : true
 }));
@@ -110,6 +117,33 @@ app.put('/api/reviews/:id', function (req, res){
     });
   });
 });
+
+////Get closest sandwich locations from yelp api
+app.post('/api/locations/', function(req, res){
+  yelp.accessToken(clientId, clientSecret).then(response => {
+    const client = yelp.client(response.jsonBody.access_token);
+    client.search({
+      term:'sandwich',
+      // location: req.params.location,
+      latitude: req.body.location.lat,
+      longitude: req.body.location.lng,
+      radius: 800
+    }).then(response => {
+      // console.log(response.jsonBody.businesses[0].name);
+      res.json(response.jsonBody.businesses)
+    });
+  }).catch(e => {
+    console.log(e);
+  });
+})
+
+
+
+// App ID
+// eOjaSriPI77z1AOBq0X33w
+// App Secret
+// UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985
+
 
 ////Listen
 app.listen(process.env.port || 3000, function(){
