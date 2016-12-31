@@ -197,7 +197,7 @@ $(document).ready(function(){
     })
 
     $('.reviewIndividual').on('click', '#delete-button', function(){
-      console.log('the delete button was pressed!', this);
+      console.log('the delete button was pressed! Review id is ', this);
       $.ajax({
         method: 'GET',
         url: '/api/reviews/:id',
