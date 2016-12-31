@@ -23,6 +23,13 @@ app.get('/', function(req, res){
   });
 });
 
+app.get('/create', function(req, res){
+  console.log(__dirname);
+  res.sendFile('views/create.html', {
+    root : __dirname
+  });
+});
+
 // server.js pretend seed data.
 // var reviewSample = [{
 //   stars: 4,
