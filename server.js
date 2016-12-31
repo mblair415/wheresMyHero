@@ -92,7 +92,6 @@ app.get('/api/reviews/:id', function(req, res) {
 
 ////Create one review  i think this is a train wreck
 app.post('/api/reviews', function (req, res) {
-  // create new book with form data (`req.body`)
   var newReview = new db.Review({
     stars: req.body.stars,
     reviewContent: req.body.reviewContent,
@@ -100,17 +99,19 @@ app.post('/api/reviews', function (req, res) {
     upvotes: req.body.upvotes,
     gif: req.body.gif
   });
-    // save newBook to database
     newReview.save(function(err, review){
       if (err) {
         return console.log("save review error: " + err);
       }
       console.log("saved ", review.reviewContent);
+      console.log(req.user)
+      req.user.reviews.push(review);
+      req.user.save();
       res.json(review);
     });
 });
 
-// delete review  this may work
+// delete review
 app.delete('/api/reviews/:id', function (req, res) {
   console.log('review delete', req.params);
   var reviewId = req.params.id;
@@ -179,7 +180,7 @@ app.post('/signup', function (req, res) {
 
 ////User login route
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.send('logged in: '+req.sessionID);
+  res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
 });
 
 //// log out user
