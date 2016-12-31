@@ -244,6 +244,7 @@ function newGifSearchError(error){
 
 function deleteReview(data){
   console.log('delete review triggered!', data);
+  location.reload();
 }
 
 function deleteFailure(error){
