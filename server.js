@@ -1,7 +1,15 @@
+////////////////////
+////Dependancies
+////////////////////
+
 var express = require('express'),
   app = express(),
   db = require('./models'),
   bodyParser = require('body-parser');
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 
 var clientId = 'eOjaSriPI77z1AOBq0X33w'
 var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
@@ -13,8 +21,24 @@ const yelp = require('yelp-fusion');
 app.use(bodyParser.urlencoded({
   extended : true
 }));
-
+app.use(cookieParser());
+app.use(session({
+  secret: 'supersecretkey',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'));
+
+// passport config
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+////////////////////
+////Load landing page
+////////////////////
 
 app.get('/', function(req, res){
   console.log(__dirname);
