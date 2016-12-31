@@ -6,7 +6,7 @@ var express = require('express'),
   app = express(),
   db = require('./models'),
   bodyParser = require('body-parser');
-  cookieParser = require('cookie-parser'),
+  // cookieParser = require('cookie-parser'), ///May no longer be needed
   session = require('express-session'),
   passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
@@ -21,7 +21,7 @@ const yelp = require('yelp-fusion');
 app.use(bodyParser.urlencoded({
   extended : true
 }));
-app.use(cookieParser());
+// app.use(cookieParser());  ///May no longer be needed
 app.use(session({
   secret: 'supersecretkey',
   resave: false,
@@ -179,7 +179,13 @@ app.post('/signup', function (req, res) {
 
 ////User login route
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.send('logged in!!!');
+  res.send('logged in: '+req.sessionID);
+});
+
+//// log out user
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
 });
 
 // App ID
