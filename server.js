@@ -30,6 +30,14 @@ app.get('/create', function(req, res){
   });
 });
 
+app.get('/edit', function(req, res){
+  console.log(__dirname);
+  res.sendFile('views/edit.html', {
+    root : __dirname
+  });
+});
+
+
 // server.js pretend seed data.
 // var reviewSample = [{
 //   stars: 4,
