@@ -32,9 +32,9 @@ app.use(passport.session());
 app.use(express.static('public'));
 
 // passport config
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 ////////////////////
 ////Load landing page
@@ -161,7 +161,17 @@ app.post('/api/locations/', function(req, res){
   });
 })
 
+////Sign up new user
 
+app.post('/signup', function (req, res) {
+  db.User.register(new db.User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.send('signed up!!!');
+      });
+    }
+  );
+});
 
 // App ID
 // eOjaSriPI77z1AOBq0X33w
