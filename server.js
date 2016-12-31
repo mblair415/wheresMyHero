@@ -161,8 +161,12 @@ app.post('/api/locations/', function(req, res){
   });
 })
 
-////Sign up new user
 
+////////////////////
+////Login Routes
+////////////////////
+
+////Sign up new user
 app.post('/signup', function (req, res) {
   db.User.register(new db.User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
@@ -171,6 +175,11 @@ app.post('/signup', function (req, res) {
       });
     }
   );
+});
+
+////User login route
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.send('logged in!!!');
 });
 
 // App ID
