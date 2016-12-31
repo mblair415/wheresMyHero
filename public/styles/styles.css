@@ -2,7 +2,6 @@
   border: dashed 1px black;
 }*/
 
-
 .gifBox {
   min-height: 150px;
   text-align: center;
@@ -12,6 +11,7 @@
       overflow: hidden;
       display: inline-block;
   }
+
   .rating-input {
       float: right;
       width: 16px;
@@ -20,6 +20,7 @@
       margin: 0 0 0 -16px;
       opacity: 0;
 }
+
   .rating-star {
       position: relative;
       float: right;
@@ -42,6 +43,38 @@
       width: 16px;
       height: 16px;
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
+  }
+
+  .jumbotron {
+    background-color: #0B543E;
+    color: #E5563C;
+  }
+
+  .site-logo {
+    max-width:100px;
+    height:auto;
+    margin-left: 40%;
+  }
+
+  h1, h2, legend {
+    text-align: center;
+    /*text-shadow: 7px 5px 5px #E5563C;*/
+    /*font-family: 'Indie Flower', cursive;*/
+    font-family: 'Gloria Hallelujah', cursive;
+  }
+
+  .reviewIndividual {
+    border: solid 1px black;
+    background-color: #BBDB93;
+  }
+
+  .review-gif {
+    min-height: 200px;
+  }
+
+  body {
+    /*font-family: Calibria, serif;*/
+    background-color: #0B543E;
   }
 
 /*The following is styling related to the map section*/

@@ -73,7 +73,8 @@ app.post('/api/reviews', function (req, res) {
     stars: req.body.stars,
     reviewContent: req.body.reviewContent,
     recommend: req.body.recommend,
-    upvotes: req.body.upvotes
+    upvotes: req.body.upvotes,
+    gif: req.body.gif
   });
     // save newBook to database
     newReview.save(function(err, review){
@@ -106,6 +107,7 @@ app.put('/api/reviews/:id', function (req, res){
     foundReview.reviewContent = req.body.reviewContent || foundReview.reviewContent;
     foundReview.recommend = req.body.recommend || foundReview.recommend;
     foundReview.upvotes = req.body.upvote || foundReview.upvotes;
+    foundReview.gif = req.body.gif || foundReview.gif;
     foundReview.save(function(err, review){
       if (err) {
         return console.log("save review error: " + err);

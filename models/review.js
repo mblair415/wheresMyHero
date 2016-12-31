@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var ReviewSchema = new Schema ({
+  gif: String,
   stars: Number,
   reviewContent: String,
   upvotes: Number,

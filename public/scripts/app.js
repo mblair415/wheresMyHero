@@ -19,6 +19,7 @@ var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
+  console.log('Body parser parsing that body!');
 
 
   $.ajax({
@@ -103,16 +104,18 @@ $(document).ready(function(){
 //Must uncommment this section
 //to get giphy handlebars to work
 
-  //Gif Handlebars template
-  // var sourceOne = $('#selectableGif-template2').html();
-  // var templateGif = Handlebars.compile(sourceOne);
+  //Gif Handlebars templates
+  var sourceOne = $('#selectableGif-template2').html(),
+    templateGif = Handlebars.compile(sourceOne);
+    sourceThree = $('#gif-choice').html(),
+    templateGifChoice = Handlebars.compile(sourceThree);
 
 //*****************
 //*****************
 
   //Review Handlebars template
   $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html();
+  var sourceTwo = $("#review-template").html(),
   templateReview = Handlebars.compile(sourceTwo);
 
   $('.new-review').on('submit', function(event) {
@@ -128,9 +131,9 @@ $(document).ready(function(){
     })
   })
 
+  // this is what searches giphy for images
   $('.form-gif').on('submit', function(event){
     console.log('gif submit clicked');
-
     event.preventDefault();
 
     $.ajax({
@@ -142,15 +145,21 @@ $(document).ready(function(){
     })
   })
 
+  // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
-    console.log('an image was clicked!', this.src);
+    $('.gifSelectionField2').empty();
+    // console.log('i still know what you clicked on! ', this.src);
+    var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
+    $('.selected-gif').empty();
+    $('.selected-gif').append(pickedGifHtml);
   })
 
+  // this is what populates selectable gifs
   function newGifSearchSuccess(json){
     console.log('ajax call for gif successful.  Gif: ', json);
-    $('.deleteThisClass').empty();
+    $('.gifSelectionField2').empty();
     json.data.forEach(function(gif){
-      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url})
+      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url});
       $(".gifSelectionField2").append(giphyHtml);
     });
   }
@@ -162,28 +171,44 @@ $(document).ready(function(){
     error: noAppend
   })
 
-function appendReviews(allReviews) {
-  var reviewHtml;
+  function appendReviews(allReviews) {
+    var reviewHtml;
 
-  // for each review:
-  allReviews.forEach(function(reviewData){
-    // create HTML for individual review
-    reviewHtml = templateReview({reviewContent: reviewData.reviewContent});
-    console.log("review appended")
-    // console.log(templateReview({reviewContent: reviewData.reviewContent}))
-    // add review to page
-    $('.appendReviews').append(reviewHtml);
-  });
-};
+    // for each review:
+    allReviews.forEach(function(reviewData){
+      // create HTML for individual review
+      reviewHtml = templateReview({
+        reviewContent: reviewData.reviewContent,
+        reviewStars: reviewData.stars,
+        // turnary cheking to see if reviewData is true or false
+        reviewRecommend: reviewData.recommend ? "Yes" : "No",
+        reviewGif: reviewData.gif,
+        reviewId: reviewData._id
+        });
+      // console.log("review appended", reviewData)
+      // console.log(templateReview({reviewContent: reviewData.reviewContent}))
+      // add review to top of review area
+      $('.appendReviews').prepend(reviewHtml);
+    });
+    //it don't work ... it don't work at all!
+    $('.reviewIndividual').on('click', '#edit-button', function(){
+      console.log('the edit button was pressed!', this);
+    })
+    $('.reviewIndividual').on('click', '#delete-button', function(){
+      console.log('the edit button was pressed!', this);
+    })
+  };
 
-function newReviewSuccess(review){
-  console.log('ajax call on review successful.  Review: ', review);
-  appendReviews([review])
-}
 
-function newReviewError(error){
-  console.log('ajax call on review dun messed up.  Error: ', error);
-}
+
+  function newReviewSuccess(review){
+    console.log('ajax call on review successful.  Review: ', review);
+    appendReviews([review])
+  }
+
+  function newReviewError(error){
+    console.log('ajax call on review dun messed up.  Error: ', error);
+  }
 
 function yelpSuccess(restaurant){
   console.log(restaurant)
