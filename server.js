@@ -3,11 +3,12 @@ var express = require('express'),
   db = require('./models'),
   bodyParser = require('body-parser');
 
+// given to use by yelp, required to use yelp api
 var clientId = 'eOjaSriPI77z1AOBq0X33w'
 var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
 
-// 'use strict';
-
+// creates an unmodifiable variable
+// yelp fusion is the plugin that makes the yelp api work
 const yelp = require('yelp-fusion');
 
 app.use(bodyParser.urlencoded({
@@ -23,7 +24,9 @@ app.get('/', function(req, res){
   });
 });
 
-// server.js pretend seed data.
+/*
+fake data for testing before seed was available, or for testing
+*/
 // var reviewSample = [{
 //   stars: 4,
 //   reviewContent: 'superduper gud',
@@ -37,11 +40,12 @@ app.get('/', function(req, res){
 //     upvotes: 7
 //   }
 // ]
+
 ////////////////////
 ////Routes
 ////////////////////
 
-////Get all reviews -- line 43 should work for seeded data.
+////Get all reviews
 app.get('/api/reviews', function(req, res){
   db.Review.find(function(err, review){
     if(err){
@@ -49,7 +53,6 @@ app.get('/api/reviews', function(req, res){
     }
     console.log('all reviews are ', review);
     res.send(review)
-    // res.send(reviewSample);
   });
 });
 
@@ -66,9 +69,9 @@ app.get('/api/reviews/:id', function(req, res) {
 })
 
 
-////Create one review  i think this is a train wreck
+//Create one review
 app.post('/api/reviews', function (req, res) {
-  // create new book with form data (`req.body`)
+  // create new review with form data (`req.body`)
   var newReview = new db.Review({
     stars: req.body.stars,
     reviewContent: req.body.reviewContent,
@@ -76,17 +79,18 @@ app.post('/api/reviews', function (req, res) {
     upvotes: req.body.upvotes,
     gif: req.body.gif
   });
-    // save newBook to database
-    newReview.save(function(err, review){
-      if (err) {
-        return console.log("save review error: " + err);
-      }
-      console.log("saved ", review.reviewContent);
-      res.json(review);
-    });
+
+  // save newReview to database
+  newReview.save(function(err, review){
+    if (err) {
+      return console.log("save review error: " + err);
+    }
+    console.log("saved ", review.reviewContent);
+    res.json(review);
+  });
 });
 
-// delete review  this may work
+// delete review
 app.delete('/api/reviews/:id', function (req, res) {
   console.log('review delete', req.params);
   var reviewId = req.params.id;
@@ -118,18 +122,20 @@ app.put('/api/reviews/:id', function (req, res){
   });
 });
 
-////Get closest sandwich locations from yelp api
+//Get closest sandwich locations from yelp api
 app.post('/api/locations/', function(req, res){
   yelp.accessToken(clientId, clientSecret).then(response => {
+    // sets the variable client as a constant
     const client = yelp.client(response.jsonBody.access_token);
     client.search({
+      // what we search the yelp api for
       term:'sandwich',
-      // location: req.params.location,
+      // this is the geolocation and best match radius area
       latitude: req.body.location.lat,
       longitude: req.body.location.lng,
       radius: 800
     }).then(response => {
-      // console.log(response.jsonBody.businesses[0].name);
+      // these are the businesses returned by yelp
       res.json(response.jsonBody.businesses)
     });
   }).catch(e => {
@@ -138,14 +144,7 @@ app.post('/api/locations/', function(req, res){
 })
 
 
-
-// App ID
-// eOjaSriPI77z1AOBq0X33w
-// App Secret
-// UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985
-
-
-////Listen
+//Listen
 app.listen(process.env.port || 3000, function(){
   console.log('express server online on port', 3000)
 });
