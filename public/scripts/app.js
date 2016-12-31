@@ -197,10 +197,11 @@ $(document).ready(function(){
     })
 
     $('.reviewIndividual').on('click', '#delete-button', function(){
-      console.log('the delete button was pressed! Review id is ', this);
+      var classes = $(this).attr("class").split(' ')[0];
+      console.log('the delete button was pressed! Review Id is ' + classes);
       $.ajax({
-        method: 'GET',
-        url: '/api/reviews/:id',
+        method: 'DELETE',
+        url: '/api/reviews/' + classes,
         success: deleteReview,
         error: deleteFailure
       })
@@ -242,7 +243,7 @@ function newGifSearchError(error){
 }
 
 function deleteReview(data){
-  console.log('delete review triggered!');
+  console.log('delete review triggered!', data);
 }
 
 function deleteFailure(error){
