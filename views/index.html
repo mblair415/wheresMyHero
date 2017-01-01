@@ -99,7 +99,7 @@
           </div>
         </section>
 
-<!-- gif handlebars section -->
+<!-- gif selection area with rows of gifs -->
           <section class="container gifSelectionField2">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
@@ -204,25 +204,39 @@
           <h2>Reviews</h2>
 
           <!-- sandwich reviews -->
-            <div class = 'appendReviews'></div>
-          <script id='review-template' type='text/x-handlebars-template'>
-            <div class="container">
-              <div class="row">
-                <article class="col-xs-8 reviewIndividual" id="{{reviewId}}">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <img class="review-gif center" src="{{reviewGif}}"></a>
+          <div class="appendReviews">
+            <script id='review-template' type='text/x-handlebars-template'>
+              <div class="container">
+                <div class="row">
+                  <article class="col-xs-8 reviewIndividual" id="{{reviewId}}">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <img class="review-gif center" src="{{reviewGif}}"></a>
+                      </div>
                     </div>
-                  </div>
-                  <p>Sandwich Stars: {{reviewStars}}</p>
-                  <p>Recommended: {{reviewRecommend}}</p>
-                  <p>{{reviewContent}}</p>
-                  <button type="button" class="btn btn-warning btn-sm" id="edit-button">Edit</button>
-                  <button type="button" class="btn btn-warning btn-sm" id="delete-button">Delete</button>
-                </article>
+                    <p>Sandwich Stars: {{reviewStars}}</p>
+                    <p>Recommended: {{reviewRecommend}}</p>
+                    <p>{{reviewContent}}</p>
+                    <button type="button" class="{{reviewId}} btn btn-warning btn-sm" id="edit-button">Edit</button>
+                    <button type="button" class="{{reviewId}} btn btn-warning btn-sm" id="delete-button">Delete</button>
+<!-- code test for basic edit of review.  delete this -->
+                    <section class="DELETE-THIS-">
+                      <h5>TEMP EDIT AREA</h2>
+                      <form>
+                        <div class="form-group2">
+                          <label class="col-md-4 control-label2" for="reviewContent2">ReReview your Sandwich</label>
+                          <div class="col-md-4">
+                            <textarea class="form-control2" id="reviewContent2" name="reviewContent2"></textarea>
+                          </div>
+                        </div>
+                      </form>
+                    </section>
+<!-- end of code test -->
+                  </article>
+                </div>
               </div>
-            </div>
-          </script>
+            </script>
+          </div>
         </div>
       </div>
     </section>
