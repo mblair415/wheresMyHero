@@ -12,89 +12,6 @@ $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
 
-
-  // automatically fetching user location (a google no-no) using google geolocation api
-  $.ajax({
-    method: 'POST',
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-    success: createMap,
-    error: noLocation
-  });
-
-  // creates a google map using geolocation info
-  function createMap(data){
-    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-    console.log('I know where you live!');
-    map = new google.maps.Map(document.getElementById('mapPlacement'), {
-    center: {lat: data.location.lat, lng: data.location.lng},
-    zoom: 15
-    })
-    $.ajax({
-      method: 'POST',
-      url: '/api/locations',
-      data: data,
-      success: showRestaurants,
-      error: noRestaurants
-    })
-  }
-
-  // function searchYelp(data){
-  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-  //   center: {lat: data.location.lat, lng: data.location.lng},
-  //   zoom: 15
-  //   })
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/locations',
-  //     data: data,
-  //     success: showRestaurants,
-  //     error: noRestaurants
-  //   })
-  // }
-
-  function noLocation(data){
-    console.log('could not find location ', data)
-  }
-
-  // looks at each restaraunt sent from yelp
-  function showRestaurants(data){
-    console.log('you found restaurants! ', data)
-    data.forEach(function(restaurant){
-      var location = {
-        lat: restaurant.coordinates.latitude,
-        lng: restaurant.coordinates.longitude
-      }
-      // this is the content that goes on the card associated with each restaurant in the map
-      var content = '<h6>' + restaurant.name + '</h6>' + '<p>' + restaurant.location.address1 + '</p>'
-      addMarker(location, content)
-    })
-  }
-
-  // places a marker on the map for each restaraunt
-  function addMarker(position, content){
-    var myLatlng, marker, infowindow,contentString;
-    // places each marker
-    marker = new google.maps.Marker({
-      position: position,
-      map: map
-    });
-    // fills in data for the card that appears when clicking on any marker
-    contentString = content;
-    infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    // listen for click to open the window when a marker is clicked on
-    marker.addListener('click', function() {
-      // open the restaraunt info when marker clicked on
-     infowindow.open(map, marker);
-    });
-  }
-
-  function noRestaurants(data){
-    console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
-  }
-
   /*
   ajax call to bring in data from yelp...couldn't get this working.  Can look at
   this later
@@ -185,8 +102,93 @@ $(document).ready(function(){
     error: noAppend
   })
 
+
+  // this is the area that deals with the map
+  // listener for find hero button
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
+
+    // automatically fetching user location (a google no-no) using google geolocation api
+    $.ajax({
+      method: 'POST',
+      url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+      success: createMap,
+      error: noLocation
+    });
+    
+    // creates a google map using geolocation info
+    function createMap(data){
+      console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      console.log('I know where you live!');
+      map = new google.maps.Map(document.getElementById('mapPlacement'), {
+      center: {lat: data.location.lat, lng: data.location.lng},
+      zoom: 15
+      })
+      $.ajax({
+        method: 'POST',
+        url: '/api/locations',
+        data: data,
+        success: showRestaurants,
+        error: noRestaurants
+      })
+    }
+
+    // function searchYelp(data){
+    //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+    //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+    //   center: {lat: data.location.lat, lng: data.location.lng},
+    //   zoom: 15
+    //   })
+    //   $.ajax({
+    //     method: 'POST',
+    //     url: '/api/locations',
+    //     data: data,
+    //     success: showRestaurants,
+    //     error: noRestaurants
+    //   })
+    // }
+
+    function noLocation(data){
+      console.log('could not find location ', data)
+    }
+
+    // looks at each restaraunt sent from yelp
+    function showRestaurants(data){
+      console.log('you found restaurants! ', data)
+      data.forEach(function(restaurant){
+        var location = {
+          lat: restaurant.coordinates.latitude,
+          lng: restaurant.coordinates.longitude
+        }
+        // this is the content that goes on the card associated with each restaurant in the map
+        var content = '<h6>' + restaurant.name + '</h6>' + '<p>' + restaurant.location.address1 + '</p>'
+        addMarker(location, content)
+      })
+    }
+
+    // places a marker on the map for each restaraunt
+    function addMarker(position, content){
+      var myLatlng, marker, infowindow,contentString;
+      // places each marker
+      marker = new google.maps.Marker({
+        position: position,
+        map: map
+      });
+      // fills in data for the card that appears when clicking on any marker
+      contentString = content;
+      infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      // listen for click to open the window when a marker is clicked on
+      marker.addListener('click', function() {
+        // open the restaraunt info when marker clicked on
+       infowindow.open(map, marker);
+      });
+    }
+
+    function noRestaurants(data){
+      console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
+    }
   })
 
   // this is what spits out each review onto the page.
