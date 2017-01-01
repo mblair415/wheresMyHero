@@ -214,6 +214,21 @@ $(document).ready(function(){
     $('.reviewIndividual').on('click', '#edit-button', function(){
       var classes = $(this).attr("class").split(' ')[0];
       console.log('the edit button was pressed! Review Id is ' + classes);
+      window.location.href="../edit";
+
+      $('.edit-review').on('submit', function(event) {
+        console.log('submit clicked');
+        event.preventDefault();
+
+        $.ajax({
+          method: 'POST',
+          url: '/api/reviews',
+          data: $(this).serializeArray(),
+          success: newReviewSuccess,
+          error: newReviewError
+        })
+      })
+
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + classes,
@@ -255,7 +270,7 @@ $(document).ready(function(){
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);
-  appendReviews([review])
+  window.location.href="../"
 }
 
 function newReviewError(error){
