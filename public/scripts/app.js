@@ -22,27 +22,27 @@ $(document).ready(function(){
   console.log('Body parser parsing that body!');
 
 
-  $.ajax({
-    method: 'POST',
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-    success: searchYelp,
-    error: noLocation
-  });
+  // $.ajax({
+  //   method: 'POST',
+  //   url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+  //   success: searchYelp,
+  //   error: noLocation
+  // });
 
-  function searchYelp(data){
-    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-    map = new google.maps.Map(document.getElementById('mapPlacement'), {
-    center: {lat: data.location.lat, lng: data.location.lng},
-    zoom: 15
-    })
-    $.ajax({
-      method: 'POST',
-      url: '/api/locations',
-      data: data,
-      success: showRestaurants,
-      error: noRestaurants
-    })
-  }
+  // function searchYelp(data){
+  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+  //   center: {lat: data.location.lat, lng: data.location.lng},
+  //   zoom: 15
+  //   })
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/locations',
+  //     data: data,
+  //     success: showRestaurants,
+  //     error: noRestaurants
+  //   })
+  // }
 
   function noLocation(data){
     console.log('could not find location ', data)
@@ -114,9 +114,9 @@ $(document).ready(function(){
 //*****************
 
   //Review Handlebars template
-  $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html(),
-  templateReview = Handlebars.compile(sourceTwo);
+  // $reviewsList = ('#review-form');
+  // var sourceTwo = $("#review-template").html(),
+  // templateReview = Handlebars.compile(sourceTwo);
 
   $('.new-review').on('submit', function(event) {
     console.log('submit clicked');
@@ -164,40 +164,40 @@ $(document).ready(function(){
     });
   }
 
-  $.ajax({
-    method: 'GET',
-    url: '/api/reviews',
-    success: appendReviews,
-    error: noAppend
-  })
-
-  function appendReviews(allReviews) {
-    var reviewHtml;
-
-    // for each review:
-    allReviews.forEach(function(reviewData){
-      // create HTML for individual review
-      reviewHtml = templateReview({
-        reviewContent: reviewData.reviewContent,
-        reviewStars: reviewData.stars,
-        // turnary cheking to see if reviewData is true or false
-        reviewRecommend: reviewData.recommend ? "Yes" : "No",
-        reviewGif: reviewData.gif,
-        reviewId: reviewData._id
-        });
-      // console.log("review appended", reviewData)
-      // console.log(templateReview({reviewContent: reviewData.reviewContent}))
-      // add review to top of review area
-      $('.appendReviews').prepend(reviewHtml);
-    });
-    //it don't work ... it don't work at all!
-    $('.reviewIndividual').on('click', '#edit-button', function(){
-      console.log('the edit button was pressed!', this);
-    })
-    $('.reviewIndividual').on('click', '#delete-button', function(){
-      console.log('the edit button was pressed!', this);
-    })
-  };
+  // $.ajax({
+  //   method: 'GET',
+  //   url: '/api/reviews',
+  //   success: appendReviews,
+  //   error: noAppend
+  // })
+  //
+  // function appendReviews(allReviews) {
+  //   var reviewHtml;
+  //
+  //   // for each review:
+  //   allReviews.forEach(function(reviewData){
+  //     // create HTML for individual review
+  //     reviewHtml = templateReview({
+  //       reviewContent: reviewData.reviewContent,
+  //       reviewStars: reviewData.stars,
+  //       // turnary cheking to see if reviewData is true or false
+  //       reviewRecommend: reviewData.recommend ? "Yes" : "No",
+  //       reviewGif: reviewData.gif,
+  //       reviewId: reviewData._id
+  //       });
+  //     // console.log("review appended", reviewData)
+  //     // console.log(templateReview({reviewContent: reviewData.reviewContent}))
+  //     // add review to top of review area
+  //     $('.appendReviews').prepend(reviewHtml);
+  //   });
+  //   //it don't work ... it don't work at all!
+  //   $('.reviewIndividual').on('click', '#edit-button', function(){
+  //     console.log('the edit button was pressed!', this);
+  //   })
+  //   $('.reviewIndividual').on('click', '#delete-button', function(){
+  //     console.log('the edit button was pressed!', this);
+  //   })
+  // };
 
 
 
