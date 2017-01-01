@@ -5,6 +5,7 @@ var map;
 var template;
 var $reviewsList;
 var allReviews = [];
+var classes;
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
@@ -264,32 +265,33 @@ $(document).ready(function(){
     save changes.
     */
     $('.reviewIndividual').on('click', '#edit-button', function(){
-      var classes = $(this).attr("class").split(' ')[0];
+      classes = $(this).attr("class").split(' ')[0];
       console.log('the edit button was pressed! Review Id is ' + classes);
       window.location.href="../edit";
 
-      $('.edit-review').on('submit', function(event) {
-        console.log('submit clicked');
-        event.preventDefault();
-
-        $.ajax({
-          method: 'POST',
-          url: '/api/reviews',
-          data: $(this).serializeArray(),
-          success: newReviewSuccess,
-          error: newReviewError
-        })
-      })
-
-      $.ajax({
-        method: 'PUT',
-        url: '/api/reviews/' + classes,
-        data: $(this).serializeArray(),
-        success: editReview,
-        error: editFailure
-      })
       // location.reload();
     })
+    $('.edit-review').on('submit', function(event) {
+      console.log('submit clicked');
+      event.preventDefault();
+
+      $.ajax({
+        method: 'POST',
+        url: '/api/reviews',
+        data: $(this).serializeArray(),
+        success: newReviewSuccess,
+        error: newReviewError
+      })
+    })
+
+    $.ajax({
+      method: 'PUT',
+      url: '/api/reviews/' + classes,
+      data: $(this).serializeArray(),
+      success: editReview,
+      error: editFailure
+    })
+
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
     $('.reviewIndividual').on('click', '#delete-button', function(){
