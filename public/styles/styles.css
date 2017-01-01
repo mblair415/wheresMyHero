@@ -80,6 +80,10 @@
     padding-bottom: 15px;
   }
 
+  .find-hero-button, .hide-map-area {
+    text-align: center;
+  }
+
   body {
     /*font-family: Calibria, serif;*/
     background-color: #0B543E;
