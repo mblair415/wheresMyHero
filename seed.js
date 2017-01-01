@@ -122,7 +122,7 @@ db.User.remove({}, function(err, users){
   db.User.create(userSamples, function(err, users){
     if (err) { return console.log('ERROR', err); }
     console.log('all users deleted before reseeding');
-    console.log("all users:", reviews);
+    console.log("all users:", users);
     console.log("created", users.length, "users");
   });
 });
