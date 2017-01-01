@@ -37,7 +37,7 @@ $(document).ready(function(){
       error: noRestaurants
     })
   }
-  
+
   // function searchYelp(data){
   //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
   //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
@@ -124,10 +124,10 @@ $(document).ready(function(){
 //*****************
 //*****************
 
-  //Review Handlebars template
-  // $reviewsList = ('#review-form');
-  // var sourceTwo = $("#review-template").html(),
-  // templateReview = Handlebars.compile(sourceTwo);
+  // Review Handlebars template
+  $reviewsList = ('#review-form');
+  var sourceTwo = $("#review-template").html(),
+  templateReview = Handlebars.compile(sourceTwo);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
