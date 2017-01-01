@@ -1,7 +1,15 @@
+////////////////////
+////Dependancies
+////////////////////
+
 var express = require('express'),
   app = express(),
   db = require('./models'),
   bodyParser = require('body-parser');
+  // cookieParser = require('cookie-parser'), ///May no longer be needed
+  session = require('express-session'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 
 var clientId = 'eOjaSriPI77z1AOBq0X33w'
 var clientSecret = 'UVTHGQC49f1hs4if3832UXZVqBr7Q4OrQxvcXVxLNxxNKk70TPr299T7rgtaS985'
@@ -13,8 +21,24 @@ const yelp = require('yelp-fusion');
 app.use(bodyParser.urlencoded({
   extended : true
 }));
-
+// app.use(cookieParser());  ///May no longer be needed
+app.use(session({
+  secret: 'supersecretkey',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'));
+
+// passport config
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+
+////////////////////
+////Load landing page
+////////////////////
 
 app.get('/', function(req, res){
   console.log(__dirname);
@@ -83,7 +107,6 @@ app.get('/api/reviews/:id', function(req, res) {
 
 ////Create one review  i think this is a train wreck
 app.post('/api/reviews', function (req, res) {
-  // create new book with form data (`req.body`)
   var newReview = new db.Review({
     stars: req.body.stars,
     reviewContent: req.body.reviewContent,
@@ -91,17 +114,19 @@ app.post('/api/reviews', function (req, res) {
     upvotes: req.body.upvotes,
     gif: req.body.gif
   });
-    // save newBook to database
     newReview.save(function(err, review){
       if (err) {
         return console.log("save review error: " + err);
       }
       console.log("saved ", review.reviewContent);
+      console.log(req.user)
+      req.user.reviews.push(review);
+      req.user.save();
       res.json(review);
     });
 });
 
-// delete review  this may work
+// delete review
 app.delete('/api/reviews/:id', function (req, res) {
   console.log('review delete', req.params);
   var reviewId = req.params.id;
@@ -153,6 +178,31 @@ app.post('/api/locations/', function(req, res){
 })
 
 
+////////////////////
+////Login Routes
+////////////////////
+
+////Sign up new user
+app.post('/signup', function (req, res) {
+  db.User.register(new db.User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.send('signed up!!!');
+      });
+    }
+  );
+});
+
+////User login route
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+});
+
+//// log out user
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 // App ID
 // eOjaSriPI77z1AOBq0X33w
