@@ -14,29 +14,29 @@ $(document).ready(function(){
 
 
   // automatically fetching user location (a google no-no) using google geolocation api
-  $.ajax({
-    method: 'POST',
-    url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-    success: createMap,
-    error: noLocation
-  });
-
-  // creates a google map using geolocation info
-  function createMap(data){
-    console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-    console.log('I know where you live!');
-    map = new google.maps.Map(document.getElementById('mapPlacement'), {
-    center: {lat: data.location.lat, lng: data.location.lng},
-    zoom: 15
-    })
-    $.ajax({
-      method: 'POST',
-      url: '/api/locations',
-      data: data,
-      success: showRestaurants,
-      error: noRestaurants
-    })
-  }
+  // $.ajax({
+  //   method: 'POST',
+  //   url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+  //   success: createMap,
+  //   error: noLocation
+  // });
+  //
+  // // creates a google map using geolocation info
+  // function createMap(data){
+  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+  //   console.log('I know where you live!');
+  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+  //   center: {lat: data.location.lat, lng: data.location.lng},
+  //   zoom: 15
+  //   })
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/locations',
+  //     data: data,
+  //     success: showRestaurants,
+  //     error: noRestaurants
+  //   })
+  // }
 
   // function searchYelp(data){
   //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
