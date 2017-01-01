@@ -42,7 +42,7 @@
         <!-- ***** gif selection ***** -->
         <section id='review-form' class="container">
           <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-9">
               <form class="form-horizontal form-gif" action="indexGiphy.html" method="get">
                 <div class="form-group">
                   <div class="col-xs-12" id="giphy">
@@ -134,7 +134,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="singlebutton">Save Review</label>
               <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+                <button id="singlebuttonSubmit" name="singlebutton" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </fieldset>
@@ -143,48 +143,9 @@
       </div>
     </section>
 
-<p><a href="/create">Create</a></p>
+
 
     <!-- End Form Sample -->
-
-     <section class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h2>Map</h2>
-          <div id="mapPlacement"></div>
-        </div>
-      </div>
-     </section>
-
-    <section class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <h2>Reviews</h2>
-
-          <!-- sandwich reviews -->
-            <div class = 'appendReviews'></div>
-          <script id='review-template' type='text/x-handlebars-template'>
-            <div class="container">
-              <div class="row">
-                <article class="col-xs-8 reviewIndividual" id="{{reviewId}}">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <img class="review-gif center" src="{{reviewGif}}"></a>
-                    </div>
-                  </div>
-                  <p>Sandwich Stars: {{reviewStars}}</p>
-                  <p>Recommended: {{reviewRecommend}}</p>
-                  <p>{{reviewContent}}</p>
-                  <button type="button" class="btn btn-warning btn-sm" id="edit-button">Edit</button>
-                  <button type="button" class="btn btn-warning btn-sm" id="delete-button">Delete</button>
-                </article>
-              </div>
-            </div>
-          </script>
-        </div>
-      </div>
-    </section>
-
 
 
   </body>
