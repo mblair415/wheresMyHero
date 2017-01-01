@@ -1,7 +1,6 @@
 console.log('sanity check, app.js is connected')
 
-
-////Declare global variables here
+//Declare global variables here
 var map;
 var template;
 var $reviewsList;
@@ -12,6 +11,7 @@ var giphyApi = "http://api.giphy.com/v1/gifs/search";
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
+
 
   // automatically fetching user location (a google no-no) using google geolocation api
   $.ajax({
@@ -37,6 +37,21 @@ $(document).ready(function(){
       error: noRestaurants
     })
   }
+  
+  // function searchYelp(data){
+  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+  //   center: {lat: data.location.lat, lng: data.location.lng},
+  //   zoom: 15
+  //   })
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/locations',
+  //     data: data,
+  //     success: showRestaurants,
+  //     error: noRestaurants
+  //   })
+  // }
 
   function noLocation(data){
     console.log('could not find location ', data)
@@ -110,9 +125,9 @@ $(document).ready(function(){
 //*****************
 
   //Review Handlebars template
-  $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html(),
-  templateReview = Handlebars.compile(sourceTwo);
+  // $reviewsList = ('#review-form');
+  // var sourceTwo = $("#review-template").html(),
+  // templateReview = Handlebars.compile(sourceTwo);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
@@ -274,27 +289,6 @@ function deleteReview(data){
 function deleteFailure(error){
   console.log('The delete went bad.  Did you delete the right thing?  Did you delete everything?', error);
 }
-
-
-// TRASH THIS ********
-// function appendReviews(allReviews) {
-//   var reviewHtml;
-//
-//   // for each review:
-//   allReviews.forEach(function(reviewData){
-//     // create HTML for individual review
-//     reviewHtml = templateReview({
-//       reviewContent: reviewData.reviewContent,
-//       reviewStars: reviewData.stars,
-//       // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
-//       reviewRecommend: reviewData.recommend ? "Yes" : "No",
-//       reviewGif: reviewData.gif,
-//       reviewId: reviewData._id
-//       });
-//     // add review to top of review area
-//     $('.appendReviews').prepend(reviewHtml);
-//   });
-// *************
 
 function editFailure(error){
   console.log('Oh, no!  We have failed to edit!  Things remained the same, and you hated that stuff! Error: ', error);

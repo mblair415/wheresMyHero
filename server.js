@@ -1,7 +1,15 @@
+////////////////////
+////Dependancies
+////////////////////
+
 var express = require('express'),
   app = express(),
   db = require('./models'),
   bodyParser = require('body-parser');
+  // cookieParser = require('cookie-parser'), ///May no longer be needed
+  session = require('express-session'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 
 // given to use by yelp, required to use yelp api
 var clientId = 'eOjaSriPI77z1AOBq0X33w'
@@ -14,8 +22,24 @@ const yelp = require('yelp-fusion');
 app.use(bodyParser.urlencoded({
   extended : true
 }));
-
+// app.use(cookieParser());  ///May no longer be needed
+app.use(session({
+  secret: 'supersecretkey',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'));
+
+// passport config
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+
+////////////////////
+////Load landing page
+////////////////////
 
 app.get('/', function(req, res){
   console.log(__dirname);
@@ -24,8 +48,22 @@ app.get('/', function(req, res){
   });
 });
 
+app.get('/create', function(req, res){
+  console.log(__dirname);
+  res.sendFile('views/create.html', {
+    root : __dirname
+  });
+});
+
+app.get('/edit', function(req, res){
+  console.log(__dirname);
+  res.sendFile('views/edit.html', {
+    root : __dirname
+  });
+});
+
 /*
-fake data for testing before seed was available, or for testing
+TRASH THIS: fake data for testing before seed was available, or for testing
 */
 // var reviewSample = [{
 //   stars: 4,
@@ -81,13 +119,16 @@ app.post('/api/reviews', function (req, res) {
   });
 
   // save newReview to database
-  newReview.save(function(err, review){
-    if (err) {
-      return console.log("save review error: " + err);
-    }
-    console.log("saved ", review.reviewContent);
-    res.json(review);
-  });
+    newReview.save(function(err, review){
+      if (err) {
+        return console.log("save review error: " + err);
+      }
+      console.log("saved ", review.reviewContent);
+      console.log(req.user)
+      req.user.reviews.push(review);
+      req.user.save();
+      res.json(review);
+    });
 });
 
 // delete review
@@ -143,8 +184,34 @@ app.post('/api/locations/', function(req, res){
   });
 })
 
+////////////////////
+////Login Routes
+////////////////////
 
-//Listen
+////Sign up new user
+app.post('/signup', function (req, res) {
+  db.User.register(new db.User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function() {
+        res.send('signed up!!!');
+      });
+    }
+  );
+});
+
+////User login route
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+});
+
+//// log out user
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+////Listen
+
 app.listen(process.env.port || 3000, function(){
   console.log('express server online on port', 3000)
 });
