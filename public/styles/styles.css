@@ -77,6 +77,15 @@
     background-color: #0B543E;
   }
 
+  .site-title {
+    padding-bottom: 15px;
+  }
+
+  .find-hero-button {
+    text-align: center;
+  }
+
+
 /*The following is styling related to the map section*/
 
 #mapPlacement {

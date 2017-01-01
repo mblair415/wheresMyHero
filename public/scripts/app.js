@@ -185,6 +185,10 @@ $(document).ready(function(){
     error: noAppend
   })
 
+  $('.map-section').on('click', '#map-button', function(){
+    console.log('map button pressed');
+  })
+
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
     var reviewHtml;
