@@ -47,6 +47,13 @@ $(document).ready(function(){
 //*****************
 //*****************
 
+  //Restaurant Handlebars templates
+    sourceRestaurant = $('#restaurant-template').html(),
+    templateRestaurant = Handlebars.compile(sourceRestaurant),
+
+//*****************
+//*****************
+
   // Review Handlebars templates
   $reviewsList = ('#review-form');
   var sourceTwo = $("#review-template").html(),
@@ -240,10 +247,23 @@ $(document).ready(function(){
 
     function appendRestaurants(restaurants){
       console.log(restaurants)
-      restaraunts.forEach(restaurant){
-        
-      }
+      $('#business-submit-form').removeClass('hidden')
+      $('.restaurant-list').html('')
+      restaurants.forEach(function (restaurant){
+        $('.restaurant-list').append(templateRestaurant({restaurantName: restaurant.name}))
+      })
     }
+
+    $('.business-submit').on('submit', function(event) {
+      event.preventDefault();
+      console.log('submit clicked');
+      var restaurant = $(this).serializeArray()[0].value
+      $('.business-forms').addClass('hidden');
+      $('#review-form').removeClass('hidden');
+      $('#review-form').prepend('<h2>'+restaurant+'</h2>');
+      $('#restaurant-input').val(restaurant)
+      console.log(restaurant)
+    })
 
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
