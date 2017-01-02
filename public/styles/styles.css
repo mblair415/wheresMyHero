@@ -72,6 +72,18 @@
     min-height: 200px;
   }
 
+  #singlebuttonSubmit {
+    margin-left: 75px;
+  }
+
+  .site-title {
+    padding-bottom: 15px;
+  }
+
+  .find-hero-button, .hide-map-area {
+    text-align: center;
+  }
+
   body {
     /*font-family: Calibria, serif;*/
     background-color: #0B543E;

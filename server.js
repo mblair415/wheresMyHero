@@ -124,9 +124,9 @@ app.post('/api/reviews', function (req, res) {
         return console.log("save review error: " + err);
       }
       console.log("saved ", review.reviewContent);
-      console.log(req.user)
-      req.user.reviews.push(review);
-      req.user.save();
+      // console.log(req.user)
+      //req.user.reviews.push(review);
+      //req.user.save();
       res.json(review);
     });
 });
