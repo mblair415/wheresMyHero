@@ -46,8 +46,9 @@
   }
 
   .jumbotron {
-    background-color: #0B543E;
-    color: #E5563C;
+    /*background-color: #0B543E;*/
+    background-color: #83CBFF;
+    color: #FBD900;
   }
 
   .site-logo {
@@ -64,8 +65,10 @@
   }
 
   .reviewIndividual {
-    border: solid 1px black;
-    background-color: #BBDB93;
+    border: solid 2px black;
+    background-color: rgba(250, 240, 250, 0.3);
+    margin-bottom: 15px;
+    border-radius: 0px 70px 0px 0px;
   }
 
   .review-gif {
@@ -84,10 +87,15 @@
     text-align: center;
   }
 
-  body {
-    /*font-family: Calibria, serif;*/
-    background-color: #0B543E;
+  .whole-page {
+    /*background-color: #0B543E;*/
+    /*background: linear-gradient(80deg, #C0281B, black 40%, #C0281B);*/
+    background: linear-gradient(225deg, #74C5FF, white);
   }
+
+  /*body {
+    background-color: #0B543E;
+  }*/
 
   .site-title {
     padding-bottom: 15px;
