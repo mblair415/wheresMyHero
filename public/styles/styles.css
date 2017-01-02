@@ -2,6 +2,7 @@
   border: dashed 1px black;
 }*/
 
+
 .gifBox {
   min-height: 150px;
   text-align: center;
@@ -45,12 +46,6 @@
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
   }
 
-  .jumbotron {
-    /*background-color: #0B543E;*/
-    background-color: #83CBFF;
-    color: #FBD900;
-  }
-
   .site-logo {
     max-width:100px;
     height:auto;
@@ -87,7 +82,7 @@
     text-align: center;
   }
 
-  .whole-page {
+  body {
     /*background-color: #0B543E;*/
     /*background: linear-gradient(80deg, #C0281B, black 40%, #C0281B);*/
     background: linear-gradient(225deg, #74C5FF, white);
