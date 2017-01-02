@@ -265,32 +265,33 @@ $(document).ready(function(){
     save changes.
     */
     $('.reviewIndividual').on('click', '#edit-button', function(){
-      classes = $(this).attr("class").split(' ')[0];
+      localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
       window.location.href="../edit";
 
       // location.reload();
     })
+
     $('.edit-review').on('submit', function(event) {
       console.log('submit clicked');
       event.preventDefault();
 
       $.ajax({
-        method: 'POST',
-        url: '/api/reviews',
+        method: 'PUT',
+        url: '/api/reviews/' + localStorage.getItem("classes"),
         data: $(this).serializeArray(),
         success: newReviewSuccess,
         error: newReviewError
       })
     })
 
-    $.ajax({
-      method: 'PUT',
-      url: '/api/reviews/' + classes,
-      data: $(this).serializeArray(),
-      success: editReview,
-      error: editFailure
-    })
+    // $.ajax({
+    //   method: 'PUT',
+    //   url: '/api/reviews/' + classes,
+    //   data: $(this).serializeArray(),
+    //   success: editReview,
+    //   error: editFailure
+    // })
 
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
