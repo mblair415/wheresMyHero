@@ -165,6 +165,27 @@ $(document).ready(function(){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    $('.hero-map').mousedown(function(){
+      console.log('button clicked on map');
+    })
+      // if ($'#hero-map')
+
+// GARBAGE *******************************************
+    // $(window).scroll(function() {
+    //  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+    //    console.log('dude, you scrolled to the bottom');
+    //
+    //      $.ajax({
+    //        method: 'GET',
+    //        url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
+    //        data: $('form').serialize(),
+    //        success: giphySearchMoreSuccess,
+    //        error: giphySearchError
+    //      })
+    //  }
+    // });
+// ABOVE IS GARBAGE *********************************
+
     // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', function(){
       console.log('I know where you live!');
