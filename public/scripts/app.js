@@ -6,15 +6,12 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
-
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 // these things only happen once the document is ready
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
-
-
 
 //*****************
 //*****************
@@ -25,14 +22,14 @@ $(document).ready(function(){
     sourceThree = $('#gif-choice').html(),
     templateGifChoice = Handlebars.compile(sourceThree),
 
+    // Review Handlebars template
+    $reviewsList = ('#review-form');
+    var sourceTwo = $("#review-template").html(),
+    templateReview = Handlebars.compile(sourceTwo);
 
 //*****************
 //*****************
 
-  // Review Handlebars template
-  $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html(),
-  templateReview = Handlebars.compile(sourceTwo);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
@@ -97,6 +94,7 @@ $(document).ready(function(){
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
+    $('.find-hero-button').hide();
 
     // set default location as Hell Mi
     var defaultLocation = {
@@ -112,7 +110,6 @@ $(document).ready(function(){
     // creates a google map using user's current position
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-      console.log('I know where you live!');
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -132,7 +129,7 @@ $(document).ready(function(){
 
     // looks at each restaraunt sent from yelp
     function showRestaurants(data){
-      console.log('you found restaurants! ', data)
+      console.log('you found restaurants! ', data);
       data.forEach(function(restaurant){
         var location = {
           lat: restaurant.coordinates.latitude,
@@ -165,11 +162,12 @@ $(document).ready(function(){
     }
 
     function noRestaurants(data){
-      console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
+      console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', function(){
-      console.log('I know where you live!')
+      console.log('I know where you live!');
       $.ajax({
         method: 'POST',
         url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
@@ -178,9 +176,23 @@ $(document).ready(function(){
       })
     })
 
+// ******  doesn't work *******
+    // Listener for searching where the map is currently centered
+    $('.change-location').on('click', '#change-location', function(){
+      console.log('User selected location');
+      $.ajax({
+        method: 'POST',
+        url: '/api/locations',
+        success: createMap,
+        error: noLocation
+      })
+    })
+// *******  ^above doesn't work^ ********
+
     // button listener to hide the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
+      $('.find-hero-button').show();
     })
     // this is the end of the map area
   })
