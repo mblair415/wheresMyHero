@@ -28,10 +28,20 @@
     <div class="jumbotron">
       <div class="container site-title">
 
-        <!-- Buttons that trigger the signup and login modals -->
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
+        <!-- Buttons that trigger the signup and login modals, logout -->
+        <div class="row">
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
+          </div>
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
+          </div>
+          <div class="col-xs-1">
+            <form method="GET" action="/logout">
+              <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+          </div>
+        </div>
 
         <!-- Title and Central Image -->
 
@@ -95,45 +105,6 @@
       </div>
     </div>
 
-    <!-- Sample login form -->
-
-    <!-- <h2>Sign Up</h2>
-    <br>
-    <form method="POST" action="/signup">
-      <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-          <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
-          </div>
-        </div>
-      </div>
-    </form> -->
-
-    <!-- Sample Sign in Form -->
-
-    <!-- <h2>Log In</h2>
-      <br>
-      <form method="POST" action="/login">
-        <div class="row">
-          <div class="col-xs-8 col-xs-offset-2">
-            <div class="form-group">
-              <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-block btn-primary" value="Log In">
-            </div>
-          </div>
-        </div> -->
-
     <!-- map section -->
     <section class="map-section">
       <div class="find-hero-button">
@@ -163,7 +134,10 @@
           </div>
           <!-- sandwich reviews -->
           <div class="appendReviews">
-            <script id='review-template' type='text/x-handlebars-template'>
+
+            <!-- Handlebars template with edit and delete buttons -->
+
+            <script id='review-template-buttons' type='text/x-handlebars-template'>
               <div class="container">
                 <div class="row">
                   <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
@@ -181,6 +155,26 @@
                 </div>
               </div>
             </script>
+
+            <!-- Handlebars template with no buttons -->
+
+            <script id='review-template' type='text/x-handlebars-template'>
+              <div class="container">
+                <div class="row">
+                  <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <img class="review-gif center" src="{{reviewGif}}"></a>
+                      </div>
+                    </div>
+                    <p>Sandwich Stars: {{reviewStars}}</p>
+                    <p>Recommended: {{reviewRecommend}}</p>
+                    <p>{{reviewContent}}</p>
+                  </article>
+                </div>
+              </div>
+            </script>
+
           </div>
         </div>
       </div>

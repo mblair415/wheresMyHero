@@ -1,14 +1,18 @@
 console.log('sanity check, app.js is connected')
 
 //Declare global variables here
-var map;
-var template;
-var $reviewsList;
-var allReviews = [];
-var classes;
-var activeUser
+var map,
+    template,
+    $reviewsList,
+    allReviews = [],
+    classes,
+    activeUser = {};
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
+
+if(!(activeUser.reviews)){
+  activeUser.reviews = []
+}
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
@@ -43,10 +47,13 @@ $(document).ready(function(){
 //*****************
 //*****************
 
-  // Review Handlebars template
+  // Review Handlebars templates
   $reviewsList = ('#review-form');
   var sourceTwo = $("#review-template").html(),
   templateReview = Handlebars.compile(sourceTwo);
+
+  var sourceTwoButtons = $('#review-template-buttons').html(),
+  templateReviewButtons = Handlebars.compile(sourceTwoButtons);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
@@ -217,14 +224,20 @@ $(document).ready(function(){
     // for each review:
     allReviews.forEach(function(reviewData){
       // create HTML for individual review
-      reviewHtml = templateReview({
+      var reviewInfo = {
         reviewContent: reviewData.reviewContent,
         reviewStars: reviewData.stars,
         // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
         reviewId: reviewData._id,
-        });
+        };
+        console.log(reviewData._id)
+        if (activeUser.reviews.indexOf(reviewData._id)>=0){
+          reviewHtml = templateReviewButtons(reviewInfo)
+        } else {
+          reviewHtml = templateReview(reviewInfo)
+        }
       // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
     });
