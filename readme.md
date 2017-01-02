@@ -16,7 +16,9 @@ See the published project at github.com/sf-wdi-labs/readme-example!
 jQuery
 HTML
 CSS
+Bootstrap
 JavaScript
+Handlebars
 Yelp api
 Google Maps api
 Geolocation api

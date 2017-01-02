@@ -73,7 +73,7 @@ $(document).ready(function(){
     // empty space to prevent gifs from multiple searches showing at the same time
     $('.gifSelectionField2').empty();
     json.data.forEach(function(gif){
-      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url});
+      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_height_small.url});
       $(".gifSelectionField2").append(giphyHtml);
     });
   }
