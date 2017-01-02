@@ -102,7 +102,6 @@ $(document).ready(function(){
     error: noAppend
   })
 
-
   // this is the area that deals with the map
   //hide map area when page loads
   $('#hero-map').hide();
@@ -112,13 +111,16 @@ $(document).ready(function(){
     console.log('map button pressed');
     $('#hero-map').show();
 
-    // automatically fetching user location (a google no-no) using google geolocation api
-    $.ajax({
-      method: 'POST',
-      url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-      success: createMap,
-      error: noLocation
-    });
+    // set a default location
+    var defaultLocation = {
+      location: {
+        lat: 42.4347,
+        lng: -83.9850
+      }
+    }
+    
+    // crete the map using the default location
+    createMap(defaultLocation);
 
     // creates a google map using geolocation info
     function createMap(data){
