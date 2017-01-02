@@ -6,57 +6,13 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
+var activeUser
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
-
-  // automatically fetching user location (a google no-no) using google geolocation api
-  // $.ajax({
-  //   method: 'POST',
-  //   url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-  //   success: createMap,
-  //   error: noLocation
-  // });
-  //
-  // // creates a google map using geolocation info
-  // function createMap(data){
-  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-  //   console.log('I know where you live!');
-  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-  //   center: {lat: data.location.lat, lng: data.location.lng},
-  //   zoom: 15
-  //   })
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/locations',
-  //     data: data,
-  //     success: showRestaurants,
-  //     error: noRestaurants
-  //   })
-  // }
-
-  // function searchYelp(data){
-  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-  //   center: {lat: data.location.lat, lng: data.location.lng},
-  //   zoom: 15
-  //   })
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/locations',
-  //     data: data,
-  //     success: showRestaurants,
-  //     error: noRestaurants
-  //   })
-  // }
-
-//   function noRestaurants(data){
-//     console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
-//   }
-
 
   /*
   ajax call to bring in data from yelp...couldn't get this working.  Can look at
@@ -148,6 +104,14 @@ $(document).ready(function(){
     error: noAppend
   })
 
+  //when page loads, save active user to a variable
+  $.ajax({
+    method: 'GET',
+    url: '/api/user/active',
+    success: saveUser,
+    // error: noAppend
+  })
+
   // this is the area that deals with the map
   //hide map area when page loads
   $('#hero-map').hide();
@@ -165,11 +129,11 @@ $(document).ready(function(){
         lng: -83.9850
       }
     }
-    
+
     // crete the map using the default location
     createMap(defaultLocation);
 
-    // creates a google map using geolocation info
+    // creates a google map using location info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
       console.log('I know where you live!');
@@ -276,8 +240,6 @@ $(document).ready(function(){
       localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
       window.location.href="../edit";
-
-      // location.reload();
     })
 
     $('#create-button').on('click', function(){
@@ -297,15 +259,6 @@ $(document).ready(function(){
         error: newReviewError
       })
     })
-
-    // $.ajax({
-    //   method: 'PUT',
-    //   url: '/api/reviews/' + classes,
-    //   data: $(this).serializeArray(),
-    //   success: editReview,
-    //   error: editFailure
-    // })
-
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
     $('.reviewIndividual').on('click', '#delete-button', function(){
@@ -375,4 +328,9 @@ function deleteFailure(error){
 
 function editFailure(error){
   console.log('Oh, no!  We have failed to edit!  Things remained the same, and you hated that stuff! Error: ', error);
+}
+
+function saveUser(user){
+  console.log(user)
+  activeUser = user
 }

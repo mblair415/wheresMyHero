@@ -62,23 +62,6 @@ app.get('/edit', function(req, res){
   });
 });
 
-/*
-TRASH THIS: fake data for testing before seed was available, or for testing
-*/
-// var reviewSample = [{
-//   stars: 4,
-//   reviewContent: 'superduper gud',
-//   recommend: false,
-//   upvotes: 417
-//   },
-//   {
-//     stars: 1,
-//     reviewContent: 'the stuff of nightmares, but on a plate',
-//     recommend: true,
-//     upvotes: 7
-//   }
-// ]
-
 ////////////////////
 ////Routes
 ////////////////////
@@ -124,9 +107,9 @@ app.post('/api/reviews', function (req, res) {
         return console.log("save review error: " + err);
       }
       console.log("saved ", review.reviewContent);
-      // console.log(req.user)
-      //req.user.reviews.push(review);
-      //req.user.save();
+      console.log(req.user)
+      req.user.reviews.push(review);
+      req.user.save();
       res.json(review);
     });
 });
@@ -188,29 +171,38 @@ app.post('/api/locations/', function(req, res){
 ////Login Routes
 ////////////////////
 
-////Sign up new user
+//Sign up new user
 app.post('/signup', function (req, res) {
   db.User.register(new db.User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        // res.send('signed up!!!');
+        res.redirect('/');
       });
     }
   );
 });
 
-////User login route
+//User login route
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+  // res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+  res.redirect('/');
 });
 
-//// log out user
+// log out user
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
 
+//Get active user data
+app.get('/api/user/active', function (req, res){
+  res.json(req.user)
+})
+
+////////////////////
 ////Listen
+////////////////////
 
 app.listen(process.env.port || 3000, function(){
   console.log('express server online on port', 3000)
