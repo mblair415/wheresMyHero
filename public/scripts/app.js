@@ -272,6 +272,11 @@ $(document).ready(function(){
       // location.reload();
     })
 
+    $('#create-button').on('click', function(){
+      console.log('the create button was pressed!');
+      window.location.href="../create";
+    })
+
     $('.edit-review').on('submit', function(event) {
       console.log('submit clicked');
       event.preventDefault();

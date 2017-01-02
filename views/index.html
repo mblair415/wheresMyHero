@@ -36,7 +36,7 @@
 
     <!-- Sample login form -->
 
-    <h2>Sign Up</h2>
+    <!-- <h2>Sign Up</h2>
     <br>
     <form method="POST" action="/signup">
       <div class="row">
@@ -52,11 +52,11 @@
           </div>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Sample Sign in Form -->
 
-    <h2>Log In</h2>
+    <!-- <h2>Log In</h2>
       <br>
       <form method="POST" action="/login">
         <div class="row">
@@ -72,122 +72,7 @@
             </div>
           </div>
         </div>
-      </form>
-
-    <!-- Begin Form Sample -->
-    <section id='review-form' class="container">
-
-      <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-
-        <!-- ***** gif selection ***** -->
-        <section id='review-form' class="container">
-          <div class="row">
-            <div class="col-md-10">
-              <form class="form-horizontal form-gif" action="indexGiphy.html" method="get">
-                <div class="form-group">
-                  <div class="col-xs-12" id="giphy">
-                    <article class="col-xs-12">
-                      <input type="hidden" name="api_key" value="dc6zaTOxFJmzC">
-                      <input id="gifId" name="q" type="text" placeholder="This gif defines the sandwich" class="form-control input-md" required="">
-                    </article>
-                  </div>
-                  <button id="singlebutton" name="gifSubmit" class="btn btn-primary center-block">Search Gifs</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
-
-<!-- gif selection area with rows of gifs -->
-          <section class="container gifSelectionField2">
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <script id="selectableGif-template2" type="text/x-handlebars-template">
-                  <article class="col-xs-6 col-md-4">
-                    <img class="gifBox" src="{{insertGifHere}}"></a>
-                  </article>
-                </script>
-              </div>
-            </div>
-          </section>
-<!-- ****** end of gif section ******  -->
-        <form class="form-horizontal new-review">
-          <fieldset>
-
-            <!-- Form Name -->
-            <legend>Add New Review</legend>
-
-            <!-- gif added to crete review -->
-            <section class="container selected-gif">
-              <div class="row">
-                <div class="col-xs-12">
-                  <script id="gif-choice" type="text/x-handlebars-template">
-                    <article class="center col-xs-4">
-                      <img class="selected-gif" src="{{userChosenGif}}"></a>
-                      <input type="hidden" name="gif" value="{{userChosenGif}}">
-                  </script>
-                </div>
-              </div>
-            </section>
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="stars">Stars</label>
-              <div class="col-md-4">
-                <span class="rating">
-                    <input type="radio" class="rating-input"
-                        id="rating-input-1-5" name="stars" value="5">
-                    <label for="rating-input-1-5" class="rating-star"></label>
-                    <input type="radio" class="rating-input"
-                        id="rating-input-1-4" name="stars" value="4">
-                    <label for="rating-input-1-4" class="rating-star"></label>
-                    <input type="radio" class="rating-input"
-                        id="rating-input-1-3" name="stars" value="3">
-                    <label for="rating-input-1-3" class="rating-star"></label>
-                    <input type="radio" class="rating-input"
-                        id="rating-input-1-2" name="stars" value="2">
-                    <label for="rating-input-1-2" class="rating-star"></label>
-                    <input type="radio" class="rating-input"
-                        id="rating-input-1-1" name="stars" value="1">
-                    <label for="rating-input-1-1" class="rating-star"></label>
-                </span>
-              </div>
-            </div>
-
-            <!-- Textarea -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="reviewContent">Review your Sandwich</label>
-              <div class="col-md-4">
-                <textarea class="form-control" id="reviewContent" name="reviewContent" placeholder="I thought this sandwich was incredible"></textarea>
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="recommend">Recommend?</label>
-              <div class="col-md-4">
-                <input type="radio" name="recommend" value="true"> Yes<br>
-                <input type="radio" name="recommend" value="false"> No<br>
-              </div>
-            </div>
-
-            <!-- Button -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="singlebutton">Save Review</label>
-              <div class="col-md-4">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-      </div>
-    </section>
-
-<p><a href="/create">Create</a></p>
-<p><a href="/edit">Edit</a></p>
-
-    <!-- End Form Sample -->
+      </form> -->
 
     <!-- map section -->
    <section class="map-section">
@@ -210,13 +95,15 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <h2>Reviews</h2>
-
+          <div class="col-xs-4 col-md-offset-5">
+            <button type="button" class="btn btn-primary btn-sm" id="create-button">Create Review</button>
+          </div>
           <!-- sandwich reviews -->
           <div class="appendReviews">
             <script id='review-template' type='text/x-handlebars-template'>
               <div class="container">
                 <div class="row">
-                  <article class="col-xs-8 reviewIndividual" id="{{reviewId}}">
+                  <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
                     <div class="row">
                       <div class="col-xs-12">
                         <img class="review-gif center" src="{{reviewGif}}"></a>
@@ -235,6 +122,8 @@
         </div>
       </div>
     </section>
+    <script id="selectableGif-template2" type="text/x-handlebars-template"></script>
+    <script id="gif-choice" type="text/x-handlebars-template"></script>
 
   </body>
 </html>
