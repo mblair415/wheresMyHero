@@ -178,7 +178,7 @@ $(document).ready(function(){
 
     // Listener for searching where the map is currently centered
     $('.change-location').on('click', '#change-location', function(){
-      console.log('User selected location');
+      console.log('Searching in the new map location');
       var movedMapLocation = {
         location: {
           lat: map.getCenter().lat(),
@@ -231,7 +231,7 @@ $(document).ready(function(){
     })
 
     $('.edit-review').on('submit', function(event) {
-      console.log('submit clicked');
+      console.log('edit review submit clicked');
       event.preventDefault();
 
       $.ajax({
