@@ -81,8 +81,12 @@
     padding-bottom: 15px;
   }
 
-  .find-hero-button {
+  .find-hero-button, .hide-map-area {
     text-align: center;
+  }
+
+  .hide-map-area {
+    margin-top: 20px;
   }
 
 

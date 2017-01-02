@@ -104,9 +104,13 @@ $(document).ready(function(){
 
 
   // this is the area that deals with the map
+  //hide map area when page loads
+  $('#hero-map').hide();
+
   // listener for find hero button
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
+    $('#hero-map').show();
 
     // automatically fetching user location (a google no-no) using google geolocation api
     $.ajax({
@@ -115,11 +119,10 @@ $(document).ready(function(){
       success: createMap,
       error: noLocation
     });
-    
+
     // creates a google map using geolocation info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-      console.log('I know where you live!');
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -189,6 +192,23 @@ $(document).ready(function(){
     function noRestaurants(data){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
     }
+
+    $('.current-location').on('click', '#current-location', function(){
+      console.log('I know where you live!')
+      $.ajax({
+        method: 'POST',
+        url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+        success: createMap,
+        error: noLocation
+      })
+    })
+
+    // hides the map area once it's open
+    $('.map-section').on('click', '#hide-map-button', function(){
+      $('#hero-map').hide();
+    })
+
+    // this is the end of the map area
   })
 
   // this is what spits out each review onto the page.
