@@ -9,70 +9,12 @@ var classes;
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
+// these things only happen once the document is ready
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
 
-  // automatically fetching user location (a google no-no) using google geolocation api
-  // $.ajax({
-  //   method: 'POST',
-  //   url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-  //   success: createMap,
-  //   error: noLocation
-  // });
-  //
-  // // creates a google map using geolocation info
-  // function createMap(data){
-  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-  //   console.log('I know where you live!');
-  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-  //   center: {lat: data.location.lat, lng: data.location.lng},
-  //   zoom: 15
-  //   })
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/locations',
-  //     data: data,
-  //     success: showRestaurants,
-  //     error: noRestaurants
-  //   })
-  // }
 
-  // function searchYelp(data){
-  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-  //   center: {lat: data.location.lat, lng: data.location.lng},
-  //   zoom: 15
-  //   })
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/api/locations',
-  //     data: data,
-  //     success: showRestaurants,
-  //     error: noRestaurants
-  //   })
-  // }
-
-//   function noRestaurants(data){
-//     console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
-//   }
-
-
-  /*
-  ajax call to bring in data from yelp...couldn't get this working.  Can look at
-  this later
-  */
-  // $.ajax({
-  //   method: 'GET',
-  //   dataType: 'json',
-  //   // cache: true,
-  //   // jsonpCallback : yelpCallback,
-  //   url: 'https://api.yelp.com/v3/businesses/search',
-  //   data: yelpSearch,
-  //   headers: {'Authorization' : 'Bearer 8V86AAXA6DIBETY505B-Ko5o0dp5Z1SrQ0Aee93tBmf_Guthvf7o9ei1cICj1UrgwADicpL1aGy5PQnrdiddwQHCYGTMRaEd2qSEJXAfdveACsEEODgz0igWOHFgWHYx'},
-  //   success: yelpSuccess,
-  //   error: yelpError
-  // });
 
 //*****************
 //*****************
@@ -123,7 +65,6 @@ $(document).ready(function(){
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     $('.gifSelectionField2').empty();
-    // console.log('i still know what you clicked on! ', this.src);
     var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
     $('.selected-gif').empty();
     $('.selected-gif').append(pickedGifHtml);
@@ -157,19 +98,18 @@ $(document).ready(function(){
     console.log('map button pressed');
     $('#hero-map').show();
 
-
-    // set a default location
+    // set default location as Hell Mi
     var defaultLocation = {
       location: {
         lat: 42.4347,
         lng: -83.9850
       }
     }
-    
+
     // crete the map using the default location
     createMap(defaultLocation);
 
-    // creates a google map using geolocation info
+    // creates a google map using user's current position
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
       console.log('I know where you live!');
@@ -238,7 +178,7 @@ $(document).ready(function(){
       })
     })
 
-    // hides the map area once it's open
+    // button listener to hide the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
     })
@@ -265,21 +205,14 @@ $(document).ready(function(){
       $('.appendReviews').prepend(reviewHtml);
     });
 
-    // click event for pressing the edit review
-    /*
-    create small handlebars area within the review handle bars.
-    this space will expand and display as needed as per handlebars.
-    display the reviewContent field and allow that one field to be changed.
-    save changes.
-    */
+    // listener for pressing the edit review.  Directs to edit page.
     $('.reviewIndividual').on('click', '#edit-button', function(){
       localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
       window.location.href="../edit";
-
-      // location.reload();
     })
 
+    // listener for the create review button.  Directs to create page.
     $('#create-button').on('click', function(){
       console.log('the create button was pressed!');
       window.location.href="../create";
@@ -297,15 +230,6 @@ $(document).ready(function(){
         error: newReviewError
       })
     })
-
-    // $.ajax({
-    //   method: 'PUT',
-    //   url: '/api/reviews/' + classes,
-    //   data: $(this).serializeArray(),
-    //   success: editReview,
-    //   error: editFailure
-    // })
-
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
     $('.reviewIndividual').on('click', '#delete-button', function(){
