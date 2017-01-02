@@ -89,6 +89,19 @@
     background-color: #0B543E;
   }
 
+  .site-title {
+    padding-bottom: 15px;
+  }
+
+  .find-hero-button, .hide-map-area {
+    text-align: center;
+  }
+
+  .hide-map-area {
+    margin-top: 20px;
+  }
+
+
 /*The following is styling related to the map section*/
 
 #mapPlacement {

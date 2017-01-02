@@ -13,7 +13,6 @@ $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
 
-
   // automatically fetching user location (a google no-no) using google geolocation api
   // $.ajax({
   //   method: 'POST',
@@ -54,9 +53,10 @@ $(document).ready(function(){
   //   })
   // }
 
-  function noRestaurants(data){
-    console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
-  }
+//   function noRestaurants(data){
+//     console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
+//   }
+
 
   /*
   ajax call to bring in data from yelp...couldn't get this working.  Can look at
@@ -151,17 +151,24 @@ $(document).ready(function(){
   // this is the area that deals with the map
   //hide map area when page loads
   $('#hero-map').hide();
+
   // listener for find hero button
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
-    // automatically fetching user location (a google no-no) using google geolocation api
-    $.ajax({
-      method: 'POST',
-      url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
-      success: createMap,
-      error: noLocation
-    });
+
+
+    // set a default location
+    var defaultLocation = {
+      location: {
+        lat: 42.4347,
+        lng: -83.9850
+      }
+    }
+    
+    // crete the map using the default location
+    createMap(defaultLocation);
+
     // creates a google map using geolocation info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
@@ -178,23 +185,11 @@ $(document).ready(function(){
         error: noRestaurants
       })
     }
-    // function searchYelp(data){
-    //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-    //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-    //   center: {lat: data.location.lat, lng: data.location.lng},
-    //   zoom: 15
-    //   })
-    //   $.ajax({
-    //     method: 'POST',
-    //     url: '/api/locations',
-    //     data: data,
-    //     success: showRestaurants,
-    //     error: noRestaurants
-    //   })
-    // }
+
     function noLocation(data){
       console.log('could not find location ', data)
     }
+
     // looks at each restaraunt sent from yelp
     function showRestaurants(data){
       console.log('you found restaurants! ', data)
@@ -208,6 +203,7 @@ $(document).ready(function(){
         addMarker(location, content)
       })
     }
+
     // places a marker on the map for each restaraunt
     function addMarker(position, content){
       var myLatlng, marker, infowindow,contentString;
@@ -227,9 +223,21 @@ $(document).ready(function(){
        infowindow.open(map, marker);
       });
     }
+
     function noRestaurants(data){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
     }
+
+    $('.current-location').on('click', '#current-location', function(){
+      console.log('I know where you live!')
+      $.ajax({
+        method: 'POST',
+        url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+        success: createMap,
+        error: noLocation
+      })
+    })
+
     // hides the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
