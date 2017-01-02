@@ -5,12 +5,58 @@ var map;
 var template;
 var $reviewsList;
 var allReviews = [];
+var classes;
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
+
+  // automatically fetching user location (a google no-no) using google geolocation api
+  // $.ajax({
+  //   method: 'POST',
+  //   url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
+  //   success: createMap,
+  //   error: noLocation
+  // });
+  //
+  // // creates a google map using geolocation info
+  // function createMap(data){
+  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+  //   console.log('I know where you live!');
+  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+  //   center: {lat: data.location.lat, lng: data.location.lng},
+  //   zoom: 15
+  //   })
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/locations',
+  //     data: data,
+  //     success: showRestaurants,
+  //     error: noRestaurants
+  //   })
+  // }
+
+  // function searchYelp(data){
+  //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
+  //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
+  //   center: {lat: data.location.lat, lng: data.location.lng},
+  //   zoom: 15
+  //   })
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/api/locations',
+  //     data: data,
+  //     success: showRestaurants,
+  //     error: noRestaurants
+  //   })
+  // }
+
+//   function noRestaurants(data){
+//     console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
+//   }
+
 
   /*
   ajax call to bring in data from yelp...couldn't get this working.  Can look at
@@ -111,6 +157,7 @@ $(document).ready(function(){
     console.log('map button pressed');
     $('#hero-map').show();
 
+
     // set a default location
     var defaultLocation = {
       location: {
@@ -125,6 +172,7 @@ $(document).ready(function(){
     // creates a google map using geolocation info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      console.log('I know where you live!');
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -137,21 +185,6 @@ $(document).ready(function(){
         error: noRestaurants
       })
     }
-
-    // function searchYelp(data){
-    //   console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng)
-    //   map = new google.maps.Map(document.getElementById('mapPlacement'), {
-    //   center: {lat: data.location.lat, lng: data.location.lng},
-    //   zoom: 15
-    //   })
-    //   $.ajax({
-    //     method: 'POST',
-    //     url: '/api/locations',
-    //     data: data,
-    //     success: showRestaurants,
-    //     error: noRestaurants
-    //   })
-    // }
 
     function noLocation(data){
       console.log('could not find location ', data)
@@ -209,9 +242,9 @@ $(document).ready(function(){
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
     })
-
     // this is the end of the map area
   })
+
 
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
@@ -240,17 +273,39 @@ $(document).ready(function(){
     save changes.
     */
     $('.reviewIndividual').on('click', '#edit-button', function(){
-      var classes = $(this).attr("class").split(' ')[0];
+      localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
-      $.ajax({
-        method: 'PUT',
-        url: '/api/reviews/' + classes,
-        data: $(this).serializeArray(),
-        success: editReview,
-        error: editFailure
-      })
+      window.location.href="../edit";
+
       // location.reload();
     })
+
+    $('#create-button').on('click', function(){
+      console.log('the create button was pressed!');
+      window.location.href="../create";
+    })
+
+    $('.edit-review').on('submit', function(event) {
+      console.log('submit clicked');
+      event.preventDefault();
+
+      $.ajax({
+        method: 'PUT',
+        url: '/api/reviews/' + localStorage.getItem("classes"),
+        data: $(this).serializeArray(),
+        success: newReviewSuccess,
+        error: newReviewError
+      })
+    })
+
+    // $.ajax({
+    //   method: 'PUT',
+    //   url: '/api/reviews/' + classes,
+    //   data: $(this).serializeArray(),
+    //   success: editReview,
+    //   error: editFailure
+    // })
+
 
     // click event for pressing the delete review button.  hits the delete route with Id from review
     $('.reviewIndividual').on('click', '#delete-button', function(){
@@ -283,7 +338,7 @@ $(document).ready(function(){
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);
-  appendReviews([review])
+  window.location.href="../"
 }
 
 function newReviewError(error){
