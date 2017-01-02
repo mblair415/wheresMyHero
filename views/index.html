@@ -27,10 +27,71 @@
   <body>
     <div class="jumbotron">
       <div class="container site-title">
+
+        <!-- Buttons that trigger the signup and login modals -->
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
+
+        <!-- Title and Central Image -->
+
         <h1 class="font-effect-3d">Where's My Hero!?</h1>
       </div>
       <div class="site-logo center">
         <img src="http://i.giphy.com/DpB9NBt1ySFDHH9yiCA.gif" alt="our hero!" height="250" style="max-width: 320px">
+      </div>
+    </div>
+
+
+    <!-- Sign up modal -->
+
+    <div class="modal fade bs-example-modal-lg sign-up-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <h2>Sign Up</h2>
+          <br>
+          <form method="POST" action="/signup">
+            <div class="row">
+              <div class="col-xs-8 col-xs-offset-2">
+                <div class="form-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+
+    <div class="modal fade bs-example-modal-lg login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <h2>Log In</h2>
+          <br>
+          <form method="POST" action="/login">
+            <div class="row">
+              <div class="col-xs-8 col-xs-offset-2">
+                <div class="form-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-block btn-primary" value="Log In">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -71,7 +132,7 @@
               <input type="submit" class="btn btn-block btn-primary" value="Log In">
             </div>
           </div>
-        </div>
+        </div> -->
 
     <!-- map section -->
     <section class="map-section">
