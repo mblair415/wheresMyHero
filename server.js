@@ -212,6 +212,6 @@ app.get('/logout', function (req, res) {
 
 ////Listen
 
-app.listen(process.env.port || 3000, function(){
+app.listen(process.env.MONGODB_URI || 3000, function(){
   console.log('express server online on port', 3000)
 });
