@@ -54,25 +54,9 @@
           </div>
         </div>
       </form> -->
-
-      <!-- Sample Sign in Form -->
-
-      <!-- <h2>Log In</h2>
-        <br>
-        <form method="POST" action="/login">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
-              <div class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-              </div>
-              <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-block btn-primary" value="Log In">
-              </div>
             </div>
           </div>
+
 
       <!-- map section -->
       <section class="map-section">
@@ -84,6 +68,17 @@
             <div class="col-md-6 col-md-offset-3" id="hero-map">
               <div id="mapPlacement"></div>
               <section class="container-fluid">
+    <section class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h2>Reviews</h2>
+          <div class="col-xs-4 col-xs-offset-5">
+            <button type="button" class="btn btn-primary btn-md" id="create-button">Create Review</button>
+          </div>
+          <!-- sandwich reviews -->
+          <div class="appendReviews">
+            <script id='review-template' type='text/x-handlebars-template'>
+              <div class="container">
                 <div class="row">
                   <div class="current-location col-lg-6 col-xs-12">
                     <button type="button" class="btn btn-primary btn-lg" id="current-location">Closest Food To My Face!</button>

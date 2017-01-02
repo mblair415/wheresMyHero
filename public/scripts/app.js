@@ -234,6 +234,10 @@ $(document).ready(function(){
       console.log('edit review submit clicked');
       event.preventDefault();
 
+    $('#singlebuttonCancel').on('click', function() {
+      window.location.href="../";
+    })
+
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + localStorage.getItem("classes"),
@@ -267,6 +271,7 @@ $(document).ready(function(){
     })
     console.log('The review was edited', data);
     return templateReview;
+    window.location.href="../"
   }
 
 // This is the end of on ready function
