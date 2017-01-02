@@ -2,7 +2,6 @@
   border: dashed 1px black;
 }*/
 
-
 .gifBox {
   min-height: 150px;
   text-align: center;
@@ -77,9 +76,36 @@
   .site-title {
     padding-bottom: 15px;
   }
+  .font-effect-3d {
+    display: inline-block;
+    margin-left: 13%;
+    font-size: 100px;
+  }
+
+  .sandwichBatman {
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 25%;
+    border: 5px solid black;
+    transform: scaleX(-1);
+  }
+
+  .sandwichPic {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    margin-right: 25%;
+    border: 5px solid black;
+  }
 
   .find-hero-button, .hide-map-area {
     text-align: center;
+  }
+
+  #map-button {
+    margin-right: 10px;
   }
 
   body {
@@ -91,10 +117,6 @@
   /*body {
     background-color: #0B543E;
   }*/
-
-  .site-title {
-    padding-bottom: 15px;
-  }
 
   .find-hero-button, .hide-map-area {
     text-align: center;
