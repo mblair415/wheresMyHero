@@ -153,7 +153,7 @@ app.post('/api/locations/', function(req, res){
     const client = yelp.client(response.jsonBody.access_token);
     client.search({
       // what we search the yelp api for
-      term:'sandwich',
+      term: req.body.term || 'sandwich',
       // this is the geolocation and best match radius area
       latitude: req.body.location.lat,
       longitude: req.body.location.lng,

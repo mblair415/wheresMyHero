@@ -128,7 +128,6 @@ $(document).ready(function(){
     console.log('map button pressed');
     $('#hero-map').show();
 
-
     // set a default location
     var defaultLocation = {
       location: {
@@ -139,22 +138,35 @@ $(document).ready(function(){
 
     // crete the map using the default location
     createMap(defaultLocation);
+  }) //225
 
     // creates a google map using location info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
       console.log('I know where you live!');
-      map = new google.maps.Map(document.getElementById('mapPlacement'), {
-      center: {lat: data.location.lat, lng: data.location.lng},
-      zoom: 15
-      })
-      $.ajax({
-        method: 'POST',
-        url: '/api/locations',
-        data: data,
-        success: showRestaurants,
-        error: noRestaurants
-      })
+      if (document.getElementById('mapPlacement')){
+        map = new google.maps.Map(document.getElementById('mapPlacement'), {
+        center: {lat: data.location.lat, lng: data.location.lng},
+        zoom: 15
+        })
+        $.ajax({
+          method: 'POST',
+          url: '/api/locations',
+          data: data,
+          success: showRestaurants,
+          error: noRestaurants
+        })
+      } else {
+        activeUser.location = data.location;
+        console.log(activeUser);
+        $.ajax({
+          method: 'POST',
+          url: '/api/locations',
+          data: activeUser,
+          success: appendRestaurants,
+          error: noRestaurants
+        })
+      }
     }
 
     function noLocation(data){
@@ -199,7 +211,9 @@ $(document).ready(function(){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
     }
 
-    $('.current-location').on('click', '#current-location', function(){
+    $('.current-location').on('click', '#current-location', findLocation)
+
+    function findLocation (){
       console.log('I know where you live!')
       $.ajax({
         method: 'POST',
@@ -207,15 +221,29 @@ $(document).ready(function(){
         success: createMap,
         error: noLocation
       })
-    })
+    }
 
     // hides the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
     })
-    // this is the end of the map area
-  })
 
+    // this is the end of the map area
+
+    $('.business-search').on('submit', function(event) {
+      event.preventDefault();
+      console.log('submit clicked');
+      activeUser.term = $(this).serializeArray()[0].value
+      console.log(activeUser, $(this).serializeArray())
+      findLocation()
+    })
+
+    function appendRestaurants(restaurants){
+      console.log(restaurants)
+      restaraunts.forEach(restaurant){
+        
+      }
+    }
 
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
