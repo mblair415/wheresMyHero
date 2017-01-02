@@ -176,18 +176,18 @@ $(document).ready(function(){
       })
     })
 
-// ******  doesn't work *******
     // Listener for searching where the map is currently centered
     $('.change-location').on('click', '#change-location', function(){
       console.log('User selected location');
-      $.ajax({
-        method: 'POST',
-        url: '/api/locations',
-        success: createMap,
-        error: noLocation
-      })
+      var movedMapLocation = {
+        location: {
+          lat: map.getCenter().lat(),
+          lng: map.getCenter().lng()
+        }
+      }
+
+      createMap(movedMapLocation);
     })
-// *******  ^above doesn't work^ ********
 
     // button listener to hide the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
