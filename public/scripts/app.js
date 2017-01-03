@@ -7,6 +7,24 @@ var $reviewsList;
 var allReviews = [];
 var classes;
 var giphyApi = "https://api.giphy.com/v1/gifs/search";
+var batwichSmack = [
+  'Wanna know my secret identity?',
+  'Stick it in your food hole!',
+  'For whom the BLT tolls',
+  'A hotdog is no sandwich',
+  'Who wants a knuckle sandwich!?',
+  ' ',
+  'Who you callin turkey!?'
+];
+var heroSmack = [
+  'Eat me!',
+  'Silence of the ham',
+  'The po-boy only rings twice',
+  "I'm pretty sure a hot dog is a sandwich",
+  'I hAvE cHaT BuBbLeS',
+  ' ',
+  'Whoa, no one called anyone a JT'
+];
 
 // these things only happen once the document is ready
 $(document).ready(function(){
@@ -284,8 +302,24 @@ $(document).ready(function(){
     window.location.href="../"
   }
 
+  function heroChat() {
+    smackTalk = setInterval(function(){
+    var chance = Math.round(Math.random());
+
+    if (chance) {
+      console.log('batwich shit talk')
+      $('#batwich-bubble').html(batwichSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]);
+    } else {
+      console.log('hero shit talk')
+      $('#hero-bubble').html(heroSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]);
+    }
+    }, 4000);
+  }
+  heroChat();
+
 // This is the end of on ready function
 })
+
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);
