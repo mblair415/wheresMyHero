@@ -124,9 +124,10 @@
     min-height: 160px;
     padding: 2px;
     text-align: center;
-    vertical-align: 40%;
+    vertical-align: middle;
     border-radius: 10px;
-
+    padding-top: 17%;
+    font-size: 17px;
     /*border-radius: 8px;*/
   }
 
