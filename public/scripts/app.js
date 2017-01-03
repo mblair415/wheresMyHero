@@ -244,10 +244,6 @@ $(document).ready(function(){
       console.log('edit review submit clicked');
       event.preventDefault();
 
-    $('#singlebuttonCancel').on('click', function() {
-      window.location.href="../";
-    })
-
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + localStorage.getItem("classes"),
