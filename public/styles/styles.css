@@ -1,6 +1,6 @@
-/** {
+* {
   border: dashed 1px black;
-}*/
+}
 
 .gifBox {
   min-height: 150px;
@@ -56,10 +56,11 @@
     /*text-shadow: 7px 5px 5px #E5563C;*/
     /*font-family: 'Indie Flower', cursive;*/
     font-family: 'Gloria Hallelujah', cursive;
+    clear: left;
   }
 
   .reviewIndividual {
-    border: solid 2px black;
+    border: solid 2px green;
     background-color: rgba(250, 240, 250, 0.3);
     margin-bottom: 15px;
     border-radius: 0px 70px 0px 0px;
@@ -104,8 +105,22 @@
     text-align: center;
   }
 
+  #create-button {
+    background-color: green;
+    margin: auto!important;
+  }
+
   #map-button {
-    margin-right: 10px;
+    /*margin-right: 10px;*/
+    background-color: green;
+  }
+
+  #edit-button {
+    background-color: green;
+  }
+
+  #delete-button {
+    background-color: green;
   }
 
   body {
