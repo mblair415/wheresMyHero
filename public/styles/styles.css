@@ -198,10 +198,25 @@
     padding-left: 0px;
   }
 
-/*The following is styling related to the map section*/
+/*Create Page Formatting*/
+li:hover {
+  background-color: rgba(45, 77, 150, .5);
+}
+
+li {
+  text-align: center;
+}
+
+/*Styling related to the map section*/
 
 #mapPlacement {
   height: 400px; /*map size has to be created manually. Feel free to edit for beautification*/
   width: 100%;
   margin-top: 20px;
+}
+
+/*Hidden Class*/
+
+.hidden {
+  visibility: hidden!important;
 }

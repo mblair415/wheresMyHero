@@ -1,12 +1,35 @@
 console.log('sanity check, app.js is connected')
 
 //Declare global variables here
-var map;
-var template;
-var $reviewsList;
-var allReviews = [];
-var classes;
-var giphyApi = "https://api.giphy.com/v1/gifs/search";
+var map,
+    template,
+    $reviewsList,
+    allReviews = [],
+    classes,
+    activeUser;
+
+var giphyApi = "http://api.giphy.com/v1/gifs/search";
+
+if(!(activeUser.reviews)){
+  activeUser.reviews = []
+}
+
+  /*
+  ajax call to bring in data from yelp...couldn't get this working.  Can look at
+  this later
+  */
+  // $.ajax({
+  //   method: 'GET',
+  //   dataType: 'json',
+  //   // cache: true,
+  //   // jsonpCallback : yelpCallback,
+  //   url: 'https://api.yelp.com/v3/businesses/search',
+  //   data: yelpSearch,
+  //   headers: {'Authorization' : 'Bearer 8V86AAXA6DIBETY505B-Ko5o0dp5Z1SrQ0Aee93tBmf_Guthvf7o9ei1cICj1UrgwADicpL1aGy5PQnrdiddwQHCYGTMRaEd2qSEJXAfdveACsEEODgz0igWOHFgWHYx'},
+  //   success: yelpSuccess,
+  //   error: yelpError
+  // });
+
 var batwichSmack = [
   'Wanna know my secret identity?',
   'Stick it in your food hole!',
@@ -40,6 +63,7 @@ $(document).ready(function(){
   $('.batwich-chat').hide();
   $('.hero-chat').hide();
 
+
 //*****************
 //*****************
 
@@ -57,6 +81,22 @@ $(document).ready(function(){
 //*****************
 //*****************
 
+
+  //Restaurant Handlebars templates
+    sourceRestaurant = $('#restaurant-template').html(),
+    templateRestaurant = Handlebars.compile(sourceRestaurant),
+
+//*****************
+//*****************
+
+  // Review Handlebars templates
+  $reviewsList = ('#review-form');
+  var sourceTwo = $("#review-template").html(),
+  templateReview = Handlebars.compile(sourceTwo);
+
+
+  var sourceTwoButtons = $('#review-template-buttons').html(),
+  templateReviewButtons = Handlebars.compile(sourceTwoButtons);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
@@ -113,6 +153,14 @@ $(document).ready(function(){
     error: noAppend
   })
 
+  //when page loads, save active user to a variable
+  $.ajax({
+    method: 'GET',
+    url: '/api/user/active',
+    success: saveUser,
+    // error: noAppend
+  })
+
   // this is the area that deals with the map
   //hide map area when page loads
   $('#hero-map').hide();
@@ -124,6 +172,7 @@ $(document).ready(function(){
     $('.find-hero-button').hide();
 
     // set default location as Hell Mi
+
     var defaultLocation = {
       location: {
         lat: 42.4347,
@@ -133,22 +182,37 @@ $(document).ready(function(){
 
     // crete the map using the default location
     createMap(defaultLocation);
+  }) //225
 
-    // creates a google map using user's current position
+    // creates a google map using location info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      console.log('I know where you live!');
       $('.change-location').hide();
-      map = new google.maps.Map(document.getElementById('mapPlacement'), {
-      center: {lat: data.location.lat, lng: data.location.lng},
-      zoom: 15
-      })
-      $.ajax({
-        method: 'POST',
-        url: '/api/locations',
-        data: data,
-        success: showRestaurants,
-        error: noRestaurants
-      })
+      if (document.getElementById('mapPlacement')){
+        map = new google.maps.Map(document.getElementById('mapPlacement'), {
+        center: {lat: data.location.lat, lng: data.location.lng},
+        zoom: 15
+        })
+        $.ajax({
+          method: 'POST',
+          url: '/api/locations',
+          data: data,
+          success: showRestaurants,
+          error: noRestaurants
+        })
+      } else {
+        activeUser.location = data.location;
+        console.log(activeUser);
+        $.ajax({
+          method: 'POST',
+          url: '/api/locations',
+          data: activeUser,
+          success: appendRestaurants,
+          error: noRestaurants
+        })
+      }
+
     }
 
     function noLocation(data){
@@ -202,15 +266,17 @@ $(document).ready(function(){
     })
 
     // Listener for searching where the user currently is
-    $('.current-location').on('click', '#current-location', function(){
-      console.log('I know where you live!');
+    $('.current-location').on('click', '#current-location', findLocation)
+
+    function findLocation (){
+      console.log('I know where you live!')  
       $.ajax({
         method: 'POST',
         url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
         success: createMap,
         error: noLocation
       })
-    })
+    }
 
     // Listener for searching where the map is currently centered
     $('.change-location').on('click', '#change-location', function(){
@@ -231,9 +297,36 @@ $(document).ready(function(){
       $('#hero-map').hide();
       $('.find-hero-button').show();
     })
-    // this is the end of the map area
-  })
 
+    // this is the end of the map area
+
+    $('.business-search').on('submit', function(event) {
+      event.preventDefault();
+      console.log('submit clicked');
+      activeUser.term = $(this).serializeArray()[0].value
+      console.log(activeUser, $(this).serializeArray())
+      findLocation()
+    })
+
+    function appendRestaurants(restaurants){
+      console.log(restaurants)
+      $('#business-submit-form').removeClass('hidden')
+      $('.restaurant-list').html('')
+      restaurants.forEach(function (restaurant){
+        $('.restaurant-list').append(templateRestaurant({restaurantName: restaurant.name}))
+      })
+    }
+
+    $('.business-submit').on('submit', function(event) {
+      event.preventDefault();
+      console.log('submit clicked');
+      var restaurant = $(this).serializeArray()[0].value
+      $('.business-forms').addClass('hidden');
+      $('#review-form').removeClass('hidden');
+      $('#review-form').prepend('<h2>'+restaurant+'</h2>');
+      $('#restaurant-input').val(restaurant)
+      console.log(restaurant)
+    })
 
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
@@ -242,14 +335,20 @@ $(document).ready(function(){
     // for each review:
     allReviews.forEach(function(reviewData){
       // create HTML for individual review
-      reviewHtml = templateReview({
+      var reviewInfo = {
         reviewContent: reviewData.reviewContent,
         reviewStars: reviewData.stars,
         // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
         reviewId: reviewData._id,
-        });
+        };
+        console.log(reviewData._id)
+        if (activeUser.reviews.indexOf(reviewData._id)>=0){
+          reviewHtml = templateReviewButtons(reviewInfo)
+        } else {
+          reviewHtml = templateReview(reviewInfo)
+        }
       // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
     });
@@ -369,4 +468,9 @@ function deleteFailure(error){
 
 function editFailure(error){
   console.log('Oh, no!  We have failed to edit!  Things remained the same, and you hated that stuff! Error: ', error);
+}
+
+function saveUser(user){
+  console.log(user)
+  activeUser = user
 }

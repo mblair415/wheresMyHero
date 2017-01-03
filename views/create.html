@@ -33,8 +33,48 @@
         <img src="http://i.giphy.com/DpB9NBt1ySFDHH9yiCA.gif" alt="our hero!" height="250" style="max-width: 320px">
       </div>
     </div>
+
+    <!-- ***** restaurant selection ***** -->
+    <section id='business-form' class="business-forms container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form class="form-horizontal business-search">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <article class="col-xs-12">
+                  <input id="business-name" name="term" type="text" placeholder="Find a restaurant near you" class="form-control input-md" required="">
+                </article>
+              </div>
+              <button id="singlebutton" name="businessSearch" class="btn btn-primary center-block">Find Restaurant</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id='business-submit-form' class="business-forms container hidden">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <form class="form-horizontal business-submit">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <article class="col-xs-12 restaurant-list">
+                  <script id="restaurant-template" type="text/x-handlebars-template">
+                      <input type="radio" name="restaurant" value="{{restaurantName}}"> {{restaurantName}}<br>
+                  </script>
+                </article>
+                <button id="singlebutton" name="restaurantSubmit" class="btn btn-primary center-block">Select Restaurant</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+
     <!-- Begin Form Sample -->
-    <section id='review-form' class="container">
+    <section id='review-form' class="container hidden">
 
       <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -77,7 +117,10 @@
             <!-- Form Name -->
             <legend>Add New Review</legend>
 
-            <!-- gif added to crete review -->
+            <!-- input for restaurant name -->
+            <input id="restaurant-input" type="hidden" name="restaurant">
+
+            <!-- gif added to create review -->
             <section class="container selected-gif">
               <div class="row">
                 <div class="col-xs-12">
@@ -89,7 +132,28 @@
                 </div>
               </div>
             </section>
-            <!-- Text input-->
+
+            <div class="dropdown">
+              <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sandwich Type
+                <span class="caret"></span>
+              </button>
+              <input type="hidden" id="sandwich_type" name="sandwichType">
+              <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <li onclick="$('#sandwich_type').val('Turkey')">Turkey</li>
+                <li onclick="$('#sandwich_type').val('Ham')">Ham</li>
+                <li onclick="$('#sandwich_type').val('Italian')">Italian</li>
+                <li onclick="$('#sandwich_type').val('Roast Beef')">Roast Beef</li>
+                <li onclick="$('#sandwich_type').val('Veggie')">Veggie</li>
+                <li onclick="$('#sandwich_type').val('Club')">Club</li>
+                <li onclick="$('#sandwich_type').val('Meatball')">Meatball</li>
+                <li onclick="$('#sandwich_type').val('Cubano')">Cubano</li>
+                <li onclick="$('#sandwich_type').val('Egg Salad')">Egg Salad</li>
+                <li onclick="$('#sandwich_type').val('Grilled Cheese')">Grilled Cheese</li>
+              </ul>
+            </div>
+
+            <!-- Stars-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="stars">Stars</label>
               <div class="col-md-4">
@@ -145,7 +209,7 @@
     </section>
 
 <script id="review-template"></script>
-
+<script id="review-template-buttons"></script>
 
     <!-- End Form Sample -->
 

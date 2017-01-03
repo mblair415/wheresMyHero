@@ -62,23 +62,6 @@ app.get('/edit', function(req, res){
   });
 });
 
-/*
-TRASH THIS: fake data for testing before seed was available, or for testing
-*/
-// var reviewSample = [{
-//   stars: 4,
-//   reviewContent: 'superduper gud',
-//   recommend: false,
-//   upvotes: 417
-//   },
-//   {
-//     stars: 1,
-//     reviewContent: 'the stuff of nightmares, but on a plate',
-//     recommend: true,
-//     upvotes: 7
-//   }
-// ]
-
 ////////////////////
 ////Routes
 ////////////////////
@@ -89,7 +72,7 @@ app.get('/api/reviews', function(req, res){
     if(err){
       console.log('Error in server.js', err);
     }
-    console.log('all reviews are ', review);
+    // console.log('all reviews are ', review);
     res.send(review)
   });
 });
@@ -109,6 +92,8 @@ app.get('/api/reviews/:id', function(req, res) {
 
 //Create one review
 app.post('/api/reviews', function (req, res) {
+  console.log(req.body)
+
   // create new review with form data (`req.body`)
   var newReview = new db.Review({
     stars: req.body.stars,
@@ -118,16 +103,66 @@ app.post('/api/reviews', function (req, res) {
     gif: req.body.gif
   });
 
-  // save newReview to database
-    newReview.save(function(err, review){
-      if (err) {
-        return console.log("save review error: " + err);
+  //save the review to the db
+  newReview.save(function(err, review){
+    if (err) {
+      return console.log("save review error: " + err);
+    }
+    console.log("saved ", review.reviewContent);
+
+  //look for the sandwich type in the db
+    db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
+      if(err){
+        console.log('FindOne error in server.js', err);
+        //if the sandwich exits, push related data
+      } else if (sandwich){
+        console.log('found a sandwich: ', sandwich)
+        sandwich.reviews.push(newReview)
+        newReview.sandwiches.push(sandwich)
+        sandwich.save()
+      } else {
+        //if it's a new sandwich, create it, then push related data
+        console.log("that's a new sandwich")
+        var newSandwich = new db.Sandwich({type: req.body.sandwichType})
+        newSandwich.save()
+        newSandwich.reviews.push(newReview)
+        newReview.sandwiches.push(newSandwich)
+        newSandwich.save()
+        console.log(newSandwich)
       }
-      console.log("saved ", review.reviewContent);
-      // console.log(req.user)
-      //req.user.reviews.push(review);
-      //req.user.save();
-      res.json(review);
+      //save the changes
+      newReview.save()
+    })
+
+    //look for the restaurant in the db
+    db.Restaurant.findOne({name: req.body.restaurant}, function(err, restaurant){
+      if(err){
+        console.log('FindOne error in server.js', err);
+        //if the restaurant exits, push related data
+      } else if (restaurant){
+        console.log('found a restaurant: ', restaurant)
+        restaurant.reviews.push(newReview)
+        newReview.restaurants.push(restaurant)
+        restaurant.save()
+      } else {
+        //if it's a new restaurant, create it, then push related data
+        console.log("that's a new restaurant")
+        var newRestaurant = new db.Restaurant({name: req.body.restaurant})
+        newRestaurant.save()
+        newRestaurant.reviews.push(newReview)
+        newReview.restaurants.push(newRestaurant)
+        console.log(newRestaurant)
+        newRestaurant.save()
+      }
+      //save the changes
+      newReview.save()
+    });
+    newReview.users.push(req.user);
+    newReview.save()
+    console.log(req.user);
+    req.user.reviews.push(review);
+    req.user.save();
+    res.json(review);
     });
 });
 
@@ -170,7 +205,7 @@ app.post('/api/locations/', function(req, res){
     const client = yelp.client(response.jsonBody.access_token);
     client.search({
       // what we search the yelp api for
-      term:'sandwich',
+      term: req.body.term || 'sandwich',
       // this is the geolocation and best match radius area
       latitude: req.body.location.lat,
       longitude: req.body.location.lng,
@@ -188,29 +223,38 @@ app.post('/api/locations/', function(req, res){
 ////Login Routes
 ////////////////////
 
-////Sign up new user
+//Sign up new user
 app.post('/signup', function (req, res) {
   db.User.register(new db.User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        // res.send('signed up!!!');
+        res.redirect('/');
       });
     }
   );
 });
 
-////User login route
+//User login route
 app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+  // res.send('logged in!!! Session ID : '+req.sessionID + "User name : "+ req.user.username);
+  res.redirect('/');
 });
 
-//// log out user
+// log out user
 app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
 
+//Get active user data
+app.get('/api/user/active', function (req, res){
+  res.json(req.user)
+})
+
+////////////////////
 ////Listen
+////////////////////
 
 
 app.listen(process.env.PORT || 3000, function(){
