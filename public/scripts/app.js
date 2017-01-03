@@ -23,7 +23,8 @@ var heroSmack = [
   "I'm pretty sure a hot dog is a sandwich",
   'I hAvE cHaT BuBbLeS',
   ' ',
-  'Whoa, no one called anyone a JT'
+  'Whoa, no one called anyone a JT',
+  'Stick it in your food hole!'
 ];
 
 // these things only happen once the document is ready
@@ -307,11 +308,17 @@ $(document).ready(function(){
     var chance = Math.round(Math.random());
 
     if (chance) {
-      console.log('batwich shit talk')
-      $('#batwich-bubble').html(batwichSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]);
+      console.log('batwich smack talk')
+      $('#batwich-bubble').html();
+      $('#hero-bubble').html();
+      console.log(batwichSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)])
+      $('#batwich-bubble').append(batwichSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]);
     } else {
-      console.log('hero shit talk')
-      $('#hero-bubble').html(heroSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]);
+      console.log('hero smack talk')
+      $('#batwich-bubble').html();
+      $('#hero-bubble').html();
+      console.log((heroSmack[Math.round(Math.random() * ((batwichSmack.length - 1) - 0 + 1) + 0)]))
+      $('#hero-bubble').append(heroSmack[Math.round(Math.random() * ((heroSmack.length - 1) - 0 + 1) + 0)]);
     }
     }, 4000);
   }
