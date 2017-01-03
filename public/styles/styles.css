@@ -45,19 +45,13 @@
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
   }
 
-  .jumbotron {
-    /*background-color: #0B543E;*/
-    background-color: #83CBFF;
-    color: #FBD900;
-  }
-
   .site-logo {
     max-width:100px;
     height:auto;
     margin-left: 40%;
   }
 
-  h1, h2, legend {
+  h1, h2, legend, .batwich-chat, .hero-chat {
     text-align: center;
     /*text-shadow: 7px 5px 5px #E5563C;*/
     /*font-family: 'Indie Flower', cursive;*/
@@ -93,12 +87,9 @@
     background: linear-gradient(225deg, #74C5FF, white);
   }
 
-  /*body {
-    background-color: #0B543E;
-  }*/
-
-  .site-title {
-    padding-bottom: 15px;
+  h1 {
+    font-size: 70px;
+    padding
   }
 
   .find-hero-button, .hide-map-area {
@@ -108,6 +99,53 @@
   .hide-map-area {
     margin-top: 20px;
   }
+
+  #batwich-bubble {
+    /*-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+    background-image: */
+
+  }
+
+  #hero-bubble {
+    /*-webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);*/
+  }
+
+  .batwich-chat, .hero-chat {
+    border: solid 5px black;
+    min-height: 160px;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 10px;
+    padding-top: 17%;
+    font-size: 17px;
+    /*border-radius: 8px;*/
+  }
+
+  .batman-box {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    padding: 0px;
+  }
+
+  .hero-box {
+    padding-left: 0px;
+  }
+
+
 
 
 /*The following is styling related to the map section*/

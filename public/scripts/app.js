@@ -7,11 +7,38 @@ var $reviewsList;
 var allReviews = [];
 var classes;
 var giphyApi = "https://api.giphy.com/v1/gifs/search";
+var batwichSmack = [
+  'Wanna know my secret identity?',
+  'Stick it in your food hole!',
+  'For whom the BLT tolls.',
+  'A hotdog is no sandwich.',
+  'Who wants a knuckle sandwich!?',
+  'Who you callin turkey!?',
+  'Swear to me!',
+  "I'm Batwich",
+  'My parents were eaten when I was young.  I took it poorly.',
+  "I'm a cipher, wrapped in an enigma, smothered in secret sauce."
+];
+var heroSmack = [
+  'Eat me!',
+  'Silence of the ham.',
+  'The po-boy only rings twice.',
+  "I'm pretty sure a hot dog is a sandwich.",
+  'I hAvE cHaT BuBbLeS!!',
+  'Whoa, no one called anyone a JT.',
+  'Stick it in your food hole!',
+  'I never get soggy.',
+  'My super power is flavor!',
+  'Please, do it for the sliders.',
+  'Potato chips do not belong in a sandwich.'
+];
 
 // these things only happen once the document is ready
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
+  $('.batwich-chat').hide();
+  $('.hero-chat').hide();
 
 //*****************
 //*****************
@@ -280,8 +307,28 @@ $(document).ready(function(){
     window.location.href="../"
   }
 
+  function heroChat() {
+    smackTalk = setInterval(function(){
+      $('.batwich-chat').empty();
+      $('.hero-chat').empty();
+      var chance = Math.round(Math.random());
+
+      if (chance) {
+        $('.hero-chat').hide();
+        $('.batwich-chat').show(400);
+        $('.batwich-chat').html(batwichSmack[Math.round(Math.random() * (batwichSmack.length - 1))]);
+      } else {
+        $('.batwich-chat').hide();
+        $('.hero-chat').show(400);
+        $('.hero-chat').html(heroSmack[Math.round(Math.random() * (heroSmack.length - 1))]);
+      }
+    }, 5500);
+  }
+  heroChat();
+
 // This is the end of on ready function
 })
+
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);
