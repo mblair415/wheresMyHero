@@ -6,7 +6,7 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+var giphyApi = "https://api.giphy.com/v1/gifs/search";
 
 // these things only happen once the document is ready
 $(document).ready(function(){
@@ -90,7 +90,7 @@ $(document).ready(function(){
   //hide map area when page loads
   $('#hero-map').hide();
 
-  // listener for find hero button
+  // listener for find hero button.  hides button to search again until map is moved.
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
@@ -110,6 +110,7 @@ $(document).ready(function(){
     // creates a google map using user's current position
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      $('.change-location').hide();
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -165,6 +166,14 @@ $(document).ready(function(){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    //Detects clicking and dragging on the map, shows the button to search
+    $('.hero-map').mousedown(function(){
+      if ($('.hero-map').mousemove(function(){
+      })){
+        $('.change-location').show(600);
+      }
+    })
+
     // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', function(){
       console.log('I know where you live!');
@@ -184,6 +193,7 @@ $(document).ready(function(){
           lat: map.getCenter().lat(),
           lng: map.getCenter().lng()
         }
+        // $('.change-location').hide();
       }
 
       createMap(movedMapLocation);
