@@ -110,58 +110,59 @@ app.post('/api/reviews', function (req, res) {
     }
     console.log("saved ", review.reviewContent);
 
-
-  console.log(req.body.sandwichType)
-  db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
-    if(err){
-      console.log('FindOne error in server.js', err);
-    } else if (sandwich){
-      console.log('found a sandwich: ', sandwich)
-      sandwich.reviews.push(newReview)
-      newReview.sandwiches.push(sandwich)
-    } else {
-      console.log("that's a new sandwich")
-      var newSandwich = new db.Sandwich({type: req.body.sandwichType})
-      newSandwich.save()
-      newSandwich.reviews.push(newReview)
-      newReview.sandwiches.push(newSandwich)
+  //look for the sandwich type in the db
+    db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
+      if(err){
+        console.log('FindOne error in server.js', err);
+        //if the sandwich exits, push related data
+      } else if (sandwich){
+        console.log('found a sandwich: ', sandwich)
+        sandwich.reviews.push(newReview)
+        newReview.sandwiches.push(sandwich)
+        sandwich.save()
+      } else {
+        //if it's a new sandwich, create it, then push related data
+        console.log("that's a new sandwich")
+        var newSandwich = new db.Sandwich({type: req.body.sandwichType})
+        newSandwich.save()
+        newSandwich.reviews.push(newReview)
+        newReview.sandwiches.push(newSandwich)
+        newSandwich.save()
+        console.log(newSandwich)
+      }
+      //save the changes
       newReview.save()
-      newSandwich.save()
-      console.log(newSandwich)
-    }
-  })
+    })
 
-  // var foundRestaurant = new db.Restaurant({name: req.body.restaurant});
-  // foundRestaurant.reviews.push(newReview);
-  // foundRestaurant.save(function(err, restaurant){
-  //   if (err) {
-  //     return console.log("save Restaurant error: " + err);
-  //   }
-  //   console.log("saved ", restaurant.name);
-  // });
-  // var searchTerm = req.body.restaurant
-  // console.log('searchTerm is ',searchTerm)
-  // db.Restaurant.findOne({name: searchTerm}, function(err, foundRestaurant){
-  //   if(err){
-  //     console.log('FindOne error in server.js', err);
-  //     var found = new db.Restaurant({name: req.body.restaurant});
-  //     found.reviews.push(newReview);
-  //     found.save(function(err, restaurant){
-  //       if (err) {
-  //         return console.log("save Restaurant error: " + err);
-  //       }
-  //       console.log("saved ", restaurant.name);
-  //     });
-  //   }
-  // });
-
-
-
-  // save newReview to database
-      console.log(req.user)
-      req.user.reviews.push(review);
-      req.user.save();
-      res.json(review);
+    //look for the restaurant in the db
+    db.Restaurant.findOne({name: req.body.restaurant}, function(err, restaurant){
+      if(err){
+        console.log('FindOne error in server.js', err);
+        //if the restaurant exits, push related data
+      } else if (restaurant){
+        console.log('found a restaurant: ', restaurant)
+        restaurant.reviews.push(newReview)
+        newReview.restaurants.push(restaurant)
+        restaurant.save()
+      } else {
+        //if it's a new restaurant, create it, then push related data
+        console.log("that's a new restaurant")
+        var newRestaurant = new db.Restaurant({name: req.body.restaurant})
+        newRestaurant.save()
+        newRestaurant.reviews.push(newReview)
+        newReview.restaurants.push(newRestaurant)
+        console.log(newRestaurant)
+        newRestaurant.save()
+      }
+      //save the changes
+      newReview.save()
+    });
+    newReview.users.push(req.user);
+    newReview.save()
+    console.log(req.user);
+    req.user.reviews.push(review);
+    req.user.save();
+    res.json(review);
     });
 });
 
