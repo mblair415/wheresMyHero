@@ -3,7 +3,6 @@ var mongoose = require('mongoose'),
 
 var RestaurantSchema = new Schema ({
   name: String,
-  location: String,
   sandwiches: [{
     type: Schema.Types.ObjectId,
     ref: 'Sandwich'
@@ -12,9 +11,9 @@ var RestaurantSchema = new Schema ({
     type: Schema.Types.ObjectId,
     ref: 'Review'
   }],
-  restaurants: [{
+  users: [{
     type: Schema.Types.ObjectId,
-    ref: 'Restaurant'
+    ref: 'User'
   }]
 })
 

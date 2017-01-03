@@ -7,65 +7,81 @@ var reviewSamples =[
 reviewSamples.push({
               stars: 4,
               reviewContent: 'Such a delicious sandwich',
-              upvotes: 37,
               recommend: true,
-              gif: 'http://media3.giphy.com/media/XHAQPPV2lMpCo/100w.gif'
+              gif: 'http://media3.giphy.com/media/XHAQPPV2lMpCo/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 2,
               reviewContent: 'Juicy and messy, but not very good.  Still, very unique and worth trying.',
-              upvotes: 5,
               recommend: true,
-              gif: 'http://media2.giphy.com/media/14qGOyLfATB5ok/100w.gif'
+              gif: 'http://media2.giphy.com/media/14qGOyLfATB5ok/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 5,
               reviewContent: 'I really liked how the meat and veggies were between the bread.',
-              upvotes: 111,
               recommend: true,
-              gif: 'https://media1.giphy.com/media/o9gX2fZzZ1mLu/100w.gif'
+              gif: 'https://media1.giphy.com/media/o9gX2fZzZ1mLu/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 3,
               reviewContent: 'This was the best sandwich I never ate. I bought it and dropped it on the ground by accident.   I cri evrtiem!!one!',
-              upvotes: 42,
               recommend: true,
-              gif: 'http://media3.giphy.com/media/3owypf6HrM3J7UTvAA/100w.gif'
+              gif: 'http://media3.giphy.com/media/3owypf6HrM3J7UTvAA/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 1,
               reviewContent: 'There was a hair in my sandwich.  I specifically told them I wanted a vegetarian sandwich',
-              upvotes: 58,
               recommend: false,
-              gif: 'http://media4.giphy.com/media/CEXDSZBbrLVmM/100w.gif'
+              gif: 'http://media4.giphy.com/media/CEXDSZBbrLVmM/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 2,
               reviewContent: 'It was awful.  I liked nothing about it, and the service was poor.',
-              upvotes: 13,
               recommend: false,
-              gif: 'https://media3.giphy.com/media/2pU8T0OTNkmre/100w.gif'
+              gif: 'https://media3.giphy.com/media/2pU8T0OTNkmre/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 4,
               reviewContent: 'Really good, but not special and I did not have a good dining experience, so I can not recommend it.',
-              upvotes: 31,
               recommend: false,
-              gif: 'http://media2.giphy.com/media/oVIJX9HoKYI8w/100w.gif'
+              gif: 'http://media2.giphy.com/media/oVIJX9HoKYI8w/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 reviewSamples.push({
               stars: 3,
               reviewContent: 'Meh....had better',
-              upvotes: 77,
               recommend: false,
-              gif: 'http://media1.giphy.com/media/IScTu2L6wFJYc/100w.gif'
+              gif: 'http://media1.giphy.com/media/IScTu2L6wFJYc/100w.gif',
+              sandwiches: [],
+              users: [],
+              restaurants: []
             });
 
 var userSamples = [{
@@ -74,40 +90,55 @@ var userSamples = [{
   username: 'SammichKing',
   password: 'BradySucks',
   sandwiches: [],
-  reviews: []
+  reviews: [],
+  restaurants: []
 }]
 
 var sandwichSamples = []
 
 sandwichSamples.push({
-  name: 'Famous Turkey Sandwich',
   type: 'Turkey',
-  hot: false,
-  price: 8.00,
-  restaurant: '782 Arguello Blvd, San Francisco, CA 94118', //May eventually be a relationship to restaurant model
-  Speed: 7,
-  Reviews: []
+  reviews: [],
+  sandwiches: [],
+  users: []
 })
 
 sandwichSamples.push({
-  name: 'Short Rib with Carmalized Onions',
-  type: 'BBQ',
-  hot: true,
-  price: 6.00,
-  restaurant: '8 trinity plaza, San Francisco, CA 94104', //May eventually be a relationship to restaurant model
-  Speed: 10,
-  Reviews: []
+  type: 'Roast Beef',
+  reviews: [],
+  sandwiches: [],
+  users: []
 })
 
 sandwichSamples.push({
-  name: 'Hot Cappicola',
-  type: 'Salami',
-  hot: true,
-  price: 7.00,
-  restaurant: '3108 16th St San Francisco CA 94103', //May eventually be a relationship to restaurant model
-  Speed: 4,
-  Reviews: []
+  type: 'Italian',
+  reviews: [],
+  sandwiches: [],
+  users: []
 })
+
+var restaurantSamples = []
+
+restaurantSamples.push({
+  name: "The Boy's Deli",
+  sandwiches: [],
+  users: [],
+  reviews: []
+})
+
+var restaurant,
+    reviews,
+    userStore,
+    sandwiches
+
+db.Restaurant.remove({}, function(err, restaurant){
+  db.Restaurant.create(restaurantSamples, function(err, restaurant){
+    if (err) { return console.log('ERROR', err); }
+    console.log('all restaurants deleted before reseeding');
+    console.log("all restaurants:", restaurant);
+    console.log("created", restaurant.length, "restaurant");
+  });
+});
 
 db.Review.remove({}, function(err, reviews){
   db.Review.create(reviewSamples, function(err, reviews){
