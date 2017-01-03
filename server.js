@@ -147,7 +147,7 @@ app.put('/api/reviews/:id', function (req, res){
     if(err){
       console.log('FindOne error in server.js', err);
     }
-    console.log('your single review is ', foundReview);
+    // console.log('your single review is ', foundReview);
     foundReview.stars = req.body.stars || foundReview.stars;
     foundReview.reviewContent = req.body.reviewContent || foundReview.reviewContent;
     foundReview.recommend = req.body.recommend || foundReview.recommend;
