@@ -90,7 +90,7 @@ $(document).ready(function(){
   //hide map area when page loads
   $('#hero-map').hide();
 
-  // listener for find hero button
+  // listener for find hero button.  hides button to search again until map is moved.
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
@@ -165,26 +165,17 @@ $(document).ready(function(){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    //Detects clicking and dragging on the map, shows the button to search
     $('.hero-map').mousedown(function(){
-      console.log('button clicked on map');
+      // console.log('button clicked on map');
+      $('.hero-map').mousemove(function(){
+        // console.log('after being clicked the map was dragged');
+        $('.map-section').mouseup(function(){
+          // console.log('Yo!  That map just got dragged.  Search here!?');
+          $('.change-location').show();
+        })
+      })
     })
-      // if ($'#hero-map')
-
-// GARBAGE *******************************************
-    // $(window).scroll(function() {
-    //  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-    //    console.log('dude, you scrolled to the bottom');
-    //
-    //      $.ajax({
-    //        method: 'GET',
-    //        url: 'http://api.giphy.com/v1/gifs/search?q=gif-input&api_key=dc6zaTOxFJmzC',
-    //        data: $('form').serialize(),
-    //        success: giphySearchMoreSuccess,
-    //        error: giphySearchError
-    //      })
-    //  }
-    // });
-// ABOVE IS GARBAGE *********************************
 
     // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', function(){
@@ -205,6 +196,7 @@ $(document).ready(function(){
           lat: map.getCenter().lat(),
           lng: map.getCenter().lng()
         }
+        // $('.change-location').hide();
       }
 
       createMap(movedMapLocation);
