@@ -118,7 +118,7 @@
             <legend>Add New Review</legend>
 
             <!-- input for restaurant name -->
-            <input id="restaurant-input" type="hidden" name="gif">
+            <input id="restaurant-input" type="hidden" name="restaurant">
 
             <!-- gif added to create review -->
             <section class="container selected-gif">
@@ -133,7 +133,27 @@
               </div>
             </section>
 
-            <!-- Text input-->
+            <div class="dropdown">
+              <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sandwich Type
+                <span class="caret"></span>
+              </button>
+              <input type="hidden" id="sandwich_type" name="sandwichType">
+              <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <li onclick="$('#sandwich_type').val('Turkey')">Turkey</li>
+                <li onclick="$('#sandwich_type').val('Ham')">Ham</li>
+                <li onclick="$('#sandwich_type').val('Italian')">Italian</li>
+                <li onclick="$('#sandwich_type').val('Roast Beef')">Roast Beef</li>
+                <li onclick="$('#sandwich_type').val('Veggie')">Veggie</li>
+                <li onclick="$('#sandwich_type').val('Club')">Club</li>
+                <li onclick="$('#sandwich_type').val('Meatball')">Meatball</li>
+                <li onclick="$('#sandwich_type').val('Cubano')">Cubano</li>
+                <li onclick="$('#sandwich_type').val('Egg Salad')">Egg Salad</li>
+                <li onclick="$('#sandwich_type').val('Grilled Cheese')">Grilled Cheese</li>
+              </ul>
+            </div>
+
+            <!-- Stars-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="stars">Stars</label>
               <div class="col-md-4">
