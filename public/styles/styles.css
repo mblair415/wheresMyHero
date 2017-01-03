@@ -100,6 +100,23 @@
     margin-top: 20px;
   }
 
+  #batwich-bubble {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+  }
+
+  #hero-bubble {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
   .batman-box {
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -109,6 +126,12 @@
     -ms-filter: "FlipH";
     padding: 0px;
   }
+
+  #hero-bubble, #batwich-bubble {
+    padding: 2px;
+  }
+
+
 
 
 /*The following is styling related to the map section*/
