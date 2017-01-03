@@ -6,12 +6,39 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+var giphyApi = "https://api.giphy.com/v1/gifs/search";
+var batwichSmack = [
+  'Wanna know my secret identity?',
+  'Stick it in your food hole!',
+  'For whom the BLT tolls.',
+  'A hotdog is no sandwich.',
+  'Who wants a knuckle sandwich!?',
+  'Who you callin turkey!?',
+  'Swear to me!',
+  "I'm Batwich",
+  'My parents were eaten when I was young.  I took it poorly.',
+  "I'm a cipher, wrapped in an enigma, smothered in secret sauce."
+];
+var heroSmack = [
+  'Eat me!',
+  'Silence of the ham.',
+  'The po-boy only rings twice.',
+  "I'm pretty sure a hot dog is a sandwich.",
+  'I hAvE cHaT BuBbLeS!!',
+  'Whoa, no one called anyone a JT.',
+  'Stick it in your food hole!',
+  'I never get soggy.',
+  'My super power is flavor!',
+  'Please, do it for the sliders.',
+  'Potato chips do not belong in a sandwich.'
+];
 
 // these things only happen once the document is ready
 $(document).ready(function(){
   console.log('The DOM body is ready')
   console.log('Body parser parsing that body!');
+  $('.batwich-chat').hide();
+  $('.hero-chat').hide();
 
 //*****************
 //*****************
@@ -90,7 +117,7 @@ $(document).ready(function(){
   //hide map area when page loads
   $('#hero-map').hide();
 
-  // listener for find hero button
+  // listener for find hero button.  hides button to search again until map is moved.
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
@@ -110,6 +137,7 @@ $(document).ready(function(){
     // creates a google map using user's current position
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      $('.change-location').hide();
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -165,6 +193,14 @@ $(document).ready(function(){
       console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    //Detects clicking and dragging on the map, shows the button to search
+    $('.hero-map').mousedown(function(){
+      if ($('.hero-map').mousemove(function(){
+      })){
+        $('.change-location').show(600);
+      }
+    })
+
     // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', function(){
       console.log('I know where you live!');
@@ -184,6 +220,7 @@ $(document).ready(function(){
           lat: map.getCenter().lat(),
           lng: map.getCenter().lng()
         }
+        // $('.change-location').hide();
       }
 
       createMap(movedMapLocation);
@@ -234,10 +271,6 @@ $(document).ready(function(){
       console.log('edit review submit clicked');
       event.preventDefault();
 
-    $('#singlebuttonCancel').on('click', function() {
-      window.location.href="../";
-    })
-
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + localStorage.getItem("classes"),
@@ -274,8 +307,28 @@ $(document).ready(function(){
     window.location.href="../"
   }
 
+  function heroChat() {
+    smackTalk = setInterval(function(){
+      $('.batwich-chat').empty();
+      $('.hero-chat').empty();
+      var chance = Math.round(Math.random());
+
+      if (chance) {
+        $('.hero-chat').hide();
+        $('.batwich-chat').show(400);
+        $('.batwich-chat').html(batwichSmack[Math.round(Math.random() * (batwichSmack.length - 1))]);
+      } else {
+        $('.batwich-chat').hide();
+        $('.hero-chat').show(400);
+        $('.hero-chat').html(heroSmack[Math.round(Math.random() * (heroSmack.length - 1))]);
+      }
+    }, 5500);
+  }
+  heroChat();
+
 // This is the end of on ready function
 })
+
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);

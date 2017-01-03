@@ -16,9 +16,13 @@ See the published project at github.com/sf-wdi-labs/readme-example!
 jQuery
 HTML
 CSS
+Express
+NodeJS
+Mongoose
 Bootstrap
 JavaScript
 Handlebars
+Mongoose Sessions
 Yelp api
 Google Maps api
 Geolocation api
