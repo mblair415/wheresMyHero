@@ -6,17 +6,13 @@ var map,
     $reviewsList,
     allReviews = [],
     classes,
-    activeUser = {};
+    activeUser;
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
 if(!(activeUser.reviews)){
   activeUser.reviews = []
 }
-
-$(document).ready(function(){
-  console.log('The DOM body is ready')
-  console.log('Body parser parsing that body!');
 
   /*
   ajax call to bring in data from yelp...couldn't get this working.  Can look at
@@ -34,6 +30,40 @@ $(document).ready(function(){
   //   error: yelpError
   // });
 
+var batwichSmack = [
+  'Wanna know my secret identity?',
+  'Stick it in your food hole!',
+  'For whom the BLT tolls.',
+  'A hotdog is no sandwich.',
+  'Who wants a knuckle sandwich!?',
+  'Who you callin turkey!?',
+  'Swear to me!',
+  "I'm Batwich",
+  'My parents were eaten when I was young.  I took it poorly.',
+  "I'm a cipher, wrapped in an enigma, smothered in secret sauce."
+];
+var heroSmack = [
+  'Eat me!',
+  'Silence of the ham.',
+  'The po-boy only rings twice.',
+  "I'm pretty sure a hot dog is a sandwich.",
+  'I hAvE cHaT BuBbLeS!!',
+  'Whoa, no one called anyone a JT.',
+  'Stick it in your food hole!',
+  'I never get soggy.',
+  'My super power is flavor!',
+  'Please, do it for the sliders.',
+  'Potato chips do not belong in a sandwich.'
+];
+
+// these things only happen once the document is ready
+$(document).ready(function(){
+  console.log('The DOM body is ready')
+  console.log('Body parser parsing that body!');
+  $('.batwich-chat').hide();
+  $('.hero-chat').hide();
+
+
 //*****************
 //*****************
 
@@ -43,9 +73,14 @@ $(document).ready(function(){
     sourceThree = $('#gif-choice').html(),
     templateGifChoice = Handlebars.compile(sourceThree),
 
+    // Review Handlebars template
+    $reviewsList = ('#review-form');
+    var sourceTwo = $("#review-template").html(),
+    templateReview = Handlebars.compile(sourceTwo);
 
 //*****************
 //*****************
+
 
   //Restaurant Handlebars templates
     sourceRestaurant = $('#restaurant-template').html(),
@@ -58,6 +93,7 @@ $(document).ready(function(){
   $reviewsList = ('#review-form');
   var sourceTwo = $("#review-template").html(),
   templateReview = Handlebars.compile(sourceTwo);
+
 
   var sourceTwoButtons = $('#review-template-buttons').html(),
   templateReviewButtons = Handlebars.compile(sourceTwoButtons);
@@ -93,7 +129,6 @@ $(document).ready(function(){
   // this is what handles clicking on a gif
   $('.gifSelectionField2').on('click', '.gifBox', function(event){
     $('.gifSelectionField2').empty();
-    // console.log('i still know what you clicked on! ', this.src);
     var pickedGifHtml = templateGifChoice({ userChosenGif: this.src});
     $('.selected-gif').empty();
     $('.selected-gif').append(pickedGifHtml);
@@ -105,7 +140,7 @@ $(document).ready(function(){
     // empty space to prevent gifs from multiple searches showing at the same time
     $('.gifSelectionField2').empty();
     json.data.forEach(function(gif){
-      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_width_small.url});
+      var giphyHtml = templateGif({ insertGifHere: gif.images.fixed_height_small.url});
       $(".gifSelectionField2").append(giphyHtml);
     });
   }
@@ -130,12 +165,14 @@ $(document).ready(function(){
   //hide map area when page loads
   $('#hero-map').hide();
 
-  // listener for find hero button
+  // listener for find hero button.  hides button to search again until map is moved.
   $('.map-section').on('click', '#map-button', function(){
     console.log('map button pressed');
     $('#hero-map').show();
+    $('.find-hero-button').hide();
 
-    // set a default location
+    // set default location as Hell Mi
+
     var defaultLocation = {
       location: {
         lat: 42.4347,
@@ -151,6 +188,7 @@ $(document).ready(function(){
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
       console.log('I know where you live!');
+      $('.change-location').hide();
       if (document.getElementById('mapPlacement')){
         map = new google.maps.Map(document.getElementById('mapPlacement'), {
         center: {lat: data.location.lat, lng: data.location.lng},
@@ -174,6 +212,7 @@ $(document).ready(function(){
           error: noRestaurants
         })
       }
+
     }
 
     function noLocation(data){
@@ -182,7 +221,7 @@ $(document).ready(function(){
 
     // looks at each restaraunt sent from yelp
     function showRestaurants(data){
-      console.log('you found restaurants! ', data)
+      console.log('you found restaurants! ', data);
       data.forEach(function(restaurant){
         var location = {
           lat: restaurant.coordinates.latitude,
@@ -215,13 +254,22 @@ $(document).ready(function(){
     }
 
     function noRestaurants(data){
-      console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data)
+      console.log('you found no restaurants :(  NO SOUP FOR YOU ... wait ... sandwich ... NO SANDWICH FOR YOU!!', data);
     }
 
+    //Detects clicking and dragging on the map, shows the button to search
+    $('.hero-map').mousedown(function(){
+      if ($('.hero-map').mousemove(function(){
+      })){
+        $('.change-location').show(600);
+      }
+    })
+
+    // Listener for searching where the user currently is
     $('.current-location').on('click', '#current-location', findLocation)
 
     function findLocation (){
-      console.log('I know where you live!')
+      console.log('I know where you live!')  
       $.ajax({
         method: 'POST',
         url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
@@ -230,9 +278,24 @@ $(document).ready(function(){
       })
     }
 
-    // hides the map area once it's open
+    // Listener for searching where the map is currently centered
+    $('.change-location').on('click', '#change-location', function(){
+      console.log('Searching in the new map location');
+      var movedMapLocation = {
+        location: {
+          lat: map.getCenter().lat(),
+          lng: map.getCenter().lng()
+        }
+        // $('.change-location').hide();
+      }
+
+      createMap(movedMapLocation);
+    })
+
+    // button listener to hide the map area once it's open
     $('.map-section').on('click', '#hide-map-button', function(){
       $('#hero-map').hide();
+      $('.find-hero-button').show();
     })
 
     // this is the end of the map area
@@ -290,26 +353,21 @@ $(document).ready(function(){
       $('.appendReviews').prepend(reviewHtml);
     });
 
-    // click event for pressing the edit review
-    /*
-    create small handlebars area within the review handle bars.
-    this space will expand and display as needed as per handlebars.
-    display the reviewContent field and allow that one field to be changed.
-    save changes.
-    */
+    // listener for pressing the edit review.  Directs to edit page.
     $('.reviewIndividual').on('click', '#edit-button', function(){
       localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
       window.location.href="../edit";
     })
 
+    // listener for the create review button.  Directs to create page.
     $('#create-button').on('click', function(){
       console.log('the create button was pressed!');
       window.location.href="../create";
     })
 
     $('.edit-review').on('submit', function(event) {
-      console.log('submit clicked');
+      console.log('edit review submit clicked');
       event.preventDefault();
 
       $.ajax({
@@ -345,10 +403,31 @@ $(document).ready(function(){
     })
     console.log('The review was edited', data);
     return templateReview;
+    window.location.href="../"
   }
+
+  function heroChat() {
+    smackTalk = setInterval(function(){
+      $('.batwich-chat').empty();
+      $('.hero-chat').empty();
+      var chance = Math.round(Math.random());
+
+      if (chance) {
+        $('.hero-chat').hide();
+        $('.batwich-chat').show(400);
+        $('.batwich-chat').html(batwichSmack[Math.round(Math.random() * (batwichSmack.length - 1))]);
+      } else {
+        $('.batwich-chat').hide();
+        $('.hero-chat').show(400);
+        $('.hero-chat').html(heroSmack[Math.round(Math.random() * (heroSmack.length - 1))]);
+      }
+    }, 5500);
+  }
+  heroChat();
 
 // This is the end of on ready function
 })
+
 
 function newReviewSuccess(review){
   console.log('ajax call on review successful.  Review: ', review);

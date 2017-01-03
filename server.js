@@ -182,7 +182,7 @@ app.put('/api/reviews/:id', function (req, res){
     if(err){
       console.log('FindOne error in server.js', err);
     }
-    console.log('your single review is ', foundReview);
+    console.log('your single review is ');
     foundReview.stars = req.body.stars || foundReview.stars;
     foundReview.reviewContent = req.body.reviewContent || foundReview.reviewContent;
     foundReview.recommend = req.body.recommend || foundReview.recommend;
@@ -256,6 +256,8 @@ app.get('/api/user/active', function (req, res){
 ////Listen
 ////////////////////
 
-app.listen(process.env.port || 3000, function(){
+
+app.listen(process.env.PORT || 3000, function(){
+
   console.log('express server online on port', 3000)
 });
