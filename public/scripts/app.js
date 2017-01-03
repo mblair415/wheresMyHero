@@ -168,16 +168,9 @@ $(document).ready(function(){
 
     //Detects clicking and dragging on the map, shows the button to search
     $('.hero-map').mousedown(function(){
-      console.log('button clicked on map');
       if ($('.hero-map').mousemove(function(){
-
       })){
         $('.change-location').show();
-        console.log('after being clicked the map was dragged');
-        if ($('.map-section').mouseup(function(){
-        }) ){
-          console.log('Yo!  That map just got dragged.  Search here!?');
-        }
       }
     })
 
