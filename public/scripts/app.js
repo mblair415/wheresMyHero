@@ -170,7 +170,7 @@ $(document).ready(function(){
     $('.hero-map').mousedown(function(){
       if ($('.hero-map').mousemove(function(){
       })){
-        $('.change-location').show();
+        $('.change-location').show(600);
       }
     })
 
