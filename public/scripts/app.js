@@ -5,8 +5,11 @@ var map,
     template,
     $reviewsList,
     allReviews = [],
-    classes,
-    activeUser;
+    classes;
+
+if(!activeUser){
+  var activeUser = {}
+}
 
 var giphyApi = "http://api.giphy.com/v1/gifs/search";
 
@@ -269,7 +272,7 @@ $(document).ready(function(){
     $('.current-location').on('click', '#current-location', findLocation)
 
     function findLocation (){
-      console.log('I know where you live!')  
+      console.log('I know where you live!')
       $.ajax({
         method: 'POST',
         url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDN9w5iCC44NN-_bnoO7Yu8ZXnmHB_QmJg',
@@ -369,7 +372,6 @@ $(document).ready(function(){
     $('.edit-review').on('submit', function(event) {
       console.log('edit review submit clicked');
       event.preventDefault();
-
       $.ajax({
         method: 'PUT',
         url: '/api/reviews/' + localStorage.getItem("classes"),
