@@ -6,7 +6,7 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+var giphyApi = "https://api.giphy.com/v1/gifs/search";
 
 // these things only happen once the document is ready
 $(document).ready(function(){
