@@ -118,13 +118,13 @@
   }
 
   #create-button {
-    margin-top: 20px;
+    margin-top: 50px;
   }
 
-  /*#map-button {
-    background-color: green;
+  #map-button {
+    margin-top: 50px;
   }
-
+/*
   #edit-button {
     background-color: green;
   }
@@ -150,7 +150,6 @@
   .hide-map-area {
     margin-top: 20px;
   }
-
 
 /*The following is styling related to the map section*/
 
