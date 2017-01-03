@@ -45,12 +45,6 @@
       background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
   }
 
-  .jumbotron {
-    /*background-color: #0B543E;*/
-    background-color: #83CBFF;
-    color: #FBD900;
-  }
-
   .site-logo {
     max-width:100px;
     height:auto;
@@ -87,18 +81,15 @@
     text-align: center;
   }
 
-  .whole-page {
+  body {
     /*background-color: #0B543E;*/
     /*background: linear-gradient(80deg, #C0281B, black 40%, #C0281B);*/
     background: linear-gradient(225deg, #74C5FF, white);
   }
 
-  /*body {
-    background-color: #0B543E;
-  }*/
-
-  .site-title {
-    padding-bottom: 15px;
+  h1 {
+    font-size: 70px;
+    padding
   }
 
   .find-hero-button, .hide-map-area {
@@ -107,6 +98,16 @@
 
   .hide-map-area {
     margin-top: 20px;
+  }
+
+  .batman-box {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    padding: 0px;
   }
 
 
