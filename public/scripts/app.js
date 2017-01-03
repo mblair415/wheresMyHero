@@ -6,7 +6,7 @@ var template;
 var $reviewsList;
 var allReviews = [];
 var classes;
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+var giphyApi = "https://api.giphy.com/v1/gifs/search";
 
 // these things only happen once the document is ready
 $(document).ready(function(){
@@ -110,6 +110,7 @@ $(document).ready(function(){
     // creates a google map using user's current position
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
+      $('.change-location').hide();
       map = new google.maps.Map(document.getElementById('mapPlacement'), {
       center: {lat: data.location.lat, lng: data.location.lng},
       zoom: 15
@@ -167,14 +168,17 @@ $(document).ready(function(){
 
     //Detects clicking and dragging on the map, shows the button to search
     $('.hero-map').mousedown(function(){
-      // console.log('button clicked on map');
-      $('.hero-map').mousemove(function(){
-        // console.log('after being clicked the map was dragged');
-        $('.map-section').mouseup(function(){
-          // console.log('Yo!  That map just got dragged.  Search here!?');
-          $('.change-location').show();
-        })
-      })
+      console.log('button clicked on map');
+      if ($('.hero-map').mousemove(function(){
+
+      })){
+        $('.change-location').show();
+        console.log('after being clicked the map was dragged');
+        if ($('.map-section').mouseup(function(){
+        }) ){
+          console.log('Yo!  That map just got dragged.  Search here!?');
+        }
+      }
     })
 
     // Listener for searching where the user currently is
