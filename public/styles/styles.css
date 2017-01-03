@@ -59,6 +59,11 @@
     clear: left;
   }
 
+  #reviews {
+    font-size: 50px;
+    margin-left: 40%;
+  }
+
   .reviewIndividual {
     border: solid 2px green;
     background-color: rgba(250, 240, 250, 0.3);
@@ -79,8 +84,11 @@
   }
   .font-effect-3d {
     display: inline-block;
-    margin-left: 13%;
     font-size: 100px;
+  }
+
+  #wheres-my-hero {
+    margin-left: 13%;
   }
 
   .sandwichBatman {
@@ -105,13 +113,15 @@
     text-align: center;
   }
 
-  #create-button {
+  button {
     background-color: green;
-    margin: auto!important;
   }
 
-  #map-button {
-    /*margin-right: 10px;*/
+  #create-button {
+    margin-top: 20px;
+  }
+
+  /*#map-button {
     background-color: green;
   }
 
@@ -121,7 +131,7 @@
 
   #delete-button {
     background-color: green;
-  }
+  }*/
 
   body {
     /*background-color: #0B543E;*/
