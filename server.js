@@ -212,6 +212,8 @@ app.get('/logout', function (req, res) {
 
 ////Listen
 
+
 app.listen(process.env.PORT || 3000, function(){
+
   console.log('express server online on port', 3000)
 });
