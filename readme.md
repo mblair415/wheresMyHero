@@ -32,7 +32,47 @@ Google fonts api
 
 
 
-Code I'm Proud Of
+## Code I'm Proud Of
+
+### Ryan Johnson:
+
+### Michael Blair:
+I'm very proud of the map functionality I wrote.  I've set up the map to hide by default, and to open at the touch of a button.  Upon opening the button to deploy it hides, and a button to change the location to the user's current location appears.  I'm especially proud of the code that will detect the user moving the map and show another button that enables the user to search for food at the new center of the map allowing them to check other neighborhoods.  And, when the map is drawn the button to search in the new location vanishes and only appears when the map is moved again.
+
+A challenge I faced while writing this was in learning how to locate the coordinates for the center of the map.  I found many posts online and much documentation about how to change the center of the map, but not the other way around.  When I saw that the code to change the center was .setCenter() I thought that if I was writing the software I would use .getCenter() to get the center of the map at a specific location, then found that the function existed, but with very little documentation or posts about usage.  After more searching and trial and error I learned that with this function you call the .lat() and .lng() functions to finalize the call.
+
+// Listener for searching where the map is currently centered
+$('.change-location').on('click', '#change-location', function(){
+  console.log('Searching in the new map location');
+  var movedMapLocation = {
+    location: {
+      lat: map.getCenter().lat(),
+      lng: map.getCenter().lng()
+    }
+  }
+
+  createMap(movedMapLocation);
+})
+
+// button listener to hide the map area once it's open
+$('.map-section').on('click', '#hide-map-button', function(){
+  $('#hero-map').hide();
+  $('.find-hero-button').show();
+})
+
+//Detects clicking and dragging on the map, shows the button to search
+$('.hero-map').mousedown(function(){
+  if ($('.hero-map').mousemove(function(){
+  })){
+    $('.change-location').show(600);
+  }
+})
+
+
+
+
+
+### Ryan Thomas:
 
   function allTheCatz(inputCatz) {
     Catz.create(inputCatz);
