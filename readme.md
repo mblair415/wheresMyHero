@@ -110,6 +110,11 @@ $('.reviewIndividual').on('click', '#edit-button', function(){
 
 
 ## Screen Shots
+####Homepage
 ![homepage](https://i.imgur.com/89gjzo6.png "Homepage")
+
+####Create Page
 ![create form](https://i.imgur.com/E8MJrzI.png "Create Form")
+
+####Login Modal
 ![sign up form](https://i.imgur.com/opMLlE9.jpg "Sign Up Form")
