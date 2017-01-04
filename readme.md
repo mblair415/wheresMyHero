@@ -12,21 +12,21 @@ See the published project at github.com/sf-wdi-labs/readme-example!
 
 
 ## Technologies Used
-jQuery
-HTML
-CSS
-Express
-NodeJS
-Mongoose
-Bootstrap
-JavaScript
-Handlebars
-Mongoose Sessions
-Yelp api
-Google Maps api
-Geolocation api
-Giphy api
-Google fonts api
+* jQuery
+* HTML
+* CSS
+* Express
+* NodeJS
+* Mongoose
+* Bootstrap
+* JavaScript
+* Handlebars
+* Mongoose Sessions
+* Yelp api
+* Google Maps api
+* Geolocation api
+* Giphy api
+* Google fonts api
 
 
 
