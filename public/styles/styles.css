@@ -96,6 +96,7 @@
     display: inline-block;
     float: left;
     border: 5px solid black;
+    transform: scaleX(-1);
   }
 
   .sandwichPic {
