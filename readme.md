@@ -12,7 +12,6 @@ See the published project at github.com/sf-wdi-labs/readme-example!
 
 
 ## Technologies Used
-
 jQuery
 HTML
 CSS
@@ -35,6 +34,30 @@ Google fonts api
 ## Code I'm Proud Of
 
 ### Ryan Johnson:
+Setting up database relationships was an exciting challenge.  We have one submission form that saves data using four different models and relates everything so that it can be accessed in a number of ways.  This snippet illustrates one piece of our route that relates a review to a sandwich.  It also creates a sandwich instance if it does not already exist on our database.  This will allow us to later add some gamifying aspects to the site, to dynamically suggest sandwiches to users based on similar users behavior, and to create user pages and other interesting queries.
+
+db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
+      if(err){
+        console.log('FindOne error in server.js', err);
+        //if the sandwich exits, push related data
+      } else if (sandwich){
+        console.log('found a sandwich: ', sandwich)
+        sandwich.reviews.push(newReview)
+        newReview.sandwiches.push(sandwich)
+        sandwich.save()
+      } else {
+        //if it's a new sandwich, create it, then push related data
+        console.log("that's a new sandwich")
+        var newSandwich = new db.Sandwich({type: req.body.sandwichType})
+        newSandwich.save()
+        newSandwich.reviews.push(newReview)
+        newReview.sandwiches.push(newSandwich)
+        newSandwich.save()
+        console.log(newSandwich)
+      }
+      //save the changes
+      newReview.save()
+    })
 
 ### Michael Blair:
 I'm very proud of the map functionality I wrote.  I've set up the map to hide by default, and to open at the touch of a button.  Upon opening the button to deploy it hides, and a button to change the location to the user's current location appears.  I'm especially proud of the code that will detect the user moving the map and show another button that enables the user to search for food at the new center of the map allowing them to check other neighborhoods.  And, when the map is drawn the button to search in the new location vanishes and only appears when the map is moved again.
@@ -70,14 +93,25 @@ $('.hero-map').mousedown(function(){
 
 
 
-
-
 ### Ryan Thomas:
+The snippet that I'm very proud of is switching pages. Most of the work I did was on the front end, so having a chance to struggle through a new subject on the back end was really helpful for me in learning more about backend. Struggling through that cleared other general problems that have troubled me in the past.  It really solidified my route building
+
+$('.reviewIndividual').on('click', '#edit-button', function(){
+      localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
+      console.log('the edit button was pressed! Review Id is ' + classes);
+      window.location.href="../edit";
+    })
+    // listener for the create review button.  Directs to create page.
+    $('#create-button').on('click', function(){
+      console.log('the create button was pressed!');
+      window.location.href="../create";
+    })
 
 
 
 ## Screen Shots
 <imghttp://imgur.com/a/XHNJR
-<img src="http://imgur.com/a/XHNJR" height="175" style="max-width: 320px">
-<img src="http://imgur.com/a/Um5wY" height="175" style="max-width: 320px">
-<img src="http://imgur.com/a/Um5wY" height="175" style="max-width: 320px">
+<img src="http://imgur.com/a/XHNJR" height="500" style="max-width: 500px">
+<img src="http://imgur.com/a/Um5wY" height="500" style="max-width: 500px">
+<img src="http://imgur.com/a/Um5wY" height="500" style="max-width: 500px">
+<img src="http://imgur.com/a/0xpcn" height="500" style="max-width: 500px">
