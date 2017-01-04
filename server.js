@@ -164,7 +164,7 @@ app.post('/api/reviews', function (req, res) {
     });
     newReview.users.push(req.user);
     newReview.save()
-    console.log(req.user);
+    // console.log(req.user);
     req.user.reviews.push(review);
     req.user.save();
     res.json(review);
