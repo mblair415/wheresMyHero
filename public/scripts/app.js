@@ -5,7 +5,35 @@ var map,
     template,
     $reviewsList,
     allReviews = [],
-    classes;
+    classes,
+    batwichSmack = [
+      'Wanna know my secret identity?',
+      'Stick it in your food hole!',
+      'For whom the BLT tolls.',
+      'A hotdog is no sandwich.',
+      'Who wants a knuckle sandwich!?',
+      'Who you callin turkey!?',
+      'Swear to me!',
+      "I'm Batwich",
+      'My parents were eaten when I was young.  I took it poorly.',
+      "I'm a cipher, wrapped in an enigma, smothered in secret sauce.",
+      "I don't trust noodles.  They're all impastas.",
+      'My partner is a small fry.'
+    ],
+    heroSmack = [
+      'Eat me!',
+      'Silence of the hams.',
+      'The po-boy only rings twice.',
+      "I'm pretty sure a hot dog is a sandwich.",
+      'I hAvE cHaT BuBbLeS!!',
+      'Whoa, no one called anyone a JT.',
+      'Stick it in your food hole!',
+      'I never get soggy.',
+      'My super power is flavor!',
+      'Please, do it for the sliders.',
+      'Potato chips do not belong in a sandwich.',
+      'Lettuce celebrate!'
+    ];
 
 if(!activeUser){
   var activeUser = {}
@@ -17,47 +45,6 @@ if(!(activeUser.reviews)){
   activeUser.reviews = []
 }
 
-  /*
-  ajax call to bring in data from yelp...couldn't get this working.  Can look at
-  this later
-  */
-  // $.ajax({
-  //   method: 'GET',
-  //   dataType: 'json',
-  //   // cache: true,
-  //   // jsonpCallback : yelpCallback,
-  //   url: 'https://api.yelp.com/v3/businesses/search',
-  //   data: yelpSearch,
-  //   headers: {'Authorization' : 'Bearer 8V86AAXA6DIBETY505B-Ko5o0dp5Z1SrQ0Aee93tBmf_Guthvf7o9ei1cICj1UrgwADicpL1aGy5PQnrdiddwQHCYGTMRaEd2qSEJXAfdveACsEEODgz0igWOHFgWHYx'},
-  //   success: yelpSuccess,
-  //   error: yelpError
-  // });
-
-var batwichSmack = [
-  'Wanna know my secret identity?',
-  'Stick it in your food hole!',
-  'For whom the BLT tolls.',
-  'A hotdog is no sandwich.',
-  'Who wants a knuckle sandwich!?',
-  'Who you callin turkey!?',
-  'Swear to me!',
-  "I'm Batwich",
-  'My parents were eaten when I was young.  I took it poorly.',
-  "I'm a cipher, wrapped in an enigma, smothered in secret sauce."
-];
-var heroSmack = [
-  'Eat me!',
-  'Silence of the ham.',
-  'The po-boy only rings twice.',
-  "I'm pretty sure a hot dog is a sandwich.",
-  'I hAvE cHaT BuBbLeS!!',
-  'Whoa, no one called anyone a JT.',
-  'Stick it in your food hole!',
-  'I never get soggy.',
-  'My super power is flavor!',
-  'Please, do it for the sliders.',
-  'Potato chips do not belong in a sandwich.'
-];
 
 // these things only happen once the document is ready
 $(document).ready(function(){
@@ -77,29 +64,16 @@ $(document).ready(function(){
     templateGifChoice = Handlebars.compile(sourceThree),
 
     // Review Handlebars template
-    $reviewsList = ('#review-form');
-    var sourceTwo = $("#review-template").html(),
+    $reviewsList = ('#review-form'),
+    sourceTwo = $("#review-template").html(),
     templateReview = Handlebars.compile(sourceTwo);
 
-//*****************
-//*****************
-
-
-  //Restaurant Handlebars templates
+    //Restaurant Handlebars templates
     sourceRestaurant = $('#restaurant-template').html(),
     templateRestaurant = Handlebars.compile(sourceRestaurant),
 
-//*****************
-//*****************
-
-  // Review Handlebars templates
-  $reviewsList = ('#review-form');
-  var sourceTwo = $("#review-template").html(),
-  templateReview = Handlebars.compile(sourceTwo);
-
-
-  var sourceTwoButtons = $('#review-template-buttons').html(),
-  templateReviewButtons = Handlebars.compile(sourceTwoButtons);
+    sourceTwoButtons = $('#review-template-buttons').html(),
+    templateReviewButtons = Handlebars.compile(sourceTwoButtons);
 
   // this is what submits the form to add a review in
   $('.new-review').on('submit', function(event) {
@@ -175,7 +149,6 @@ $(document).ready(function(){
     $('.find-hero-button').hide();
 
     // set default location as Hell Mi
-
     var defaultLocation = {
       location: {
         lat: 42.4347,
@@ -185,12 +158,11 @@ $(document).ready(function(){
 
     // crete the map using the default location
     createMap(defaultLocation);
-  }) //225
+  })
 
     // creates a google map using location info
     function createMap(data){
       console.log('location found - lat: ', data.location.lat, 'lng: ', data.location.lng);
-      console.log('I know where you live!');
       $('.change-location').hide();
       if (document.getElementById('mapPlacement')){
         map = new google.maps.Map(document.getElementById('mapPlacement'), {
@@ -215,7 +187,6 @@ $(document).ready(function(){
           error: noRestaurants
         })
       }
-
     }
 
     function noLocation(data){
@@ -289,7 +260,6 @@ $(document).ready(function(){
           lat: map.getCenter().lat(),
           lng: map.getCenter().lng()
         }
-        // $('.change-location').hide();
       }
 
       createMap(movedMapLocation);
@@ -323,12 +293,12 @@ $(document).ready(function(){
     $('.business-submit').on('submit', function(event) {
       event.preventDefault();
       console.log('submit clicked');
-      var restaurant = $(this).serializeArray()[0].value
+      var restaurant = $(this).serializeArray()[0].value;
       $('.business-forms').addClass('hidden');
       $('#review-form').removeClass('hidden');
       $('#review-form').prepend('<h2>'+restaurant+'</h2>');
       $('#restaurant-input').val(restaurant)
-      console.log(restaurant)
+      console.log(restaurant);
     })
 
   // this is what spits out each review onto the page.
