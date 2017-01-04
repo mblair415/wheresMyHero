@@ -39,7 +39,7 @@ if(!activeUser){
   var activeUser = {}
 }
 
-var giphyApi = "http://api.giphy.com/v1/gifs/search";
+var giphyApi = "https://api.giphy.com/v1/gifs/search";
 
 if(!(activeUser.reviews)){
   activeUser.reviews = []
