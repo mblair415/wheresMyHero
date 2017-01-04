@@ -1,5 +1,5 @@
 # Where's My Hero!?
-Where's My Hero!? - <i>Link to Deployed version of the project</i>
+Where's My Hero!? - [Link to Deployed version of the project](https://shielded-inlet-58489.herokuapp.com/)
 
 
 ## Who is our user?
@@ -35,7 +35,7 @@ Google fonts api
 
 ### Ryan Johnson:
 Setting up database relationships was an exciting challenge.  We have one submission form that saves data using four different models and relates everything so that it can be accessed in a number of ways.  This snippet illustrates one piece of our route that relates a review to a sandwich.  It also creates a sandwich instance if it does not already exist on our database.  This will allow us to later add some gamifying aspects to the site, to dynamically suggest sandwiches to users based on similar users behavior, and to create user pages and other interesting queries.
-
+```javascript
 db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
       if(err){
         console.log('FindOne error in server.js', err);
@@ -58,12 +58,12 @@ db.Sandwich.findOne({type: req.body.sandwichType}, function(err, sandwich){
       //save the changes
       newReview.save()
     })
-
+```
 ### Michael Blair:
 I'm very proud of the map functionality I wrote.  I've set up the map to hide by default, and to open at the touch of a button.  Upon opening the button to deploy it hides, and a button to change the location to the user's current location appears.  I'm especially proud of the code that will detect the user moving the map and show another button that enables the user to search for food at the new center of the map allowing them to check other neighborhoods.  And, when the map is drawn the button to search in the new location vanishes and only appears when the map is moved again.
 
 A challenge I faced while writing this was in learning how to locate the coordinates for the center of the map.  I found many posts online and much documentation about how to change the center of the map, but not the other way around.  When I saw that the code to change the center was .setCenter() I thought that if I was writing the software I would use .getCenter() to get the center of the map at a specific location, then found that the function existed, but with very little documentation or posts about usage.  After more searching and trial and error I learned that with this function you call the .lat() and .lng() functions to finalize the call.
-
+```javascript
 // Listener for searching where the map is currently centered
 $('.change-location').on('click', '#change-location', function(){
   console.log('Searching in the new map location');
@@ -90,12 +90,11 @@ $('.hero-map').mousedown(function(){
     $('.change-location').show(600);
   }
 })
-
-
+```
 
 ### Ryan Thomas:
 The snippet that I'm very proud of is switching pages. Most of the work I did was on the front end, so having a chance to struggle through a new subject on the back end was really helpful for me in learning more about backend. Struggling through that cleared other general problems that have troubled me in the past.  It really solidified my route building
-
+```javascript
 $('.reviewIndividual').on('click', '#edit-button', function(){
       localStorage.setItem('classes', $(this).attr("class").split(' ')[0]);
       console.log('the edit button was pressed! Review Id is ' + classes);
@@ -106,7 +105,7 @@ $('.reviewIndividual').on('click', '#edit-button', function(){
       console.log('the create button was pressed!');
       window.location.href="../create";
     })
-
+```
 
 
 ## Screen Shots
