@@ -110,8 +110,6 @@ $('.reviewIndividual').on('click', '#edit-button', function(){
 
 
 ## Screen Shots
-<imghttp://imgur.com/a/XHNJR
-<img src="http://imgur.com/a/XHNJR" height="500" style="max-width: 500px">
-<img src="http://imgur.com/a/Um5wY" height="500" style="max-width: 500px">
-<img src="http://imgur.com/a/Um5wY" height="500" style="max-width: 500px">
-<img src="http://imgur.com/a/0xpcn" height="500" style="max-width: 500px">
+![homepage](imghttp://imgur.com/a/XHNJR "Homepage")
+![create form](imghttp://imgur.com/a/Um5wY "Create Form")
+![sign up form](imghttp://imgur.com/a/0xpcn "Sign Up Form")
