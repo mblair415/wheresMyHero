@@ -110,6 +110,6 @@ $('.reviewIndividual').on('click', '#edit-button', function(){
 
 
 ## Screen Shots
-![homepage](imghttp://imgur.com/a/XHNJR "Homepage")
-![create form](imghttp://imgur.com/a/Um5wY "Create Form")
-![sign up form](imghttp://imgur.com/a/0xpcn "Sign Up Form")
+![homepage](http://imgur.com/a/XHNJR "Homepage")
+![create form](http://imgur.com/a/Um5wY "Create Form")
+![sign up form](http://imgur.com/a/0xpcn "Sign Up Form")
