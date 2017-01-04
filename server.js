@@ -133,7 +133,7 @@ app.post('/api/reviews', function (req, res) {
         newSandwich.reviews.push(newReview)
         newReview.sandwiches.push(newSandwich)
         newSandwich.save()
-        console.log(newSandwich)
+        // console.log(newSandwich)
       }
       //save the changes
       newReview.save()
@@ -156,7 +156,7 @@ app.post('/api/reviews', function (req, res) {
         newRestaurant.save()
         newRestaurant.reviews.push(newReview)
         newReview.restaurants.push(newRestaurant)
-        console.log(newRestaurant)
+        // console.log(newRestaurant)
         newRestaurant.save()
       }
       //save the changes
