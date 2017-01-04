@@ -171,15 +171,19 @@
                   <div class="row">
                     <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
                       <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6 pic">
                           <img class="review-gif center" src="{{reviewGif}}"></a>
                         </div>
+                        <div class="col-xs-6">
+                          <p>Sandwich Stars: {{reviewStars}}</p>
+                          <p>Recommended: {{reviewRecommend}}</p>
+                          <p>{{reviewContent}}</p>
+                        </div>
                       </div>
-                      <p>Sandwich Stars: {{reviewStars}}</p>
-                      <p>Recommended: {{reviewRecommend}}</p>
-                      <p>{{reviewContent}}</p>
-                      <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="edit-button">Edit</button>
-                      <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="delete-button">Delete</button>
+                      <div class="clearfix">
+                        <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="edit-button">Edit</button>
+                        <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="delete-button">Delete</button>
+                      </div>
                     </article>
                   </div>
                 </div>
@@ -192,14 +196,15 @@
                   <div class="row">
                     <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
                       <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6 pic">
                           <img class="review-gif center" src="{{reviewGif}}"></a>
                         </div>
+                        <div class= "col-xs-6">
+                          <p>Sandwich Stars: {{reviewStars}}</p>
+                          <p>Recommended: {{reviewRecommend}}</p>
+                          <p>{{reviewContent}}</p>
+                        </div>
                       </div>
-                      <div class= "paragraphs">
-                      <p>Sandwich Stars: {{reviewStars}}</p>
-                      <p>Recommended: {{reviewRecommend}}</p>
-                      <p>{{reviewContent}}</p>
                     </div>
                     </article>
                   </div>
