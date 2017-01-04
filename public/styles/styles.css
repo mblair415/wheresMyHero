@@ -96,6 +96,7 @@
     display: inline-block;
     float: left;
     border: 5px solid black;
+    transform: scaleX(-1);
   }
 
   .sandwichPic {
@@ -209,6 +210,10 @@ li {
   height: 400px; /*map size has to be created manually. Feel free to edit for beautification*/
   width: 100%;
   margin-top: 20px;
+}
+
+.pic img {
+  width: 100%;
 }
 
 /*Hidden Class*/
