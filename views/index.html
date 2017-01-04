@@ -82,10 +82,22 @@
     <div class="title-section">
       <div class="container">
 
-         <!-- Buttons that trigger the signup and login modals, logout -->
-      <div class="row">
-        <div class="col-xs-1">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
+
+<!--********************-->
+
+           <!-- Buttons that trigger the signup and login modals, logout -->
+        <div class="row">
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-primary sign-up" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
+          </div>
+          <div class="col-xs-1">
+            <button type="button" class="btn btn-primary login" data-toggle="modal" data-target=".login-modal">Login</button>
+          </div>
+          <div class="col-xs-1">
+            <form method="GET" action="/logout">
+              <button type="submit" class="btn btn-danger logout">Logout</button>
+            </form>
+          </div>
         </div>
         <div class="col-xs-1">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
@@ -152,7 +164,7 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <div class="text-center">
-              <button type="button" class="btn btn-createReview btn-lg" id="create-button">Create Review</button>
+              <button type="button" class="btn btn-createReview btn-lg create" id="create-button">Create Review</button>
             </div>
             <div class="row review-word">
               <h2 class="font-effect-3d">Reviews</h2>
@@ -183,7 +195,7 @@
                         <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="delete-button">Delete</button>
                       </div>
                       <div class="clearfix">
-                        <p>author</p>
+                        <p>author: {{author}}</p>
                       </div>
                     </article>
                   </div>
@@ -207,7 +219,7 @@
                         </div>
                       </div>
                       <div class="clearfix">
-                        <p>author: </p>
+                        <p>author: {{author}}</p>
                       </div>
                     </div>
                     </article>

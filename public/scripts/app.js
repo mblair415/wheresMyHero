@@ -315,12 +315,20 @@ $(document).ready(function(){
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
         reviewId: reviewData._id,
+        author: reviewData.username
         };
-        console.log(reviewData._id)
+        console.log(reviewData.username)
         if (activeUser.reviews.indexOf(reviewData._id)>=0){
           reviewHtml = templateReviewButtons(reviewInfo)
         } else {
           reviewHtml = templateReview(reviewInfo)
+        }
+        if(activeUser._id){
+          $('.login').hide()
+          $('.sign-up').hide()
+        } else {
+          $('.create').hide()
+          $('.logout').hide()
         }
       // add review to top of review area
       $('.appendReviews').prepend(reviewHtml);
