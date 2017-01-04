@@ -16,7 +16,9 @@ var map,
       'Swear to me!',
       "I'm Batwich",
       'My parents were eaten when I was young.  I took it poorly.',
-      "I'm a cipher, wrapped in an enigma, smothered in secret sauce."
+      "I'm a cipher, wrapped in an enigma, smothered in secret sauce.",
+      "I don't trust noodles.  They're all impastas.",
+      'My partner is a small fry.'
     ],
     heroSmack = [
       'Eat me!',
@@ -29,7 +31,8 @@ var map,
       'I never get soggy.',
       'My super power is flavor!',
       'Please, do it for the sliders.',
-      'Potato chips do not belong in a sandwich.'
+      'Potato chips do not belong in a sandwich.',
+      'Lettuce celebrate!'
     ];
 
 if(!activeUser){
