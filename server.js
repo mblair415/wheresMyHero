@@ -121,7 +121,7 @@ app.post('/api/reviews', function (req, res) {
         console.log('FindOne error in server.js', err);
         //if the sandwich exits, push related data
       } else if (sandwich){
-        console.log('found a sandwich: ', sandwich)
+        console.log('found a sandwich')
         sandwich.reviews.push(newReview)
         newReview.sandwiches.push(sandwich)
         sandwich.save()
@@ -145,7 +145,7 @@ app.post('/api/reviews', function (req, res) {
         console.log('FindOne error in server.js', err);
         //if the restaurant exits, push related data
       } else if (restaurant){
-        console.log('found a restaurant: ', restaurant)
+        console.log('found a restaurant')
         restaurant.reviews.push(newReview)
         newReview.restaurants.push(restaurant)
         restaurant.save()
