@@ -73,6 +73,11 @@ app.get('/api/reviews', function(req, res){
       console.log('Error in server.js', err);
     }
     // console.log('all reviews are ', review);
+    // review.forEach(function(rev){
+    //   db.User.findOne({_id:rev.users}, function(err, user){
+    //     rev.username = user.username
+    //   })
+    // })
     res.send(review)
   });
 });
