@@ -162,19 +162,17 @@
               <h2 class="font-effect-3d">Reviews</h2>
             </div>
 
-
             <!-- sandwich reviews -->
             <div class="appendReviews">
 
-              <!-- Handlebars template with edit and delete buttons -->
-
+              <!-- Handlebars template with edit and delete buttons ** rewrite to use conditions to add/remove buttons to make code dry-er -->
               <script id='review-template-buttons' type='text/x-handlebars-template'>
                 <div class="container">
                   <div class="row">
                     <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
                       <div class="row">
                         <div class="col-xs-6 pic">
-                          <img class="review-gif center" src="{{reviewGif}}"></a>
+                          <img class="review-gif center img-responsive" src="{{reviewGif}}"></a>
                         </div>
                         <div class="col-xs-6">
                           <p>Sandwich Stars: {{reviewStars}}</p>
@@ -195,7 +193,6 @@
               </script>
 
               <!-- Handlebars template with no buttons -->
-
               <script id='review-template' type='text/x-handlebars-template'>
                 <div class="container">
                   <div class="row">

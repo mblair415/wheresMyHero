@@ -25,9 +25,9 @@
     padding-bottom: 15px;
   }
 
-  .review-word {
+  /*.review-word {
     text-align: left;
-  }
+  }*/
 
   .gifBox {
     min-height: 150px;
@@ -80,7 +80,13 @@
   }
 
   .review-gif {
-    min-height: 200px;
+    /*min-height: 200px;*/
+    margin-top: 10%;
+  }
+
+  .pic img {
+    width: 100%;
+    height: auto;
   }
 
   h1, h2, legend, .batwich-chat, .hero-chat {
@@ -155,15 +161,6 @@
     height: 400px;
     width: 100%;
     margin-top: 20px;
-  }
-
-  .pic img {
-    width: 100%;
-    height: auto;
-  }
-
-  .review-gif {
-    margin-top: 10%;
   }
 
   p {
