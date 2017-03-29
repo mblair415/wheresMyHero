@@ -68,17 +68,16 @@ app.get('/edit', function(req, res){
 
 ////Get all reviews
 app.get('/api/reviews', function(req, res){
-  db.Review.find(function(err, review){
+  db.Review.find(function(err, reviews){
     if(err){
       console.log('Error in server.js', err);
     }
-    // console.log('all reviews are ', review);
-    // review.forEach(function(rev){
-    //   db.User.findOne({_id:rev.users}, function(err, user){
-    //     rev.username = user.username
+    // reviews.forEach(function(review) {
+    //   db.User.findById(review.users[0], function(err, user){
+    //     review[username] = user.username || "shiv";
     //   })
     // })
-    res.send(review)
+    res.send(reviews);
   });
 });
 
