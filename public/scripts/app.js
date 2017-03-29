@@ -315,9 +315,9 @@ $(document).ready(function(){
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
         reviewId: reviewData._id,
-        author: reviewData.username
+        author: reviewData.users.username
         };
-        console.log(reviewData.username)
+        console.log('reviewData', reviewData)
         if (activeUser.reviews.indexOf(reviewData._id)>=0){
           reviewHtml = templateReviewButtons(reviewInfo)
         } else {
