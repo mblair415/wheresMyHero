@@ -154,7 +154,7 @@
       <!-- Create review -->
       <section class="container">
         <div class="row">
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-12">
             <div class="text-center">
               <button type="button" class="btn btn-createReview btn-lg create" id="create-button">Create Review</button>
             </div>
@@ -167,54 +167,60 @@
 
               <!-- Handlebars template with edit and delete buttons ** rewrite to use conditions to add/remove buttons to make code dry-er -->
               <script id='review-template-buttons' type='text/x-handlebars-template'>
-                <div class="container">
-                  <div class="row">
-                    <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
-                      <div class="row">
-                        <div class="col-xs-6 pic">
-                          <img class="review-gif center img-responsive" src="{{reviewGif}}"></a>
-                        </div>
-                        <div class="col-xs-6">
-                          <p>Sandwich Stars: {{reviewStars}}</p>
-                          <p>Recommended: {{reviewRecommend}}</p>
-                          <p>{{reviewContent}}</p>
-                        </div>
+                <article class="reviewIndividual" id="{{reviewId}}">
+                  <section class="pic review-half">
+                    <img class="review-gif center img-responsive" src="{{reviewGif}}"></a>
+                  </section>
+                  <section class="review-content review-half">
+                    <div class="row col-sm-12">
+                      <div class="star-box text-center">
+                        <p>Sandwich Stars: {{reviewStars}}</p>
                       </div>
-                      <div class="clearfix">
-                        <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="edit-button">Edit</button>
-                        <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="delete-button">Delete</button>
-                      </div>
-                      <div class="clearfix">
+                    </div>
+                    <div class="row">
+                      <div class="review-attributes col-sm-6">
                         <p>author: {{author}}</p>
+                        <p>restaraunt: </p>
+                        <p>sandwich: </p>
                       </div>
-                    </article>
+                      <div class="review-text col-sm-6">
+                        <p class="pre-scrollable">{{reviewContent}}</p>
+                      </div>
+                    </div>
+                  </section>
+                  <div class="clearfix">
+                    <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="edit-button">Edit</button>
+                    <button type="button" class="{{reviewId}} btn btn-revision btn-sm" id="delete-button">Delete</button>
                   </div>
-                </div>
+                </article>
               </script>
 
               <!-- Handlebars template with no buttons -->
               <script id='review-template' type='text/x-handlebars-template'>
-                <div class="container">
-                  <div class="row">
-                    <article class="col-xs-8 col-md-offset-1 reviewIndividual" id="{{reviewId}}">
-                      <div class="row">
-                        <div class="col-xs-6 pic">
-                          <img class="review-gif center" src="{{reviewGif}}"></a>
-                        </div>
-                        <div class= "col-xs-6">
-                          <p>Sandwich Stars: {{reviewStars}}</p>
-                          <p>Recommended: {{reviewRecommend}}</p>
-                          <p>{{reviewContent}}</p>
-                        </div>
-                      </div>
-                      <div class="clearfix">
-                        <p>author: {{author}}</p>
+                <article class="reviewIndividual" id="{{reviewId}}">
+                  <section class="pic review-half">
+                    <img class="review-gif center img-responsive" src="{{reviewGif}}"></a>
+                  </section>
+                  <section class="review-content review-half">
+                    <div class="row col-sm-12">
+                      <div class="star-box text-center">
+                        <p>Sandwich Stars: {{reviewStars}}</p>
                       </div>
                     </div>
-                    </article>
-                  </div>
-                </div>
+                    <div class="row">
+                      <div class="review-attributes col-sm-6">
+                        <p>author: {{author}}</p>
+                        <p>restaraunt: </p>
+                        <p>sandwich: </p>
+                      </div>
+                      <div class="review-text col-sm-6">
+                        <p class="pre-scrollable">{{reviewContent}}</p>
+                      </div>
+                    </div>
+                  </section>
+                </article>
               </script>
+
           </div>
         </div>
       </div>

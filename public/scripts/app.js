@@ -304,6 +304,9 @@ $(document).ready(function(){
   // this is what spits out each review onto the page.
   function appendReviews(allReviews) {
     var reviewHtml;
+    var reviewCounter = 3;
+    var tallLeft = 2;
+
 
     // for each review:
     allReviews.forEach(function(reviewData){
@@ -314,11 +317,10 @@ $(document).ready(function(){
         // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
-        reviewId: reviewData._id,
-        author: reviewData.username
+        reviewId: reviewData._id
         };
         console.log(reviewData.username)
-        if (activeUser.reviews.indexOf(reviewData._id)>=0){
+        if (activeUser.reviews.indexOf(reviewData._id) >= 0){
           reviewHtml = templateReviewButtons(reviewInfo)
         } else {
           reviewHtml = templateReview(reviewInfo)
@@ -330,8 +332,30 @@ $(document).ready(function(){
           $('.create').hide()
           $('.logout').hide()
         }
-      // add review to top of review area
-      $('.appendReviews').prepend(reviewHtml);
+
+      $('.appendReviews').append(reviewHtml);
+      var wholeReview = $('#' + reviewData._id);
+      var halfReview = wholeReview.children(".review-half");
+
+      if (reviewCounter % 3 === 0) {
+        wholeReview.addClass('col-sm-3 bigguns');
+        if (tallLeft % 2 == 0) {
+          wholeReview.addClass('pull-left');
+        } else {
+          wholeReview.addClass('pull-right');
+        }
+        tallLeft += 1;
+      } else if (reviewCounter % 2 == 0) {
+        wholeReview.addClass('col-sm-8');
+        halfReview[0].className += " col-sm-6";
+        halfReview[1].className += " col-sm-6";
+      } else {
+        wholeReview.addClass('col-sm-8');
+        halfReview[0].className += " col-sm-6 pull-right";
+        halfReview[1].className += " col-sm-6";
+      }
+      reviewCounter += 1;
+
     });
 
     // listener for pressing the edit review.  Directs to edit page.
