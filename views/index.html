@@ -79,42 +79,81 @@
       </div>
     </div>
 
-    <div class="title-section">
-      <div class="container">
-           <!-- Buttons that trigger the signup and login modals, logout -->
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"></a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a class="auth sign-up" data-toggle="modal" data-target=".sign-up-modal">Sign up<span class="sr-only">(current)</span></a></li>
+            <li><a class="auth login" data-toggle="modal" data-target=".login-modal">Login</a></li>
+            <li>
+              <form class="auth" method="GET" action="/logout">
+                <button type="submit" class="logout">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+      <!-- Section for Heroes and Header -->
+      <div class="batcave">
+        <div class="container">
         <div class="row">
-          <div class="col-xs-1">
-            <button type="button" class="btn btn-primary sign-up" data-toggle="modal" data-target=".sign-up-modal">Sign up</button>
+          <div class="site-title col-md-6 comic">
+            <h1 class="font-effect-3d title-text">Where's</h1>
           </div>
-          <div class="col-xs-1">
-            <button type="button" class="btn btn-primary login" data-toggle="modal" data-target=".login-modal">Login</button>
-          </div>
-          <div class="col-xs-1">
-            <form method="GET" action="/logout">
-              <button type="submit" class="btn btn-danger logout">Logout</button>
-            </form>
+          <div class="picDiv">
+            <section class="col-md-6 comic">
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="col-xs-12 hero-chat">
+                    <!-- hero chat goes here -->
+                  </div>
+                </div>
+                <div class="col-xs-2 col-xs-offset-2 hero-box">
+                  <img class="sandwichPic" src="http://i.giphy.com/DpB9NBt1ySFDHH9yiCA.gif" alt="our hero!" height="175" style="max-width: 320px">
+                </div>
+              </div>
+            </section>
           </div>
         </div>
-        <div class="site-title">
-          <h1 class="font-effect-3d">Where's My Hero!?</h1>
+        <div class="row">
+          <div class="col-md-4 thwack-image comic">
+            
+          </div>
+          <div class="site-title col-md-4 comic">
+            <h1 class="font-effect-3d title-text">My</h1>
+          </div>
+          <div class="col-md-4 pow-image comic">
+
+          </div>
         </div>
-        <div class="picDiv row">
-          <div class="col-xs-2 batman-box">
-            <img class="sandwichBatman" src="https://aunicornwithcancer.files.wordpress.com/2013/01/hero_sandwich_by_stanlydan-d39c77b.jpg" height="175" style="max-width: 320px">
-          </div>
-          <section class="col-xs-4">
-            <div class="col-xs-12 batwich-chat">
-              <!-- batwich chat goes here -->
+        <div class="row">
+          <div class="picDiv">
+            <section class="col-md-6 comic">
+              <div class="row">
+                <div class="col-xs-2 batman-box">
+                  <img class="sandwichBatman" src="https://aunicornwithcancer.files.wordpress.com/2013/01/hero_sandwich_by_stanlydan-d39c77b.jpg" height="175" style="max-width: 320px">
+                </div>
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div class="col-xs-12 batwich-chat">
+                    <!-- batwich chat goes here -->
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div class="site-title col-md-6 comic">
+              <h1 class="font-effect-3d title-text">Hero?!</h1>
             </div>
-          </section>
-          <section class="col-xs-4">
-            <div class="col-xs-12 hero-chat">
-              <!-- hero chat goes here -->
-            </div>
-          </section>
-          <div class="col-xs-2 hero-box">
-            <img class="sandwichPic" src="http://i.giphy.com/DpB9NBt1ySFDHH9yiCA.gif" alt="our hero!" height="175" style="max-width: 320px">
           </div>
+
         </div>
       </div>
     </div>

@@ -317,10 +317,12 @@ $(document).ready(function(){
         // turnary cheking to see if reviewData is true or false - if true return yes, if false return no
         reviewRecommend: reviewData.recommend ? "Yes" : "No",
         reviewGif: reviewData.gif,
-        reviewId: reviewData._id
+        reviewId: reviewData._id,
+        author: reviewData.users.username
         };
-        console.log(reviewData.username)
-        if (activeUser.reviews.indexOf(reviewData._id) >= 0){
+        console.log('reviewData', reviewData)
+        if (activeUser.reviews.indexOf(reviewData._id)>=0){
+
           reviewHtml = templateReviewButtons(reviewInfo)
         } else {
           reviewHtml = templateReview(reviewInfo)
