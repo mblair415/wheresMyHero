@@ -201,7 +201,7 @@
 }
 
 .pow-image {
-  background-image: url('https://cdn.pixabay.com/photo/2016/08/17/22/22/pow-1601674_1280.png');
+  background-image: url('../images/pow.png');
   background-repeat: no-repeat;
   background-size: 90% 90%;
   background-position: center;
