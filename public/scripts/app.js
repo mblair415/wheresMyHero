@@ -54,9 +54,6 @@ $(document).ready(function(){
   $('.hero-chat').hide();
 
 
-//*****************
-//*****************
-
   //Gif Handlebars templates
   var sourceOne = $('#selectableGif-template2').html(),
     templateGif = Handlebars.compile(sourceOne),
@@ -307,7 +304,6 @@ $(document).ready(function(){
     var reviewCounter = 3;
     var tallLeft = 2;
 
-
     // for each review:
     allReviews.forEach(function(reviewData){
       // create HTML for individual review
@@ -339,12 +335,12 @@ $(document).ready(function(){
       var wholeReview = $('#' + reviewData._id);
       var halfReview = wholeReview.children(".review-half");
 
-      if (reviewCounter % 3 === 0) {
+      if (reviewCounter % 3 === 0 && reviewCounter % 6 != 0) {
         wholeReview.addClass('col-sm-3 bigguns');
         if (tallLeft % 2 == 0) {
           wholeReview.addClass('pull-left');
         } else {
-          wholeReview.addClass('pull-right');
+          // wholeReview.addClass('pull-right');
         }
         tallLeft += 1;
       } else if (reviewCounter % 2 == 0) {

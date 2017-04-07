@@ -79,8 +79,8 @@
     /*border: solid 1px black;*/
     background-color: rgba(250, 240, 250, 0.5);
     padding: 5px;
-    padding-right: -300px;
-    margin: 3px;
+    /*padding-right: -300px;*/
+    margin: 5px;
   }
 
   .review-gif {
@@ -88,13 +88,13 @@
     float: none;
     margin: 0 auto;
     border-radius: 5px;
-    max-height: 190px;
+    max-height: 190px !important;
   }
 
   .review-half {
     /*max-width: 300px;*/
-    max-height: 200px;
-    min-height: 190px;
+    max-height: 1700px !important;
+    min-height: 160px;
   }
 
   .pic img {
