@@ -88,13 +88,13 @@
     float: none;
     margin: 0 auto;
     border-radius: 5px;
-    max-height: 190px !important;
+    /*max-height: 160px !important;*/
   }
 
   .review-half {
     /*max-width: 300px;*/
-    max-height: 1700px !important;
-    min-height: 160px;
+    /*max-height: 190px !important;
+    min-height: 180px;*/
   }
 
   .pic img {

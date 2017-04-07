@@ -335,7 +335,7 @@ $(document).ready(function(){
       var wholeReview = $('#' + reviewData._id);
       var halfReview = wholeReview.children(".review-half");
 
-      if (reviewCounter % 3 === 0 && reviewCounter % 6 != 0) {
+      if (reviewCounter % 3 === 0) {
         wholeReview.addClass('col-sm-3 bigguns');
         if (tallLeft % 2 == 0) {
           wholeReview.addClass('pull-left');
